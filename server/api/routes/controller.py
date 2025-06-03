@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-router = APIRouter(prefix="/controller")
-
+# router = APIRouter(prefix="/controller")
+router = APIRouter()
 
 @router.get("/todo")
 def login():

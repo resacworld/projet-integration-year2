@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-router = APIRouter(prefix="/robot")
-
+# router = APIRouter(prefix="/robot")
+router = APIRouter()
 
 @router.get("/instructions")
 def login():
@@ -9,8 +9,7 @@ def login():
     Route for the robot to get instructions
     '''
     try:
-        return NotImplementedError
-    
+
         # Put instructions here
     
         return {
@@ -22,14 +21,13 @@ def login():
             "error": str(e)
         }
 
-@router.post("/status")
+@router.post("/telemetry")
 def register():
     '''
     Route to register the status of a robot's mission
     '''
     try:
-        return NotImplementedError
-    
+
         # Put instructions here
     
         return {
@@ -41,13 +39,12 @@ def register():
             "error": str(e)
         }
 
-@router.post("/end")
+@router.post("/summary")
 def register():
     '''
     Route to register the end of a robot's mission
     '''
     try:
-        return NotImplementedError
 
         # Put instructions here
 
