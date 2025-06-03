@@ -1,13 +1,10 @@
 package com.osr.simulator;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Robot {
+public class RESTService {
     static String json = "{\n" + "\"userId\": 101,\r\n" +
             "    \"id\": 101,\r\n" +
             "    \"title\": \"Test Title\",\r\n" +

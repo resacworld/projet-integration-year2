@@ -3,7 +3,7 @@ package com.osr.simulator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class CommandController {
     @FXML
     private Label consoleTest;
 
