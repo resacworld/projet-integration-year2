@@ -1,43 +1,93 @@
-from typing import List
+"""
+Ce fichier a été complété par un assistant IA, (il a fait toutes les tâches répétitives des fichiers dans le dossier parent "models").
+"""
+
+import uuid
+from typing import List, Optional
 from ..interfaces.base import BaseRepository
 from ..interfaces.mission import Mission, MissionId, IMissionRepository
 from ..database import Database
 
-
 class MissionRepository(BaseRepository, IMissionRepository):
-    """Mission Repository."""
+    """
+    Mission Repository implementing CRUD operations.
+    """
 
     def __init__(self):
-        # To be Implemented 
         super().__init__()
-        self.cursor = Database().getCursor()
+        self.conn = Database.getConnection()
+        self.cursor = self.conn.cursor()
 
-        # TODO: define the mission table schema
-        # self.cursor.execute("CREATE TABLE IF NOT EXISTS mission "
-        #     "(id TEXT PRIMARY KEY, "
-        #     "name TEXT, "
-        #     "description TEXT)")
+        # Create the mission table if it does not exist
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS mission (
+                id TEXT PRIMARY KEY,
+                name TEXT,
+                description TEXT
+            )
+        """)
+        self.conn.commit()
 
     def next_identity(self) -> MissionId:
-        # To be Implemented 
-        raise NotImplementedError
+        """
+        Generate a new unique identifier for a Mission record.
+        """
+
+        return MissionId(id=str(uuid.uuid4()))
 
     def find_all(self) -> List[Mission]:
-        # To be Implemented 
-        raise NotImplementedError
+        """
+        Retrieve all missions from the database.
+        """
 
-    def find_by_id(self, id: MissionId) -> Mission:
-        # To be Implemented 
-        raise NotImplementedError
+        self.cursor.execute("SELECT * FROM mission")
+        rows = self.cursor.fetchall()
+        return [Mission(
+            id=MissionId(id=row[0]),
+            name=row[1],
+            description=row[2]
+        ) for row in rows]
 
-    def add(self, room: Mission) -> None:
-        # To be Implemented 
-        raise NotImplementedError
+    def find_by_id(self, id: str) -> Optional[Mission]:
+        """
+        Find a mission by its ID.
+        """
 
-    def update(self, room: Mission) -> None:
-        # To be Implemented 
-        raise NotImplementedError
+        self.cursor.execute(f"SELECT * FROM mission WHERE id = \"{id}\"")
+        row = self.cursor.fetchone()
+        return Mission(
+            id=MissionId(id=row[0]),
+            name=row[1],
+            description=row[2]
+        ) if row else None
 
-    def delete(self, id: MissionId) -> None:
-        # To be Implemented 
-        raise NotImplementedError
+    def add(self, mission: Mission) -> None:
+        """
+        Add a new mission to the database.
+        """
+
+        self.cursor.execute(f"""
+            INSERT INTO mission (id, name, description)
+            VALUES (
+                \"{self.next_identity()}\", 
+                \"{mission.name}\", 
+                \"{mission.description}\""
+            )
+        """)
+        self.conn.commit()
+
+    def update(self, mission: Mission) -> None:
+        """
+        Update an existing mission in the database.
+        """
+
+        raise NotImplementedError("Method is not implemented yet.")
+
+    def delete(self, id: str) -> None:
+        """
+        Delete a mission by its ID.
+        """
+
+        raise NotImplementedError("Method should not be implemented (due of the laws, for tracability).")
+        # self.cursor.execute("DELETE FROM mission WHERE id = \"{id}\"")
+        # self.conn.commit()

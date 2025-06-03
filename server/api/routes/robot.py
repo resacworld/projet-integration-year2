@@ -1,5 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
+from database.models.robotTelemetry import RobotTelemetryRepository, RobotTelemetry, RobotTelemetryId
+from datetime import datetime
 
 # router = APIRouter(prefix="/robot")
 router = APIRouter()
@@ -29,10 +31,10 @@ class reqTelemetry(BaseModel):
     '''
     vitesse_instant: float = None
     ds_ultrasons: float = None
-    status_deplacement: bool = None
+    status_deplacement: str = None
     orientation: float = None
     status_pince: bool = None
-    timestamp: str = None
+    # timestamp: str = None # => gérée par l'API (Cahier des Charges)
 
 @router.post("/telemetry")
 def register(req: reqTelemetry):
@@ -41,10 +43,23 @@ def register(req: reqTelemetry):
     '''
     try:
 
+        RobotTelemetryRepository().add(
+            RobotTelemetry(
+                id=RobotTelemetryId(id=""),
+                robotid="robot1",  # This should be dynamically set based on the robot's mac address
+                vitesse_instant=req.vitesse_instant,
+                ds_ultrasons=req.ds_ultrasons,
+                status_deplacement=req.status_deplacement,
+                orientation=req.orientation,
+                status_pince=req.status_pince,
+                timestamp=datetime.now().isoformat()  # Automatically set the timestamp
+            )
+        )
+
         # Put instructions here
     
         return {
-            "status": True,
+            "status": True
         }
     except Exception as e:
         return {

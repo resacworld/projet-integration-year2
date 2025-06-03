@@ -20,24 +20,24 @@ class IMissionRepository(ABC):
     """Interface for handling robots persistence."""
     @abstractmethod
     def next_identity(self) -> MissionId:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
     def find_all(self) -> List[Mission]:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
     def find_by_id(self, id: MissionId) -> Mission:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
     def add(self, room: Mission) -> None:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
     def update(self, room: Mission) -> None:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
     def delete(self, id: MissionId) -> None:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
