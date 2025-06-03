@@ -1,6 +1,4 @@
 from fastapi import APIRouter
-import src.main as configs
-from ...database.postgres.models import User
 
 router = APIRouter(prefix="/robot")
 
@@ -25,7 +23,7 @@ def login():
         }
 
 @router.post("/status")
-def register(user: User):
+def register():
     '''
     Route to register the status of a robot's mission
     '''
@@ -44,7 +42,7 @@ def register(user: User):
         }
 
 @router.post("/end")
-def register(user: User):
+def register():
     '''
     Route to register the end of a robot's mission
     '''

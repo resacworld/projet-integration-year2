@@ -1,10 +1,10 @@
 from fastapi import APIRouter
-from .routes.courses import router as coursesRouter
-from .routes.robot import router as authRouter
+from .routes.robot import router as robotRouter
+from .routes.controller import router as controllerRouter
 
 # Create the master router
 MasterRouter = APIRouter(prefix="/api")
 
 # Include the child routers
-MasterRouter.include_router(coursesRouter)
-MasterRouter.include_router(authRouter)
+MasterRouter.include_router(robotRouter)
+MasterRouter.include_router(controllerRouter)
