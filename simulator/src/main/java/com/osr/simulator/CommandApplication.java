@@ -12,7 +12,7 @@ public class CommandApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CommandApplication.class.getResource("command-control.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Hello!");
+        stage.setTitle("Command Control");
         stage.setScene(scene);
         stage.show();
     }

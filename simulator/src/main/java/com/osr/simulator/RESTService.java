@@ -44,11 +44,11 @@ public class RESTService {
             // print result
             System.out.println(response.toString());
         } else {
-            System.out.println("POST NOT WORKED");
+            System.out.println("POST FAILED");
         }
     }
 
-    public static void MyGETRequest() throws IOException {
+    public static String MyGETRequest() throws IOException {
         URL urlForGetRequest = new URL("http://10.7.5.185:8000/api/instructions");
         String readLine = null;
         HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
@@ -65,10 +65,10 @@ public class RESTService {
                 response.append(readLine);
             } in .close();
             // print result
-            System.out.println("JSON String Result " + response.toString());
+            return (response.toString());
             //GetAndPost.POSTRequest(response.toString());
         } else {
-            System.out.println("GET NOT WORKED");
+            return ("GET FAILED");
         }
     }
 }
