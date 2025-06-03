@@ -1,15 +1,23 @@
 from fastapi import APIRouter
+from pydantic import BaseModel
 
 # router = APIRouter(prefix="/controller")
 router = APIRouter()
 
-@router.get("/todo")
-def login():
+class req(BaseModel):
+    '''
+    Class to define the request structure
+    '''
+    status: bool = False
+    error: str = None
+
+@router.post("/addmission")
+def login(req: req):
     '''
     Route to implement
     '''
     try:
-        return NotImplementedError
+        print(req.status)
     
         # Put instructions here
 

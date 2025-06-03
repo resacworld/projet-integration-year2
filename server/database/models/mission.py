@@ -10,7 +10,13 @@ class MissionRepository(BaseRepository, IMissionRepository):
     def __init__(self):
         # To be Implemented 
         super().__init__()
-        self.cursor = Database.getCursor()
+        self.cursor = Database().getCursor()
+
+        # TODO: define the mission table schema
+        # self.cursor.execute("CREATE TABLE IF NOT EXISTS mission "
+        #     "(id TEXT PRIMARY KEY, "
+        #     "name TEXT, "
+        #     "description TEXT)")
 
     def next_identity(self) -> MissionId:
         # To be Implemented 

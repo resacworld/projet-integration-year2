@@ -10,7 +10,7 @@ class Database:
     _instance = None
 
     def __init__(self):
-        self.conn = sqlite3.connect('database.db')
+        self.conn = sqlite3.connect(os.getenv("SQLITE_URL"))
 
     def __new__(cls, *args, **kwargs):
         """
@@ -21,18 +21,16 @@ class Database:
         return cls._instance
 
 
-    @staticmethod
-    def getConnection(self):
+    def getConnection(self) -> sqlite3.Connection:
         """
         Returns the SQLite database connection.
         """
 
-        return sqlite3.connect(os.getenv("SQLITE_URL"))
+        return self.conn
 
-    @staticmethod
-    def getCursor(self):
+    def getCursor(self) -> sqlite3.Cursor:
         """
         Returns a the cursor of the connection.
         """
 
-        return sqlite3.connect(os.getenv("SQLITE_URL")).cursor()
+        return self.conn.cursor()

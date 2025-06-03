@@ -1,14 +1,23 @@
 from typing import List
 from ..interfaces.base import BaseRepository
 from ..interfaces.robot import Robot, RobotId, IRobotRepository
+from ..database import Database
 
 
 class RobotRepository(BaseRepository, IRobotRepository):
     """Robot repository"""
-    
+
     def __init__(self):
         # To be Implemented 
         super().__init__()
+
+        self.cursor = Database().getCursor()
+
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS robot "
+            "(id TEXT PRIMARY KEY, " \
+            "mac TEXT, " \
+            "name TEXT, " \
+            "description TEXT)")
 
     def next_identity(self) -> RobotId:
         # To be Implemented 
