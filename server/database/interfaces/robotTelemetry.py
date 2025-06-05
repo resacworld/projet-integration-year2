@@ -1,7 +1,8 @@
 from typing import List
 from abc import ABC, abstractmethod
 from pydantic import BaseModel
-from .base import BaseIdentifier
+from .base import BaseIdentifier, BaseObject
+from .mission import MissionId
 
 
 class RobotTelemetryId(BaseIdentifier):
@@ -9,16 +10,17 @@ class RobotTelemetryId(BaseIdentifier):
     pass
 
 
-class RobotTelemetry(BaseModel):
+class RobotTelemetry(BaseObject):
     """Aggregate root, entity holding robotTelemetry."""
     id: RobotTelemetryId
-    robotid: str
+    mission_id: MissionId
     vitesse_instant: float
     ds_ultrasons: float
     status_deplacement: str
     orientation: float
     status_pince: bool
     timestamp: str
+
 
 class IRobotTelemetryRepository(ABC):
     """Interface for handling RobotTelemetry persistence."""

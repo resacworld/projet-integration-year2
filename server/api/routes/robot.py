@@ -1,22 +1,50 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from database.models.robotTelemetry import RobotTelemetryRepository, RobotTelemetry, RobotTelemetryId
+from database.models.robot import RobotRepository, RobotId
+from database.models.mission import Mission, MissionRepository
+from database.models.block import Block, BlockRepository
+from database.models.robot import Robot
 from datetime import datetime
+import json
 
 # router = APIRouter(prefix="/robot")
 router = APIRouter()
 
-@router.get("/instructions")
-def login():
+class reqInstructions(BaseModel):
+    '''
+    Class to define the request structure
+    '''
+    robot_id: str = None
+    # timestamp: str = None # => gérée par l'API (Cahier des Charges)
+
+@router.post("/instructions")
+def login(req: reqInstructions):
     '''
     Route for the robot to get instructions
     '''
     try:
+        db_robot = RobotRepository()
+        db_mission = MissionRepository()
+        db_block = BlockRepository()
 
-        # Put instructions here
-    
+        # Check if the robot exists, if not create it
+        if(db_robot.find_by_id(req.robot_id) is None):
+            raise Exception("Robot not found in the database. Please register the robot first.")
+        
+        mission = db_mission.find_next_mission_by_robot_id(req.robot_id)
+
+        if(mission is None):
+            raise Exception("No mission avalaible for this robot. Please add a mission first.")
+
+        blocks = db_block.find_by_mission_id(mission.id)
+
+        db_mission.update_execution_status(mission.id, executing=True)
+
         return {
             "status": True,
+            "nb_blocks": mission.nb_blocks,
+            "liste_blocks": [ block.to_json() for block in blocks ],
         }
     except Exception as e:
         return {
@@ -29,6 +57,7 @@ class reqTelemetry(BaseModel):
     '''
     Class to define the request structure
     '''
+    robot_id: str = None
     vitesse_instant: float = None
     ds_ultrasons: float = None
     status_deplacement: str = None
@@ -42,11 +71,18 @@ def register(req: reqTelemetry):
     Route to register the status of a robot's mission
     '''
     try:
+        db_mission = MissionRepository()
+        db_robot_telemetry = RobotTelemetryRepository()
 
-        RobotTelemetryRepository().add(
+        mission = db_mission.find_by_robot_id_and_executing(robot_id=req.robot_id, executing=True)
+
+        if mission is None:
+            raise Exception("No mission currently running for this robot. Please start a mission first.")
+
+        db_robot_telemetry.add(
             RobotTelemetry(
-                id=RobotTelemetryId(id=""),
-                robotid="robot1",  # This should be dynamically set based on the robot's mac address
+                id=db_robot_telemetry.next_identity(),
+                mission_id=mission.id,
                 vitesse_instant=req.vitesse_instant,
                 ds_ultrasons=req.ds_ultrasons,
                 status_deplacement=req.status_deplacement,
@@ -72,6 +108,7 @@ class reqSummary(BaseModel):
     '''
     Class to define the request structure
     '''
+    robot_id: str = None
     vitesse_moy: float = None
     tps_total: float = None
 
@@ -81,8 +118,14 @@ def register(req: reqSummary):
     Route to register the end of a robot's mission
     '''
     try:
+        db_mission = MissionRepository()
 
-        # Put instructions here
+        mission = db_mission.find_by_robot_id_and_executing(req.robot_id, executing=True)
+
+        if mission is None:
+            raise Exception("No mission currently running for this robot. Please start a mission first.")
+
+        db_mission.update_execution_status(mission.id, executing=False, finished=True)
 
         return {
             "status": True,

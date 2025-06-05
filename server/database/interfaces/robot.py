@@ -1,7 +1,7 @@
 from typing import List
 from abc import ABC, abstractmethod
 from pydantic import BaseModel
-from .base import BaseIdentifier
+from .base import BaseIdentifier, BaseObject
 
 
 class RobotId(BaseIdentifier):
@@ -9,12 +9,11 @@ class RobotId(BaseIdentifier):
     pass
 
 
-class Robot(BaseModel):
+class Robot(BaseObject):
     """Aggregate root, entity holding robot."""
     id: RobotId
     mac: str
     name: str
-    description: str
 
 
 class IRobotRepository(ABC):

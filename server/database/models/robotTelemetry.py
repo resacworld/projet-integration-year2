@@ -6,6 +6,7 @@ import uuid
 from typing import List
 from ..interfaces.base import BaseRepository
 from ..interfaces.robotTelemetry import RobotTelemetry, RobotTelemetryId, IRobotTelemetryRepository
+from ..interfaces.mission import MissionId
 from ..database import Database
 
 
@@ -14,22 +15,33 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
     RobotTelemetry repository implementing CRUD operations.
     """
 
+    # _instance = None
+
+    # def __new__(cls, *args, **kwargs):
+    #     """
+    #     Singleton pattern to ensure only one instance of BlockRepository exists.
+    #     """
+    #     if not cls._instance:
+    #         cls._instance = super().__new__(cls, *args, **kwargs)
+    #     return cls._instance
+
     def __init__(self):
         super().__init__()
         self.conn = Database.getConnection()
         self.cursor = self.conn.cursor()
 
-        # Create the robot telemetry table if it does not exist
+        # Create the robot_telemetries table if it does not exist
         self.cursor.execute("""
-            CREATE TABLE IF NOT EXISTS robot_telemetry (
+            CREATE TABLE IF NOT EXISTS robot_telemetries (
                 id TEXT PRIMARY KEY,
-                robotid TEXT,
+                mission_id TEXT,
                 vitesse_instant REAL,
                 ds_ultrasons REAL,
                 status_deplacement TEXT,
                 orientation REAL,
                 status_pince INTEGER,
-                timestamp TEXT
+                timestamp TEXT,
+                FOREIGN KEY (mission_id) REFERENCES missions (id)
             )
         """)
         self.conn.commit()
@@ -46,14 +58,14 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
         Retrieve all robot telemetry records from the database.
         """
         
-        self.cursor.execute("SELECT * FROM robot_telemetry")
+        self.cursor.execute("SELECT * FROM robot_telemetries")
         rows: List[RobotTelemetry] = self.cursor.fetchall()
 
         print(rows[0])
 
         return [RobotTelemetry(
             id=RobotTelemetryId(id=row[0]),
-            robotid=row[1],
+            mission_id=MissionId(id=row[1]),
             vitesse_instant=row[2],
             ds_ultrasons=row[3],
             status_deplacement=row[4],
@@ -62,25 +74,23 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
             timestamp=row[7]
         ) for row in rows]
 
-    def find_by_id(self, id: str) -> RobotTelemetry:
+    def find_by_id(self, id: str | RobotTelemetryId) -> RobotTelemetry:
         """
         Find a robot telemetry record by its ID.
         """
 
-        self.cursor.execute(f"SELECT * FROM robot_telemetry WHERE id = \"{id}\"")
+        self.cursor.execute(f"SELECT * FROM robot_telemetries WHERE id = \"{id}\"")
         row = self.cursor.fetchone()
-        if row:
-            return RobotTelemetry(
-                id=RobotTelemetryId(id=row[0]),
-                robotid=row[1],
-                vitesse_instant=row[2],
-                ds_ultrasons=row[3],
-                status_deplacement=row[4],
-                orientation=row[5],
-                status_pince=bool(row[6]),  # Convert integer to boolean
-                timestamp=row[7]
-            )
-        return None
+        return None if row == None else RobotTelemetry(
+            id=RobotTelemetryId(id=row[0]),
+            mission_id=MissionId(id=row[1]),
+            vitesse_instant=row[2],
+            ds_ultrasons=row[3],
+            status_deplacement=row[4],
+            orientation=row[5],
+            status_pince=bool(row[6]),  # Convert integer to boolean
+            timestamp=row[7]
+        )
 
     def add(self, telemetry: RobotTelemetry) -> None:
         """
@@ -88,12 +98,12 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
         """
 
         self.cursor.execute(f"""
-            INSERT INTO robot_telemetry (
-                id, robotid, vitesse_instant, ds_ultrasons, status_deplacement,
+            INSERT INTO robot_telemetries (
+                id, mission_id, vitesse_instant, ds_ultrasons, status_deplacement,
                 orientation, status_pince, timestamp
             ) VALUES (
-                \"{self.next_identity()}\", 
-                \"{telemetry.robotid}\", 
+                \"{telemetry.id if telemetry.id != None else self.next_identity()}\", 
+                \"{telemetry.mission_id}\", 
                 {telemetry.vitesse_instant}, 
                 {telemetry.ds_ultrasons}, 
                 \"{telemetry.status_deplacement}\", 
@@ -111,11 +121,11 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
 
         raise NotImplementedError("Method is not implemented yet.")
 
-    def delete(self, id: str) -> None:
+    def delete(self, id: str | RobotTelemetryId) -> None:
         """
         Delete a robot telemetry record by its ID.
         """
 
         raise NotImplementedError("Method should not be implemented (due of the laws, for tracability).")
-        # self.cursor.execute(f"DELETE FROM robot_telemetry WHERE id = \"{id}\"")
+        # self.cursor.execute(f"DELETE FROM robot_telemetries WHERE id = \"{id}\"")
         # self.conn.commit()

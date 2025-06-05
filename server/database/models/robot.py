@@ -13,18 +13,27 @@ class RobotRepository(BaseRepository, IRobotRepository):
     Robot repository implementing CRUD operations.
     """
 
+    # _instance = None
+
+    # def __new__(cls, *args, **kwargs):
+    #     """
+    #     Singleton pattern to ensure only one instance of BlockRepository exists.
+    #     """
+    #     if not cls._instance:
+    #         cls._instance = super().__new__(cls, *args, **kwargs)
+    #     return cls._instance
+
     def __init__(self):
         super().__init__()
         self.conn = Database.getConnection()
         self.cursor = self.conn.cursor()
 
-        # Create the robot table if it does not exist
+        # Create the robots table if it does not exist
         self.cursor.execute("""
-            CREATE TABLE IF NOT EXISTS robot (
+            CREATE TABLE IF NOT EXISTS robots (
                 id TEXT PRIMARY KEY,
                 mac TEXT,
-                name TEXT,
-                description TEXT
+                name TEXT
             )
         """)
         self.conn.commit()
@@ -41,27 +50,25 @@ class RobotRepository(BaseRepository, IRobotRepository):
         Retrieve all robots from the database.
         """
 
-        self.cursor.execute("SELECT * FROM robot")
+        self.cursor.execute("SELECT * FROM robots")
         rows = self.cursor.fetchall()
         return [Robot(
             id=RobotId(id=row[0]),
             mac=row[1],
-            name=row[2],
-            description=row[3]
+            name=row[2]
         ) for row in rows]
 
-    def find_by_id(self, id: str) -> Optional[Robot]:
+    def find_by_id(self, id: str | RobotId) -> Optional[Robot]:
         """
         Find a robot by its ID.
         """
 
-        self.cursor.execute(f"SELECT * FROM robot WHERE id = \"{id}\"")
+        self.cursor.execute(f"SELECT * FROM robots WHERE id = \"{id}\"")
         row = self.cursor.fetchone()
-        return Robot(
+        return None if row == None else Robot(
             id=RobotId(id=row[0]),
             mac=row[1],
-            name=row[2],
-            description=row[3]
+            name=row[2]
         ) if row else None
 
     def add(self, robot: Robot) -> None:
@@ -70,12 +77,11 @@ class RobotRepository(BaseRepository, IRobotRepository):
         """
 
         self.cursor.execute(f"""
-            INSERT INTO robot (id, mac, name, description)
+            INSERT INTO robots (id, mac, name)
             VALUES (
-                \"{self.next_identity()}\", 
+                \"{robot.id if robot.id != None else self.next_identity()}\", 
                 \"{robot.mac}\", 
-                \"{robot.name}\", 
-                \"{robot.description}\""
+                \"{robot.name}\"
             )
         """)
         self.conn.commit()
@@ -87,11 +93,11 @@ class RobotRepository(BaseRepository, IRobotRepository):
 
         raise NotImplementedError("Method is not implemented yet.")
 
-    def delete(self, id: str) -> None:
+    def delete(self, id: str | RobotId) -> None:
         """
         Delete a robot by its ID.
         """
 
         raise NotImplementedError("Method should not be implemented (due of the laws, for tracability).")
-        # self.cursor.execute("DELETE FROM robot WHERE id = \"{id}\"")
+        # self.cursor.execute("DELETE FROM robots WHERE id = \"{id}\"")
         # self.conn.commit()
