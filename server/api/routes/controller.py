@@ -13,7 +13,6 @@ class reqBlock(BaseModel):
     Class to define the structure of a block in a mission
     '''
     block_nb: int = None
-    status_pince: bool = None
 
 class reqAddMission(BaseModel):
     '''
@@ -21,7 +20,6 @@ class reqAddMission(BaseModel):
     '''
     robot_id: str = None
     name: str = None
-    # nb_blocks: int = None,
     blocks: List[reqBlock] = None
 
 @router.post("/addmission")
@@ -55,8 +53,7 @@ def login(req: reqAddMission):
             db_block.add(block=Block(
                 id=db_block.next_identity(),
                 mission_id=mission_id,
-                block_nb=block.block_nb,
-                status_pince=block.status_pince
+                block_nb=block.block_nb
             ))
 
         return {
@@ -76,21 +73,45 @@ class reqGetMission(BaseModel):
     robot_id: str = None
     currently_running: bool = None
 
-@router.post("/getmission")
-def register(req: reqGetMission):
+# @router.post("/getmission")
+# def register(req: reqGetMission):
+#     '''
+#     Route to implement
+#     '''
+#     try:
+#         db_mission = MissionRepository()
+
+#         mission = db_mission.find_by_robot_id_and_executing(req.robot_id, req.currently_running)
+
+#         # Put instructions here
+
+#         return {
+#             "status": True,
+#             "mission": mission.to_json() if mission else None
+#         }
+#     except Exception as e:
+#         raise e
+#         return {
+#             "status": False,
+#             "error": str(e)
+#         }
+
+
+@router.get("/robots")
+def register():
     '''
     Route to implement
     '''
     try:
-        db_mission = MissionRepository()
+        db_robot = RobotRepository()
 
-        mission = db_mission.find_by_robot_id_and_executing(req.robot_id, req.currently_running)
+        robots = db_robot.find_all()
 
         # Put instructions here
 
         return {
             "status": True,
-            "mission": mission.to_json() if mission else None
+            "robots": [robot.to_json() for robot in robots]
         }
     except Exception as e:
         raise e

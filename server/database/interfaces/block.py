@@ -15,7 +15,6 @@ class Block(BaseObject):
     id: BlockId
     mission_id: MissionId
     block_nb: int
-    status_pince: bool
 
 
 class IBlockRepository(ABC):

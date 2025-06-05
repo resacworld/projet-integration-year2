@@ -11,26 +11,30 @@ import json
 # router = APIRouter(prefix="/web")
 router = APIRouter()
 
-@router.get("/addrobot")
-def register():
+class reqAddRobot(BaseModel):
+    '''
+    Class to define the request structure for adding a robot
+    '''
+    mac: str = None
+    name: str = None
+
+@router.post("/addrobot")
+def register(req: reqAddRobot):
     '''
     Route to register the status of a robot's mission
     '''
     try:
         db_robot = RobotRepository()
-        
-        robot_id = db_robot.next_identity()
-
+    
         db_robot.add(robot=Robot(
-            id=robot_id,
-            mac="NO MAC ENTERED",
-            name="Robot 1"
+            id=db_robot.next_identity(),
+            mac=req.mac,
+            name=req.name
         ))
 
         # Put instructions here
     
         return {
-            "robot_id": robot_id.id,
             "status": True
         }
     except Exception as e:

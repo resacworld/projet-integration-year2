@@ -35,7 +35,6 @@ class BlockRepository(BaseRepository, IBlockRepository):
                 id TEXT PRIMARY KEY,
                 mission_id TEXT,
                 block_nb INTEGER,
-                status_pince BOOLEAN,
                 FOREIGN KEY (mission_id) REFERENCES missions (id)
             )
         """)
@@ -58,8 +57,7 @@ class BlockRepository(BaseRepository, IBlockRepository):
         return [Block(
             id=BlockId(id=row[0]),
             mission_id=MissionId(id=row[1]),
-            block_nb=row[2],
-            status_pince=row[3]
+            block_nb=row[2]
         ) for row in rows]
 
     def find_by_id(self, id: str | BlockId) -> Optional[Block]:
@@ -72,8 +70,7 @@ class BlockRepository(BaseRepository, IBlockRepository):
         return None if row == None else Block(
             id=BlockId(id=row[0]),
             mission_id=MissionId(id=row[1]),
-            block_nb=row[2],
-            status_pince=row[3]
+            block_nb=row[2]
         ) if row else None
     
     def find_by_mission_id(self, mission_id: str | MissionId) -> List[Block]:
@@ -86,8 +83,7 @@ class BlockRepository(BaseRepository, IBlockRepository):
         return [Block(
             id=BlockId(id=row[0]),
             mission_id=MissionId(id=row[1]),
-            block_nb=row[2],
-            status_pince=row[3]
+            block_nb=row[2]
         ) for row in rows]
 
 
@@ -97,12 +93,11 @@ class BlockRepository(BaseRepository, IBlockRepository):
         """
 
         self.cursor.execute(f"""
-            INSERT INTO blocks (id, mission_id, block_nb, status_pince)
+            INSERT INTO blocks (id, mission_id, block_nb)
             VALUES (
                 \"{block.id if block.id != None else self.next_identity()}\", 
                 \"{block.mission_id}\",
-                {block.block_nb},
-                {int(block.status_pince)}
+                {block.block_nb}
             )
         """)
         self.conn.commit()
