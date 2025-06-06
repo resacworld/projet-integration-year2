@@ -35,6 +35,7 @@ class BlockRepository(BaseRepository, IBlockRepository):
                 id TEXT PRIMARY KEY,
                 mission_id TEXT,
                 block_nb INTEGER,
+                block_order INTEGER,
                 FOREIGN KEY (mission_id) REFERENCES missions (id)
             )
         """)
@@ -57,7 +58,8 @@ class BlockRepository(BaseRepository, IBlockRepository):
         return [Block(
             id=BlockId(id=row[0]),
             mission_id=MissionId(id=row[1]),
-            block_nb=row[2]
+            block_nb=row[2],
+            block_order=row[3]
         ) for row in rows]
 
     def find_by_id(self, id: str | BlockId) -> Optional[Block]:
@@ -70,7 +72,8 @@ class BlockRepository(BaseRepository, IBlockRepository):
         return None if row == None else Block(
             id=BlockId(id=row[0]),
             mission_id=MissionId(id=row[1]),
-            block_nb=row[2]
+            block_nb=row[2],
+            block_order=row[3]
         ) if row else None
     
     def find_by_mission_id(self, mission_id: str | MissionId) -> List[Block]:
@@ -78,12 +81,13 @@ class BlockRepository(BaseRepository, IBlockRepository):
         Find all Blocks associated with a specific Mission ID.
         """
 
-        self.cursor.execute(f"SELECT * FROM blocks WHERE mission_id = \"{mission_id}\"")
+        self.cursor.execute(f"SELECT * FROM blocks WHERE mission_id = \"{mission_id}\" ORDER BY block_order ASC")
         rows = self.cursor.fetchall()
         return [Block(
             id=BlockId(id=row[0]),
             mission_id=MissionId(id=row[1]),
-            block_nb=row[2]
+            block_nb=row[2],
+            block_order=row[3]
         ) for row in rows]
 
 
@@ -93,11 +97,12 @@ class BlockRepository(BaseRepository, IBlockRepository):
         """
 
         self.cursor.execute(f"""
-            INSERT INTO blocks (id, mission_id, block_nb)
+            INSERT INTO blocks (id, mission_id, block_nb, block_order)
             VALUES (
                 \"{block.id if block.id != None else self.next_identity()}\", 
                 \"{block.mission_id}\",
-                {block.block_nb}
+                {block.block_nb},
+                {block.block_order}
             )
         """)
         self.conn.commit()

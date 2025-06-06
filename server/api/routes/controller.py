@@ -8,11 +8,11 @@ from typing import List
 # router = APIRouter(prefix="/controller")
 router = APIRouter()
 
-class reqBlock(BaseModel):
-    '''
-    Class to define the structure of a block in a mission
-    '''
-    block_nb: int = None
+# class reqBlock(BaseModel):
+#     '''
+#     Class to define the structure of a block in a mission
+#     '''
+#     block_nb: int = None
 
 class reqAddMission(BaseModel):
     '''
@@ -20,7 +20,7 @@ class reqAddMission(BaseModel):
     '''
     robot_id: str = None
     name: str = None
-    blocks: List[reqBlock] = None
+    blocks: List[int] = None
 
 @router.post("/addmission")
 def login(req: reqAddMission):
@@ -44,17 +44,20 @@ def login(req: reqAddMission):
             id=mission_id,
             robot_id=RobotId(id=req.robot_id),
             name=req.name,
-            nb_blocks=99999,  #TODO: remove useless field : req.nb_blocks,
             finished=False,
             executing=False
         ))
 
+        i = 0
         for block in req.blocks:
             db_block.add(block=Block(
                 id=db_block.next_identity(),
                 mission_id=mission_id,
-                block_nb=block.block_nb
+                block_nb=block,
+                block_order=i
             ))
+
+            i+=1
 
         return {
             "status": True

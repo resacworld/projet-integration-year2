@@ -35,7 +35,6 @@ class MissionRepository(BaseRepository, IMissionRepository):
                 id TEXT PRIMARY KEY,
                 robot_id TEXT,
                 name TEXT,
-                nb_blocks INTEGER,
                 finished INTEGER DEFAULT 0,
                 executing INTEGER DEFAULT 0,
                 FOREIGN KEY (robot_id) REFERENCES robots (id)
@@ -61,9 +60,8 @@ class MissionRepository(BaseRepository, IMissionRepository):
             id=MissionId(id=row[0]),
             robot_id=RobotId(id=row[1]),
             name=row[2],
-            nb_blocks=row[3],
-            finished=bool(row[4]),
-            executing=bool(row[5])
+            finished=bool(row[3]),
+            executing=bool(row[4])
         ) for row in rows]
 
     def find_by_id(self, id: str | MissionId) -> Optional[Mission]:
@@ -77,9 +75,8 @@ class MissionRepository(BaseRepository, IMissionRepository):
             id=MissionId(id=row[0]),
             robot_id=RobotId(id=row[1]),
             name=row[2],
-            nb_blocks=row[3],
-            finished=bool(row[4]),
-            executing=bool(row[5])
+            finished=bool(row[3]),
+            executing=bool(row[4])
         ) if row else None
     
     def find_next_mission_by_robot_id(self, robot_id: str | RobotId) -> Optional[Mission]:
@@ -93,9 +90,8 @@ class MissionRepository(BaseRepository, IMissionRepository):
             id=MissionId(id=row[0]),
             robot_id=RobotId(id=row[1]),
             name=row[2],
-            nb_blocks=row[3],
-            finished=bool(row[4]),
-            executing=bool(row[5])
+            finished=bool(row[3]),
+            executing=bool(row[4])
         ) if row else None
     
 
@@ -113,9 +109,8 @@ class MissionRepository(BaseRepository, IMissionRepository):
             id=MissionId(id=row[0]),
             robot_id=RobotId(id=row[1]),
             name=row[2],
-            nb_blocks=row[3],
-            finished=bool(row[4]),
-            executing=bool(row[5])
+            finished=bool(row[3]),
+            executing=bool(row[4])
         )
 
     def add(self, mission: Mission) -> None:
@@ -124,12 +119,11 @@ class MissionRepository(BaseRepository, IMissionRepository):
         """
 
         self.cursor.execute(f"""
-            INSERT INTO missions (id, robot_id, name, nb_blocks, finished, executing)
+            INSERT INTO missions (id, robot_id, name, finished, executing)
             VALUES (
                 \"{mission.id if mission.id != None else self.next_identity()}\", 
                 \"{mission.robot_id}\",
                 \"{mission.name}",
-                {mission.nb_blocks},
                 {mission.finished},
                 {mission.executing}
             )
@@ -145,7 +139,6 @@ class MissionRepository(BaseRepository, IMissionRepository):
             UPDATE missions
             SET robot_id = \"{mission.robot_id}\",
                 name = \"{mission.name}\",
-                nb_blocks = {mission.nb_blocks},
                 finished = {int(mission.finished)},
                 executing = {int(mission.executing)}
             WHERE id = \"{mission.id}\"

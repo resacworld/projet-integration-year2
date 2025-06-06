@@ -4,7 +4,7 @@ import requests
 from typing import List
 from pydantic import BaseModel
 
-blocks = []
+comboBoxes:List[ttk.Combobox] = []
 
 class Robot (BaseModel):
     id: str
@@ -15,14 +15,22 @@ robots_json = requests.get("http://localhost:8000/api/robots").json()["robots"]
 
 robots = [Robot(id=robot["id"], mac=robot["mac"], name=robot["name"]) for robot in robots_json]
 
+if len(robots) == 0:
+     raise Exception("Server need to store at least one robot to be working !")
+
 root = tk.Tk()
 blocks_frame = tk.Frame(root)
 
 def add_mission():
+    blocks_to_send = []
+
+    for block in comboBoxes:
+         blocks_to_send.append([2, 3, 6, 7, 10][block.current()])
+
     url = "http://10.7.5.185:8000/api/addmission"
     payload = {
         "robot_id": robots[robot_number.current()].id,
-        "blocks": blocks,
+        "blocks": blocks_to_send,
         "name": mission_entry.get(),
         "status": True
     }
@@ -40,14 +48,12 @@ def add_block():
 
         # Numéro de bloc
         tk.Label(block_frame, text="N° bloc :", padx=10).grid(row=0, column=0, sticky="w")
-        block_number = ttk.Combobox(block_frame, values=["2 - Jaune", "3 - Rouge", "6 - Rose", "7 - Bleu", "10 - Vert"], width=20)
+        block_number = ttk.Combobox(block_frame, values=["2 - Jaune", "3 - Rouge", "6 - Rose", "7 - Bleu", "10 - Vert"], width=20, )
         block_number.grid(row=0, column=1)
         block_number.current(0)  # valeur par défaut
 
         # Sauvegarde de la référence
-        blocks.append({
-            "block_nb": [2, 3, 6, 7, 10][block_number.current()]
-        })
+        comboBoxes.append(block_number)
 
 root.title("Basic Tkinter GUI")
 root.geometry("500x350")

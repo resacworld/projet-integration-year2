@@ -32,6 +32,11 @@ def login(req: reqInstructions):
         if(db_robot.find_by_id(req.robot_id) is None):
             raise Exception("Robot not found in the database. Please register the robot first.")
         
+        current_mission = db_mission.find_by_robot_id_and_executing(req.robot_id, True)
+
+        if current_mission != None:
+            raise Exception("Robot already executing a mission !")
+        
         mission = db_mission.find_next_mission_by_robot_id(req.robot_id)
 
         if(mission is None):
@@ -43,8 +48,7 @@ def login(req: reqInstructions):
 
         return {
             "status": True,
-            "nb_blocks": mission.nb_blocks,
-            "liste_blocks": [ block.to_json() for block in blocks ],
+            "liste_blocks": [ block.block_nb for block in blocks ],
         }
     except Exception as e:
         return {

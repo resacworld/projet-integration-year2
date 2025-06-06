@@ -15,7 +15,6 @@ class Mission(BaseObject):
     id: MissionId
     robot_id: RobotId
     name: str
-    nb_blocks: int
     finished: bool
     executing: bool
 
