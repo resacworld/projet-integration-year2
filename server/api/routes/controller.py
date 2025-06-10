@@ -23,7 +23,7 @@ class reqAddMission(BaseModel):
     blocks: List[int] = None
 
 @router.post("/addmission")
-def login(req: reqAddMission):
+def route(req: reqAddMission):
     '''
     Route to implement
     '''
@@ -32,11 +32,14 @@ def login(req: reqAddMission):
         db_mission = MissionRepository()
         db_block = BlockRepository()
 
-        if(len(req.blocks) == 0):
+        if len(req.blocks) == 0:
             raise Exception("No blocks provided for the mission. Please add at least one block.")
         
-        if(db_robot.find_by_id(req.robot_id) is None):
+        if db_robot.find_by_id(req.robot_id) is None:
             raise Exception("Robot not found in the database. Please register the robot first.")
+        
+        if len(req.blocks) != len(set(req.blocks)):
+            raise Exception("Double block found in the sequence !!")
 
         mission_id = db_mission.next_identity()
     
@@ -77,7 +80,7 @@ class reqGetMission(BaseModel):
     currently_running: bool = None
 
 # @router.post("/getmission")
-# def register(req: reqGetMission):
+# def route(req: reqGetMission):
 #     '''
 #     Route to implement
 #     '''
@@ -101,7 +104,7 @@ class reqGetMission(BaseModel):
 
 
 @router.get("/robots")
-def register():
+def route():
     '''
     Route to implement
     '''

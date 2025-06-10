@@ -19,7 +19,7 @@ class reqAddRobot(BaseModel):
     name: str = None
 
 @router.post("/addrobot")
-def register(req: reqAddRobot):
+def route(req: reqAddRobot):
     '''
     Route to register the status of a robot's mission
     '''

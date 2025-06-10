@@ -6,38 +6,32 @@ from database.models.mission import Mission, MissionRepository
 from database.models.block import Block, BlockRepository
 from database.models.robot import Robot
 from datetime import datetime
-import json
 
 # router = APIRouter(prefix="/robot")
 router = APIRouter()
 
-class reqInstructions(BaseModel):
-    '''
-    Class to define the request structure
-    '''
-    robot_id: str = None
-    # timestamp: str = None # => gérée par l'API (Cahier des Charges)
-
-@router.post("/instructions")
-def login(req: reqInstructions):
+@router.get("/instructions")
+def route(robot_id: str = None):
     '''
     Route for the robot to get instructions
+    
     '''
+
     try:
         db_robot = RobotRepository()
         db_mission = MissionRepository()
         db_block = BlockRepository()
 
         # Check if the robot exists, if not create it
-        if(db_robot.find_by_id(req.robot_id) is None):
+        if(db_robot.find_by_id(robot_id) is None):
             raise Exception("Robot not found in the database. Please register the robot first.")
         
-        current_mission = db_mission.find_by_robot_id_and_executing(req.robot_id, True)
+        current_mission = db_mission.find_by_robot_id_and_executing(robot_id, True)
 
         if current_mission != None:
             raise Exception("Robot already executing a mission !")
         
-        mission = db_mission.find_next_mission_by_robot_id(req.robot_id)
+        mission = db_mission.find_next_mission_by_robot_id(robot_id)
 
         if(mission is None):
             raise Exception("No mission avalaible for this robot. Please add a mission first.")
@@ -70,7 +64,7 @@ class reqTelemetry(BaseModel):
     # timestamp: str = None # => gérée par l'API (Cahier des Charges)
 
 @router.post("/telemetry")
-def register(req: reqTelemetry):
+def route(req: reqTelemetry):
     '''
     Route to register the status of a robot's mission
     '''
@@ -117,7 +111,7 @@ class reqSummary(BaseModel):
     tps_total: float = None
 
 @router.post("/summary")
-def register(req: reqSummary):
+def route(req: reqSummary):
     '''
     Route to register the end of a robot's mission
     '''

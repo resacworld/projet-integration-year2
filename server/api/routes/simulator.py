@@ -19,7 +19,7 @@ router = APIRouter()
 #     error: str = None
 
 # @router.post("/todo1")
-# def login(req: req):
+# def route(req: req):
 #     '''
 #     Route to implement
 #     '''
@@ -41,7 +41,7 @@ router = APIRouter()
 
 
 # @router.put("/todo2")
-# def register():
+# def route():
 #     '''
 #     Route to implement
 #     '''
