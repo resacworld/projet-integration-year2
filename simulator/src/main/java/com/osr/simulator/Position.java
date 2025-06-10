@@ -1,22 +1,17 @@
 package com.osr.simulator;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 public class Position {
     private final String fxId;
     private final String name;
-    private Color color;
+    private Cube cube;
 
-    public Position(String fxId, String name, Color color) throws NullPointerException{
+    public Position(String fxId, String name, Cube cube) throws NullPointerException{
 
         this.fxId = fxId;
         this.name = name;
-        this.color = color;
+        this.cube = cube;
     }
     public String getFxId() { // Getter for the FXML ID
         return fxId;
@@ -24,16 +19,14 @@ public class Position {
     public String getName() {
         return name;
     }
-    public Color getColor() {
-        return color;
+
+    public Cube getCube() {
+        return cube;
     }
 
     @FXML
-    public void setColor(Color color) {
-        this.color = color;
-
-
-
+    public void setCube(Cube cube) {
+        this.cube = cube;
     }
 }
 

@@ -2,6 +2,7 @@ package com.osr.simulator;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,9 +13,12 @@ public class CommandApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CommandApplication.class.getResource("command-control.fxml"));
-        commandController = fxmlLoader.getController();
-        Scene scene = new Scene(fxmlLoader.load(), 896, 504);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("command-control.fxml")); // Assuming your FXML is SimulatorView.fxml
+        Parent root = loader.load();
+
+        // Get the controller instance created by the FXMLLoader
+        commandController = loader.getController();
+        Scene scene = new Scene(root, 896, 504);
         stage.setTitle("Command Control");
         stage.setScene(scene);
         stage.show();

@@ -2,6 +2,7 @@ package com.osr.simulator;
 
 import java.io.IOException;
 import java.util.Vector;
+import com.osr.simulator.CommandController;
 
 
 public class Robot {
@@ -33,6 +34,7 @@ public class Robot {
 
     public void execute() throws IOException {
         System.out.println(RESTService.MyGETRequest(robotId));
+        System.out.println(commandController);
 
 
     }

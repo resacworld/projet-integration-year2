@@ -32,33 +32,43 @@ public class CommandController{
             Node foundNode = map_pane.lookup("#" + pos.getFxId()); // Use pos.getFxId() here!
 
             if (foundNode instanceof Circle circle) {
-                circle.setFill(pos.getColor()); // Set its initial color from the data
+                //circle.setFill(pos.getCube().getColor());
                 uiCircles.put(pos.getFxId(), circle); // Store the UI reference
-                System.out.println("Initialized Circle '" + pos.getFxId() + "' with color " + pos.getColor());
+                System.out.println("Initialized Circle '" + pos.getFxId()); //+ "' with color " + pos.getCube().getColor());
             } else {
                 System.err.println("Error: Circle with fx:id='" + pos.getFxId() + "' not found in FXML or is not a Circle.");
             }
         }
+        updatePositionColor();
     }
 
-    public void updatePositionColor(String positionId, Color newColor) {
-        // 1. Update the data model
-        Position dataPosition = dictPosition.getPosition(positionId);
-        if (dataPosition != null) {
-            dataPosition.setColor(newColor);
-            System.out.println("Data for Position " + dataPosition.getName() + " updated to " + newColor);
-
-            // 2. Update the UI component
-            Circle uiCircle = uiCircles.get(dataPosition.getFxId()); // Get UI circle using its FXML ID
-            if (uiCircle != null) {
-                uiCircle.setFill(newColor);
-                System.out.println("UI for Circle " + dataPosition.getFxId() + " updated to " + newColor);
-            } else {
-                System.err.println("Warning: UI Circle for fx:id '" + dataPosition.getFxId() + "' not found in map.");
+//    public void updatePositionColor(String positionId, Color newColor) {
+//        Position dataPosition = dictPosition.getPosition(positionId);
+//        if (dataPosition != null) {
+//            dataPosition.setColor(newColor);
+//            System.out.println("Data for Position " + dataPosition.getName() + " updated to " + newColor);
+//
+//            // 2. Update the UI component
+//            Circle uiCircle = uiCircles.get(dataPosition.getFxId()); // Get UI circle using its FXML ID
+//            if (uiCircle != null) {
+//                uiCircle.setFill(newColor);
+//                System.out.println("UI for Circle " + dataPosition.getFxId() + " updated to " + newColor);
+//            } else {
+//                System.err.println("Warning: UI Circle for fx:id '" + dataPosition.getFxId() + "' not found in map.");
+//            }
+//        } else {
+//            System.err.println("Error: Position with ID '" + positionId + "' not found in dictPosition.");
+//        }
+//    }
+    public void updatePositionColor() {
+        dictPosition.getAllPositions().values().forEach(pos -> {
+            Circle uiCircle = uiCircles.get(pos.getFxId());
+            if (pos.getCube()==null&&uiCircle!=null) {
+                    uiCircle.setFill(BLACK);
+            } else if (uiCircle!=null) {
+            uiCircle.setFill(pos.getCube().getColor());
             }
-        } else {
-            System.err.println("Error: Position with ID '" + positionId + "' not found in dictPosition.");
-        }
+        });
     }
 
     public void setConsoleTestText(String consoleTestText) {
@@ -70,7 +80,7 @@ public class CommandController{
     protected void pressedTestButton() throws IOException {
         //consoleTestText = RESTService.MyGETRequest();
         //consoleTest.setText(consoleTestText);
-        updatePositionColor("1",RED);
+        //updatePositionColor("1",RED);
     }
 
 }
