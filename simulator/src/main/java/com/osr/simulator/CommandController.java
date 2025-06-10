@@ -1,15 +1,65 @@
 package com.osr.simulator;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-public class CommandController {
+import static javafx.scene.paint.Color.*;
+
+public class CommandController{
+
+    @FXML
+    private Pane map_pane;
+    private Map<String, Circle> uiCircles = new HashMap<>();
     @FXML
     private Label consoleTest;
     private String consoleTestText ;
+
+    @FXML
+    public void initialize() {
+        // After map_pane is injected, we can now safely lookup circles.
+        // Iterate through all the Position data objects from dictPosition
+        for (Position pos : dictPosition.getAllPositions().values())
+        {
+            // Find the corresponding Circle UI element in the FXML
+            Node foundNode = map_pane.lookup("#" + pos.getFxId()); // Use pos.getFxId() here!
+
+            if (foundNode instanceof Circle circle) {
+                circle.setFill(pos.getColor()); // Set its initial color from the data
+                uiCircles.put(pos.getFxId(), circle); // Store the UI reference
+                System.out.println("Initialized Circle '" + pos.getFxId() + "' with color " + pos.getColor());
+            } else {
+                System.err.println("Error: Circle with fx:id='" + pos.getFxId() + "' not found in FXML or is not a Circle.");
+            }
+        }
+    }
+
+    public void updatePositionColor(String positionId, Color newColor) {
+        // 1. Update the data model
+        Position dataPosition = dictPosition.getPosition(positionId);
+        if (dataPosition != null) {
+            dataPosition.setColor(newColor);
+            System.out.println("Data for Position " + dataPosition.getName() + " updated to " + newColor);
+
+            // 2. Update the UI component
+            Circle uiCircle = uiCircles.get(dataPosition.getFxId()); // Get UI circle using its FXML ID
+            if (uiCircle != null) {
+                uiCircle.setFill(newColor);
+                System.out.println("UI for Circle " + dataPosition.getFxId() + " updated to " + newColor);
+            } else {
+                System.err.println("Warning: UI Circle for fx:id '" + dataPosition.getFxId() + "' not found in map.");
+            }
+        } else {
+            System.err.println("Error: Position with ID '" + positionId + "' not found in dictPosition.");
+        }
+    }
 
     public void setConsoleTestText(String consoleTestText) {
         this.consoleTestText = consoleTestText;
@@ -18,6 +68,9 @@ public class CommandController {
     @FXML
     //protected void onHelloButtonClick() {welcomeText.setText("Welcome to JavaFX Application!");}
     protected void pressedTestButton() throws IOException {
-        consoleTestText = RESTService.MyGETRequest();
-        consoleTest.setText(consoleTestText);}
+        //consoleTestText = RESTService.MyGETRequest();
+        //consoleTest.setText(consoleTestText);
+        updatePositionColor("1",RED);
+    }
+
 }
