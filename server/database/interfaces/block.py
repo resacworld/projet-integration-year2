@@ -1,46 +1,44 @@
 from typing import List
 from abc import ABC, abstractmethod
-from pydantic import BaseModel
 from .base import BaseIdentifier, BaseObject
-from .robot import RobotId
-import json
+from .mission import MissionId
 
-class MissionId(BaseIdentifier):
-    """Value object holding Robot identity."""
+
+class BlockId(BaseIdentifier):
+    """Value object holding Block identity."""
     pass
 
+# TODO: Add order to blocks in a mission
+class Block(BaseObject):
+    """Aggregate root, entity holding Block."""
+    id: BlockId
+    mission_id: MissionId
+    block_nb: int
+    block_order: int
 
-class Mission(BaseObject):
-    """Aggregate root, entity holding robot."""
-    id: MissionId
-    robot_id: RobotId
-    name: str
-    finished: bool
-    executing: bool
 
-
-class IMissionRepository(ABC):
-    """Interface for handling robots persistence."""
+class IBlockRepository(ABC):
+    """Interface for handling Block persistence."""
     @abstractmethod
-    def next_identity(self) -> MissionId:
+    def next_identity(self) -> BlockId:
         raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
-    def find_all(self) -> List[Mission]:
+    def find_all(self) -> List[Block]:
         raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
-    def find_by_id(self, id: MissionId) -> Mission:
+    def find_by_id(self, id: BlockId) -> Block:
         raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
-    def add(self, room: Mission) -> None:
+    def add(self, room: Block) -> None:
         raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
-    def update(self, room: Mission) -> None:
+    def update(self, room: Block) -> None:
         raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
-    def delete(self, id: MissionId) -> None:
+    def delete(self, id: BlockId) -> None:
         raise NotImplementedError("Method is not implemented (abstract).")

@@ -1,7 +1,7 @@
 from typing import List
 from abc import ABC, abstractmethod
 from pydantic import BaseModel
-from .base import BaseIdentifier
+from .base import BaseIdentifier, BaseObject
 
 
 class RobotId(BaseIdentifier):
@@ -9,35 +9,35 @@ class RobotId(BaseIdentifier):
     pass
 
 
-class Robot(BaseModel):
+class Robot(BaseObject):
     """Aggregate root, entity holding robot."""
     id: RobotId
+    mac: str
     name: str
-    description: str
 
 
 class IRobotRepository(ABC):
     """Interface for handling robots persistence."""
     @abstractmethod
     def next_identity(self) -> RobotId:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
     def find_all(self) -> List[Robot]:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
     def find_by_id(self, id: RobotId) -> Robot:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
     def add(self, room: Robot) -> None:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
     def update(self, room: Robot) -> None:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
 
     @abstractmethod
     def delete(self, id: RobotId) -> None:
-        raise NotImplementedError
+        raise NotImplementedError("Method is not implemented (abstract).")
