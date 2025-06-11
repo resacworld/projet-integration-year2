@@ -89,8 +89,6 @@ def route(req: reqTelemetry):
                 timestamp=datetime.now().isoformat()  # Automatically set the timestamp
             )
         )
-
-        # Put instructions here
     
         return {
             "status": True

@@ -91,6 +91,24 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
             status_pince=bool(row[6]),  # Convert integer to boolean
             timestamp=row[7]
         )
+    
+    def find_last_by_mission_id(self, mission_id: str | MissionId) -> RobotTelemetry:
+        """
+        Find the last robot telemetry recorded, by the mission id.
+        """
+
+        self.cursor.execute(f"SELECT * FROM robot_telemetries WHERE mission_id = \"{mission_id}\" ORDER BY timestamp DESC")
+        row = self.cursor.fetchone()
+        return None if row == None else RobotTelemetry(
+            id=RobotTelemetryId(id=row[0]),
+            mission_id=MissionId(id=row[1]),
+            vitesse_instant=row[2],
+            ds_ultrasons=row[3],
+            status_deplacement=row[4],
+            ligne=row[5],
+            status_pince=bool(row[6]),  # Convert integer to boolean
+            timestamp=row[7]
+        )
 
     def add(self, telemetry: RobotTelemetry) -> None:
         """

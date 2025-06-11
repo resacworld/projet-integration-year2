@@ -31,11 +31,43 @@ def route(req: reqAddRobot):
             mac=req.mac,
             name=req.name
         ))
-
-        # Put instructions here
     
         return {
             "status": True
+        }
+    except Exception as e:
+        return {
+            "status": False,
+            "error": str(e)
+        }
+    
+
+class reqGetMission(BaseModel):
+    '''
+    Class to define the request structure
+    '''
+    robot_id: str = None
+
+@router.post("/getmissions")
+def route(req: reqGetMission):
+    '''
+    Route to implement
+    '''
+    try:
+        db_mission = MissionRepository()
+        db_block = BlockRepository()
+
+        missions = db_mission.find_all_by_robot_id(req.robot_id)
+
+        def getFullMission(mission: Mission):
+            json_mission = mission.to_json()
+            json_mission["blocks"] = db_block.find_by_mission_id(mission.id)
+
+            return json_mission
+
+        return {
+            "status": True,
+            "missions": [getFullMission(mission) for mission in missions]
         }
     except Exception as e:
         return {

@@ -1,11 +1,11 @@
 {
-  "proxy": "http://10.7.5.185:8000/",
+  "proxy": "http://10.7.5.182:8000/",
   "name": "web-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "exbuild": "vite build --outDir ../server/public --emptyOutDir",
     "lint": "eslint .",

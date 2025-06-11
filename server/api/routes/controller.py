@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from database.models.robot import RobotRepository, RobotId
 from database.models.mission import MissionRepository, Mission
 from database.models.block import BlockRepository, Block
+from database.models.robotTelemetry import RobotTelemetryRepository, RobotTelemetry
 from typing import List
 
 # router = APIRouter(prefix="/controller")
@@ -71,37 +72,41 @@ def route(req: reqAddMission):
             "error": str(e)
         }
 
-
-class reqGetMission(BaseModel):
+class reqLastTelemety(BaseModel):
     '''
     Class to define the request structure
     '''
     robot_id: str = None
-    currently_running: bool = None
 
-# @router.post("/getmission")
-# def route(req: reqGetMission):
-#     '''
-#     Route to implement
-#     '''
-#     try:
-#         db_mission = MissionRepository()
+@router.post("/lasttelemetry")
+def route(req: reqLastTelemety):
+    '''
+    Route to implement
+    '''
+    try:
+        db_robot_telemetry = RobotTelemetryRepository()
+        db_mission = MissionRepository()
 
-#         mission = db_mission.find_by_robot_id_and_executing(req.robot_id, req.currently_running)
+        print(req.robot_id)
 
-#         # Put instructions here
+        mission = db_mission.find_by_robot_id_and_executing(req.robot_id, executing=True)
 
-#         return {
-#             "status": True,
-#             "mission": mission.to_json() if mission else None
-#         }
-#     except Exception as e:
-#         raise e
-#         return {
-#             "status": False,
-#             "error": str(e)
-#         }
+        if mission == None:
+            raise Exception("No active mission find")
 
+        telemetry: RobotTelemetry = db_robot_telemetry.find_last_by_mission_id(mission_id=mission.id)
+
+        # Put instructions here
+
+        return {
+            "status": True,
+            "telemetry": telemetry.to_json() if telemetry != None else None
+        }
+    except Exception as e:
+        return {
+            "status": False,
+            "error": str(e)
+        }
 
 @router.get("/robots")
 def route():
@@ -120,7 +125,6 @@ def route():
             "robots": [robot.to_json() for robot in robots]
         }
     except Exception as e:
-        raise e
         return {
             "status": False,
             "error": str(e)
