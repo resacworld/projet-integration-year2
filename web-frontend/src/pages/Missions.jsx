@@ -34,7 +34,7 @@ export default ({}) => {
     }, [selectedRobotMac])
 
     return <div className="p-3 pr-0 bg-slate-300 min-h-screen w-2/3">
-        <label htmlFor="name" className="block mb-2 text-md font-medium text-gray-900 dark:text-white">Missions</label>
+        <h2 className="block mb-2 text-xl font-semibold text-gray-900 dark:text-white">Missions</h2>
         <div>
             <form className="max-w-md mx-auto w-80">
                 <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a robot</label>
@@ -48,7 +48,7 @@ export default ({}) => {
                 </select>
             </form>
             
-            <div className="flex flex-row flex-wrap justify-center">
+            <div className="flex flex-row flex-wrap justify-center mt-2">
                 {missions.map((mission, index) => {
                     return <div className="mr-6 bg-slate-400 p-2 m-1 rounded-md" key={mission.id}>
                         <h3 htmlFor="name" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Mission : <span className="text-gray-500">{mission.name}</span></h3>
@@ -62,6 +62,7 @@ export default ({}) => {
                         </div>
                     </div>
                 })}
+                {missions.length==0?"Aucune mission enregistrée":null}
             </div>
         </div>
     </div>
