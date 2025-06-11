@@ -59,7 +59,7 @@ class reqTelemetry(BaseModel):
     vitesse_instant: float = None
     ds_ultrasons: float = None
     status_deplacement: str = None
-    orientation: float = None
+    ligne: int = None
     status_pince: bool = None
     # timestamp: str = None # => gérée par l'API (Cahier des Charges)
 
@@ -84,7 +84,7 @@ def route(req: reqTelemetry):
                 vitesse_instant=req.vitesse_instant,
                 ds_ultrasons=req.ds_ultrasons,
                 status_deplacement=req.status_deplacement,
-                orientation=req.orientation,
+                ligne=req.ligne,
                 status_pince=req.status_pince,
                 timestamp=datetime.now().isoformat()  # Automatically set the timestamp
             )

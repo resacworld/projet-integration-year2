@@ -38,7 +38,7 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
                 vitesse_instant REAL,
                 ds_ultrasons REAL,
                 status_deplacement TEXT,
-                orientation REAL,
+                ligne INTEGER,
                 status_pince INTEGER,
                 timestamp TEXT,
                 FOREIGN KEY (mission_id) REFERENCES missions (id)
@@ -69,7 +69,7 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
             vitesse_instant=row[2],
             ds_ultrasons=row[3],
             status_deplacement=row[4],
-            orientation=row[5],
+            ligne=row[5],
             status_pince=bool(row[6]),  # Convert integer to boolean
             timestamp=row[7]
         ) for row in rows]
@@ -87,7 +87,7 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
             vitesse_instant=row[2],
             ds_ultrasons=row[3],
             status_deplacement=row[4],
-            orientation=row[5],
+            ligne=row[5],
             status_pince=bool(row[6]),  # Convert integer to boolean
             timestamp=row[7]
         )
@@ -107,7 +107,7 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
                 {telemetry.vitesse_instant}, 
                 {telemetry.ds_ultrasons}, 
                 \"{telemetry.status_deplacement}\", 
-                {telemetry.orientation}, 
+                {telemetry.ligne}, 
                 {telemetry.status_pince}, 
                 \"{telemetry.timestamp}\"
             )

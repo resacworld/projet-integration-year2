@@ -17,7 +17,7 @@ class RobotTelemetry(BaseObject):
     vitesse_instant: float
     ds_ultrasons: float
     status_deplacement: str
-    orientation: float
+    ligne: float
     status_pince: bool
     timestamp: str
 

@@ -23,6 +23,7 @@ pinEcho = Pin(19, Pin.IN)
 vitesse_instant = 999999
 ds_ultrasons = 999999
 status_pince = False
+current_dir = "X"
 
 #======= MOTEURS ============
 
@@ -30,41 +31,61 @@ vitesse_ralentis_rotation = 0
 
 # Fonction pour faire avancer le robot
 def avant():
+  global current_dir 
+  
   IN1.off()     # On met la pin 9 (IN1) sur 0
   IN2.on()      # On met la pin 10 (IN2) sur la vitesse voulue
   IN3.on()     # On met la pin 5 (IN3) sur la vitesse voulue
   IN4.off()     # On met la pin 3 (IN4) sur 0
+
+  current_dir = "A"
     
 
 # Fonction pour faire reculer le robot
 def arriere():
+  global current_dir 
+  
   IN1.on()     # On met la pin 9 (IN1) sur la vitesse voulue
   IN2.off()     # On met la pin 10 (IN2) sur 0
   IN3.off()     # On met la pin 5 (IN3) sur 0
   IN4.on()     # On met la pin 3 (IN4) sur la vitesse voulue
 
+  current_dir = "R"
+
 # Fonction pour faire tourner a droite le robot
 def droite():
+  global current_dir 
+  
   IN1.off()     # On met la pin 9 (IN1) sur 0
   IN2.on()      # On met la pin 10 (IN2) sur la vitesse voulue
   IN3.off()     # On met la pin 5 (IN3) sur 0
-  IN4.on()     # On met la pin 3 (IN4) sur la vitesse voulue
+  IN4.on()     # On met la pin 3 (IN4) sur la vitesse voulue*
+
+  current_dir = "D"
 
 
 # Fonction pour faire tourner a gauche le robot
 def gauche():
+  global current_dir 
+  
   IN1.on()     # On met la pin 9 (IN1) sur la vitesse voulue
   IN2.off()     # On met la pin 10 (IN2) sur 0
   IN3.on()     # On met la pin 5 (IN3) sur la vitesse voulue
   IN4.off()     # On met la pin 3 (IN4) sur 0
 
+  current_dir = "G"
+
 
 # Fonction pour freiner / bloquer les roues
 def frein():
+  global current_dir 
+  
   IN1.on()     # On met la pin 9 (IN1) sur 0
   IN2.on()     # On met la pin 10 (IN2) sur la vitesse voulue
   IN3.on()     # On met la pin 5 (IN3) sur 0
   IN4.on()     # On met la pin 3 (IN4) sur la vitesse voulue
+
+  current_dir = "X"
 
 #======= GRABBER ============
 

@@ -12,8 +12,10 @@ instructions = []
 current_inst_index = 0
 
 current_zone_index = 1
-current_dir = ""
 have_block = False
+
+zone_1_block_stored = 0
+zone_2_block_stored = 0
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -36,16 +38,21 @@ def sendTelemetry():
     "robot_id": robot_id,
     "vitesse_instant": robot.vitesse_instant,
     "ds_ultrasons": robot.ds_ultrasons,
-    "status_deplacement": "JSP",
-    "orientation": 0,
+    "status_deplacement": robot.current_dir,
+    "ligne": current_zone_index,
     "status_pince": robot.status_pince
   }))
   
   res.close()
 
-def depose_zone():
+def depose_zone(zone_nb):
   global have_block
   print("depose zone")
+
+  time_ms = zone_1_block_stored * 400 if zone_nb == 4 else zone_2_block_stored * 400
+  if time != 0:
+    robot.avant()
+    time.sleep_ms(time_ms)
 
   robot.droite()
   time.sleep_ms(500)
@@ -61,11 +68,16 @@ def depose_zone():
   while (not robot.status_led_gauche()):
     time.sleep_ms(50)
 
-  robot.droite()
+  robot.gauche()
   time.sleep_ms(500)
 
-  robot.close_grabber()
   robot.frein()
+  robot.close_grabber()
+
+  if zone_nb == 4:
+    zone_1_block_stored += 1
+  else :
+    zone_2_block_stored += 1
 
 def recupere_cube(gauche=False):
   global have_block
@@ -134,21 +146,18 @@ while True:
 
   while (not robot.status_led_droite()) or (not robot.status_led_gauche()):
     if robot.status_led_droite():
-      if current_dir != "D":
+      if robot.current_dir != "D":
         print("droite")
-        current_dir = "D"
         robot.droite()
       
     elif robot.status_led_gauche():
-      if current_dir != "G":
+      if robot.current_dir != "G":
         print("gauche")
-        current_dir = "G"
         robot.gauche()
         
     else:
-      if current_dir != "A":
+      if robot.current_dir != "A":
         print("avant")
-        current_dir = "A"
         robot.avant()
       
     time.sleep_ms(100)
@@ -162,10 +171,10 @@ while True:
     recupere_cube(current_zone_index == 6)
 
   elif current_zone_index == 4:
-    depose_zone()
+    depose_zone(4)
 
   elif current_zone_index == 8:
-    depose_zone()
+    depose_zone(8)
   
   current_zone_index += 1
   if current_zone_index == 11:

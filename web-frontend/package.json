@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "mbuild": "vite build --outDir ../server/public --emptyOutDir",
+    "exbuild": "vite build --outDir ../server/public --emptyOutDir",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -11,7 +11,7 @@ class Robot (BaseModel):
     mac: str
     name: str
 
-robots_json = requests.get("http://localhost:8000/api/robots").json()["robots"]
+robots_json = requests.get("http://10.7.5.182:8000/api/robots").json()["robots"]
 
 robots = [Robot(id=robot["id"], mac=robot["mac"], name=robot["name"]) for robot in robots_json]
 
@@ -27,7 +27,7 @@ def add_mission():
     for block in comboBoxes:
          blocks_to_send.append([2, 3, 6, 7, 10][block.current()])
 
-    url = "http://10.7.5.185:8000/api/addmission"
+    url = "http://10.7.5.182:8000/api/addmission"
     payload = {
         "robot_id": robots[robot_number.current()].id,
         "blocks": blocks_to_send,
