@@ -14,7 +14,6 @@ import java.util.Map;
 import static javafx.scene.paint.Color.*;
 
 public class CommandController{
-
     @FXML
     private Pane map_pane;
     private static Map<String, Circle> uiCircles = new HashMap<>();

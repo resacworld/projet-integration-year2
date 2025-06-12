@@ -51,7 +51,7 @@ public class Robot {
     public void execute() throws IOException, InterruptedException {
         System.out.println(RESTService.MyGETRequest(robotId));
         //System.out.println(commandController);
-        List<Integer> listeInstructions = getListeBlocksFromJson(RESTService.MyGETRequest(robotId));
+        List<Integer> listeInstructions = getListeBlocksFromJson("{\"status\":true,\"liste_blocks\":[2,6,7]}"/*RESTService.MyGETRequest(robotId)*/);
         TimeUnit.SECONDS.sleep(3);
         System.out.println(listeInstructions);
         for (Integer i : listeInstructions) {
@@ -63,6 +63,7 @@ public class Robot {
             Map<Float, Position> storagePositions = dictPosition.getFreeStoragePositions();
             int closest = findClosest((int) positionRobot,storagePositions);
             System.out.println("Going to storage position : "+ closest);
+            //System.out.println(findOrientation((int) positionRobot,closest));
             moveRobot((int) positionRobot,closest,findOrientation((int) positionRobot,closest));
             dictPosition.getPosition(positionRobot).setCube(cube);
             System.out.println("Dropped "+cube.getColor()+"cube");
@@ -103,7 +104,13 @@ public class Robot {
     private boolean findOrientation(int start, int end) {
         boolean startOrientation = true;
         int nbPositions = dictPosition.getNumberOfPositions();
-        if(end>0.5*nbPositions+(start)){startOrientation=false;}
+        if (end<start) {
+            if(end<0.25*nbPositions+(start)){startOrientation=false;}else{startOrientation=true;}
+        }else {
+            if(end>0.25*nbPositions+(start)){startOrientation=false;}else{startOrientation=true;}
+        }
+
+        System.out.println("start Orientation : "+startOrientation);
         return startOrientation;
     }
     private void moveRobot(int start, int end, boolean startOrientation) throws InterruptedException {
