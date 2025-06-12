@@ -56,7 +56,9 @@ def arriere():
 def droite():
   global current_dir 
   
-  IN1.off()     # On met la pin 9 (IN1) sur 0
+  # IN1.off()     # On met la pin 9 (IN1) sur 0
+  IN1.on()
+  
   IN2.on()      # On met la pin 10 (IN2) sur la vitesse voulue
   IN3.off()     # On met la pin 5 (IN3) sur 0
   IN4.on()     # On met la pin 3 (IN4) sur la vitesse voulue*
@@ -71,7 +73,9 @@ def gauche():
   IN1.on()     # On met la pin 9 (IN1) sur la vitesse voulue
   IN2.off()     # On met la pin 10 (IN2) sur 0
   IN3.on()     # On met la pin 5 (IN3) sur la vitesse voulue
-  IN4.off()     # On met la pin 3 (IN4) sur 0
+  
+  IN4.on()
+  # IN4.off()     # On met la pin 3 (IN4) sur 0
 
   current_dir = "G"
 

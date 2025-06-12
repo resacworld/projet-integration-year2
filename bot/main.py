@@ -117,8 +117,6 @@ def recupere_cube(gauche=False):
   while (not robot.status_led_gauche()):
     time.sleep_ms(50)
 
-  robot.frein()
-
   print("end grab cube")
 
 robot.close_grabber()
@@ -159,22 +157,20 @@ while True:
       if robot.current_dir != "A":
         print("avant")
         robot.avant()
-      
-    time.sleep_ms(100)
 
   robot.frein()
 
   # if current_zone_index == 1:
   #   robot.frein()
     
-  if (not have_block) and ((current_zone_index == 2) or (current_zone_index == 3) or (current_zone_index == 6) or (current_zone_index == 7) or (current_zone_index == 10)):
-    recupere_cube(current_zone_index == 6)
+  # if (not have_block) and ((current_zone_index == 2) or (current_zone_index == 3) or (current_zone_index == 6) or (current_zone_index == 7) or (current_zone_index == 10)):
+  #   recupere_cube(current_zone_index == 6)
 
-  elif current_zone_index == 4:
-    depose_zone(4)
+  # elif current_zone_index == 4:
+  #   depose_zone(4)
 
-  elif current_zone_index == 8:
-    depose_zone(8)
+  # elif current_zone_index == 8:
+  #   depose_zone(8)
   
   current_zone_index += 1
   if current_zone_index == 11:
