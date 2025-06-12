@@ -10,6 +10,7 @@ public class Cube {
     }
 
     public Color getColor() {
+        if(color==null){return Color.BLACK;}
         return color;
     }
 }

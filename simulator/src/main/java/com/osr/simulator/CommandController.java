@@ -17,7 +17,7 @@ public class CommandController{
 
     @FXML
     private Pane map_pane;
-    private Map<String, Circle> uiCircles = new HashMap<>();
+    private static Map<String, Circle> uiCircles = new HashMap<>();
     @FXML
     private Label consoleTest;
     private String consoleTestText ;
@@ -60,15 +60,31 @@ public class CommandController{
 //            System.err.println("Error: Position with ID '" + positionId + "' not found in dictPosition.");
 //        }
 //    }
-    public void updatePositionColor() {
+    public static void updatePositionColor() {
         dictPosition.getAllPositions().values().forEach(pos -> {
             Circle uiCircle = uiCircles.get(pos.getFxId());
+            uiCircle.setStroke(BLACK);
             if (pos.getCube()==null&&uiCircle!=null) {
                     uiCircle.setFill(BLACK);
             } else if (uiCircle!=null) {
             uiCircle.setFill(pos.getCube().getColor());
             }
         });
+
+        float robotPose =Robot.getInstance().getPositionRobot();
+//        String robotPoseString;
+//        if (robotPose%1==0){
+//            robotPoseString = (int) robotPose+"";
+//        }else{robotPoseString = robotPose+"";}
+        System.out.println("robot pose : "+robotPose);
+        //System.out.println(uiCircles.values());
+        uiCircles.get(dictPosition.getPosition(robotPose).getFxId())
+                .setStroke(GRAY);
+        if(Robot.getInstance().getCube()!=null){
+            uiCircles.get(dictPosition.getPosition(robotPose).getFxId())
+                    .setFill(Robot.getInstance().getCube().getColor());
+        }
+
     }
 
     public void setConsoleTestText(String consoleTestText) {

@@ -30,7 +30,15 @@ public class CommandApplication extends Application {
     }
 
     public static void main(String[] args) throws IOException {
+        Thread t1 = new Thread(() -> {
+            try {
+                Robot.getInstance().execute();
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t1.start();
         launch();
-        Robot.getInstance().execute();
+
     }
 }

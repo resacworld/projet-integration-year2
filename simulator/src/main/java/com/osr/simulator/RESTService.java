@@ -11,10 +11,10 @@ public class RESTService {
             "    \"title\": \"Test Title\",\r\n" +
             "    \"body\": \"Test Body\"" + "\n}";
     static String server = "http://10.7.5.182:8000/api/";
-    public static void main(String[] args) throws IOException {
-        //MyGETRequest();
-        //MyPOSTRequest(json);
-    }
+//    public static void main(String[] args) throws IOException {
+//        //MyGETRequest();
+//        //MyPOSTRequest(json);
+//    }
     public static void MyPOSTRequest(String Post) throws IOException {
         System.out.println(Post);
         StringBuilder url = new StringBuilder(server);

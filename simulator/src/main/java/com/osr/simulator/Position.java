@@ -6,12 +6,14 @@ public class Position {
     private final String fxId;
     private final String name;
     private Cube cube;
+    private boolean storage =false;
 
-    public Position(String fxId, String name, Cube cube) throws NullPointerException{
+    public Position(String fxId, String name, Cube cube,Boolean storage) throws NullPointerException{
 
         this.fxId = fxId;
         this.name = name;
         this.cube = cube;
+        this.storage = storage;
     }
     public String getFxId() { // Getter for the FXML ID
         return fxId;
@@ -22,6 +24,13 @@ public class Position {
 
     public Cube getCube() {
         return cube;
+    }
+
+    public boolean isStorage() {
+        return storage;
+    }
+    public void setStorage(boolean storage) {
+        this.storage = storage;
     }
 
     @FXML
