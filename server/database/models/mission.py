@@ -79,6 +79,17 @@ class MissionRepository(BaseRepository, IMissionRepository):
             executing=bool(row[4])
         ) if row else None
     
+    def find_all_by_robot_id(self, robot_id: str | RobotId) -> Optional[List[Mission]]:
+        self.cursor.execute(f"SELECT * FROM missions WHERE robot_id =  \"{robot_id}\"")
+        rows = self.cursor.fetchall()
+        return [Mission(
+            id=MissionId(id=row[0]),
+            robot_id=RobotId(id=row[1]),
+            name=row[2],
+            finished=bool(row[3]),
+            executing=bool(row[4])
+        ) for row in rows]
+    
     def find_next_mission_by_robot_id(self, robot_id: str | RobotId) -> Optional[Mission]:
         """
         Find the next mission for a given robot by its ID.
