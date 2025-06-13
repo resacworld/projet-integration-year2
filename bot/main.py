@@ -6,16 +6,19 @@ import robot
 import urequests
 import ujson
 
+#INIT
+##############################################################################################################
 ssid = 'IMERIR Fablab'
 password = 'imerir66'
 
-lum = (120, 120, 120)
+# lum = (120, 120, 120)
 
-np = neopixel.NeoPixel(Pin(26), 3)
-np[0] = lum
-np[1] = lum
-np[2] = lum
-np.write()
+# np = neopixel.NeoPixel(Pin(26), 3)
+# np[0] = lum
+# np[1] = lum
+# np[2] = lum
+# np.write()
+
 
 instructions = []
 current_inst_index = 0
@@ -42,6 +45,13 @@ if not wlan.isconnected():
     time.sleep_ms(500)
 
 print("\nWi-Fi Config: ", wlan.ifconfig())
+
+print("he")
+robot.close_grabber()
+robot.frein()
+robot.gaucheSurPlace(600)
+time.sleep(3)
+##############################################################################################################
 
 def sendTelemetry():
   res = urequests.post("http://10.7.5.182:8000/api/telemetry", data=ujson.dumps({
@@ -129,27 +139,50 @@ def recupere_cube(gauche=False):
 
   print("end grab cube")
 
-print("he")
-robot.close_grabber()
+
+
+def getInstructions():
+  # res = urequests.get(f"http://10.7.5.182:8000/api/instructions?robot_id={robot_id}")
+  # print("pk faire ?")
+  # res_json = ujson.loads(res.text)
+  
+  # if not res_json["status"]:
+  #   time.sleep_ms(500)
+  #   continue
+  
+  # instructions = res_json["liste_blocks"]
+  #   res.close()
+  # return instructions
+  return
+
+def suiviLigne():
+  vitesse = 600
+  reverseFactor = 0.5
+  
+  if (robot.status_led_droite() and not robot.status_led_gauche()):
+    robot.droiteSurPlace(600)
+    robot.moteur(0, vitesse, 0, int(vitesse*reverseFactor))
+    time.sleep_ms(150)
+    
+  elif (not robot.status_led_droite() and robot.status_led_gauche()):
+    robot.gaucheSurPlace(600)
+    robot.moteur(int(vitesse*reverseFactor), 0,vitesse, 0)
+    time.sleep_ms(150)
+  else: 
+    robot.avant(600)
+  
+    print("Droite :" + str(robot.status_led_droite()))
+    print("Gauche :" + str(robot.status_led_gauche()))
 
 # Loop
 def loop():
   global instructions
-  
+
   while True:
     while len(instructions) == 0:
       instructions = [2, 2]
       # print("hello")
-      # res = urequests.get(f"http://10.7.5.182:8000/api/instructions?robot_id={robot_id}")
-      # print("pk faire ?")
-      # res_json = ujson.loads(res.text)
-      
-      # if not res_json["status"]:
-      #   time.sleep_ms(500)
-      #   continue
-      
-      # instructions = res_json["liste_blocks"]
-      # res.close()
+
   
     # print(robot.get_distance())
   
@@ -162,31 +195,8 @@ def loop():
     # print(robot.status_led_droite())
     # while (not robot.status_led_droite()) or (not robot.status_led_gauche()):
       
-    if (robot.status_led_droite() and robot.status_led_gauche()):
-      if robot.current_dir != "A":
-        print("avant")
-        robot.avant(600)
-    
-    elif robot.status_led_droite():
-      if robot.current_dir != "D":
-        print("droite")
-        robot.tournerDroiteAvecFrein()
-      
-    elif robot.status_led_gauche():
-      if robot.current_dir != "G":
-        print("gauche")
-        robot.tournerGaucheAvecFrein()
-        
-    else:
-      if robot.current_dir != "A":
-        print("avant")
-        robot.avant(600)
-        # robot.frein()
-
-    print("Droite :" + str(robot.status_led_droite()))
-    print("Gauche :" + str(robot.status_led_gauche()))
-
-    time.sleep_ms(100)
+    suiviLigne()
+    time.sleep_ms(50)
     # robot.frein()
   
     # if current_zone_index == 1:
@@ -209,4 +219,6 @@ def loop():
     # time.sleep_ms(10)
     # end of current instruction
 
+# MAIN
+##############################################################################################################
 loop()

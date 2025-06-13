@@ -82,7 +82,7 @@ def droiteSurPlace(vitesse=1023):
 def gaucheSurPlace(vitesse=1023):
   global current_dir
 
-  moteur(vitesse, 0, vitesse, 0)
+  moteur(vitesse, 0,vitesse, 0)
 
   current_dir  = "D"
 
@@ -95,11 +95,11 @@ def frein():
 
   current_dir = "X"
 
-def tournerGaucheAvecFrein(vitesse=1023, forceFrein=1023):
+def tournerDroiteAvecFrein(vitesse=1023, forceFrein=1023):
   moteur(0, vitesse, forceFrein, forceFrein)
 
-def tournerDroiteAvecFrein(vitesse=1023, forceFrein=1023):
-  moteur(forceFrein, forceFrein, 0, vitesse)
+def tournerGaucheAvecFrein(vitesse=1023, forceFrein=1023):
+  moteur(forceFrein, forceFrein, vitesse, 0)
 
 #======= GRABBER ============
 
