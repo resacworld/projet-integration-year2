@@ -1,10 +1,9 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from database.models.robotTelemetry import RobotTelemetryRepository, RobotTelemetry, RobotTelemetryId
-from database.models.robot import RobotRepository, RobotId
-from database.models.mission import Mission, MissionRepository
-from database.models.block import Block, BlockRepository
-from database.models.robot import Robot
+from database.models.robotTelemetry import RobotTelemetryRepository, RobotTelemetry
+from database.models.robot import RobotRepository
+from database.models.mission import MissionRepository
+from database.models.block import BlockRepository
 from datetime import datetime
 
 # router = APIRouter(prefix="/robot")
@@ -56,7 +55,7 @@ class reqTelemetry(BaseModel):
     Class to define the request structure
     '''
     robot_id: str = None
-    vitesse_instant: float = None
+    vitesse: float = None
     ds_ultrasons: float = None
     status_deplacement: str = None
     ligne: int = None
@@ -81,7 +80,7 @@ def route(req: reqTelemetry):
             RobotTelemetry(
                 id=db_robot_telemetry.next_identity(),
                 mission_id=mission.id,
-                vitesse_instant=req.vitesse_instant,
+                vitesse_instant=req.vitesse,
                 ds_ultrasons=req.ds_ultrasons,
                 status_deplacement=req.status_deplacement,
                 ligne=req.ligne,
