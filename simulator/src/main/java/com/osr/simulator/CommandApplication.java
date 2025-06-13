@@ -1,10 +1,13 @@
 package com.osr.simulator;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -23,11 +26,18 @@ public class CommandApplication extends Application {
         stage.setScene(scene);
         stage.show();
         Robot.setInstance(commandController);
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
 
     public static CommandController getCommandController() {
         return commandController;
     }
+
 
     public static void main(String[] args) throws IOException {
         Thread t1 = new Thread(() -> {
