@@ -1,17 +1,20 @@
-from machine import PWM, Pin, time_pulse_us
+from machine import PWM, Pin, ADC, time_pulse_us
 import time
 
-vitesse = 60		  # Gère la vitesse globale
-forceFrein = 255	  # Gère la force de frein
+seuil_detection = 1700
+forceFrein = 1023	  # Gère la force de frein
 
 # Configure the LED pins
-IN1 = Pin(16, Pin.OUT)
-IN2 = Pin(17, Pin.OUT)
-IN3 = Pin(5, Pin.OUT)
-IN4 = Pin(18, Pin.OUT)
+IN1 = PWM(Pin(16, Pin.OUT), freq=50)
+IN2 = PWM(Pin(17, Pin.OUT), freq=50)
+IN3 = PWM(Pin(5, Pin.OUT), freq=50)
+IN4 = PWM(Pin(18, Pin.OUT), freq=50)
 
-LED_INFRA1 = Pin(12, Pin.IN, Pin.PULL_DOWN)
-LED_INFRA2 = Pin(27, Pin.IN, Pin.PULL_DOWN)
+# LED_INFRA1 = Pin(12, Pin.IN, Pin.PULL_DOWN)
+# LED_INFRA2 = Pin(27, Pin.IN, Pin.PULL_DOWN)
+
+LED_INFRA1 = ADC(Pin(34, Pin.IN))
+LED_INFRA2 = ADC(Pin(35, Pin.IN))
 
 servo = PWM(Pin(15), freq=50)
 
@@ -29,67 +32,74 @@ current_dir = "X"
 
 vitesse_ralentis_rotation = 0
 
+def moteur(m1, m2, m3, m4):
+  IN1.duty(m1)           # On met la pin 9 (IN1) sur 0
+  IN2.duty(m2)     # On met la pin 10 (IN2) sur la vitesse voulue
+  IN3.duty(m3)     # On met la pin 5 (IN3) sur la vitesse voulue
+  IN4.duty(m4)
+
 # Fonction pour faire avancer le robot
-def avant():
+def avant(vitesse=1023):
   global current_dir 
-  
-  IN1.off()     # On met la pin 9 (IN1) sur 0
-  IN2.on()      # On met la pin 10 (IN2) sur la vitesse voulue
-  IN3.on()     # On met la pin 5 (IN3) sur la vitesse voulue
-  IN4.off()     # On met la pin 3 (IN4) sur 0
+
+  moteur(0, vitesse, vitesse, 0)
 
   current_dir = "A"
     
 
 # Fonction pour faire reculer le robot
-def arriere():
+def arriere(vitesse=1023):
   global current_dir 
-  
-  IN1.on()     # On met la pin 9 (IN1) sur la vitesse voulue
-  IN2.off()     # On met la pin 10 (IN2) sur 0
-  IN3.off()     # On met la pin 5 (IN3) sur 0
-  IN4.on()     # On met la pin 3 (IN4) sur la vitesse voulue
+
+  moteur(vitesse, 0, 0, vitesse)
 
   current_dir = "R"
 
 # Fonction pour faire tourner a droite le robot
-def droite():
+def droite(vitesse=1023, rayon_br=0.2):
   global current_dir 
   
-  # IN1.off()     # On met la pin 9 (IN1) sur 0
-  IN1.on()
-  
-  IN2.on()      # On met la pin 10 (IN2) sur la vitesse voulue
-  IN3.off()     # On met la pin 5 (IN3) sur 0
-  IN4.on()     # On met la pin 3 (IN4) sur la vitesse voulue*
+  moteur(0, vitesse, int(vitesse * rayon_br), 0)
 
   current_dir = "D"
 
-
 # Fonction pour faire tourner a gauche le robot
-def gauche():
+def gauche(vitesse=1023, rayon_br=0.2):
   global current_dir 
   
-  IN1.on()     # On met la pin 9 (IN1) sur la vitesse voulue
-  IN2.off()     # On met la pin 10 (IN2) sur 0
-  IN3.on()     # On met la pin 5 (IN3) sur la vitesse voulue
-  
-  IN4.on()
-  # IN4.off()     # On met la pin 3 (IN4) sur 0
+  moteur(0, int(vitesse * rayon_br), vitesse, 0)
 
   current_dir = "G"
+
+def droiteSurPlace(vitesse=1023):
+  global current_dir
+
+  moteur(0, vitesse, 0, vitesse)
+
+  current_dir  = "D"
+
+
+def gaucheSurPlace(vitesse=1023):
+  global current_dir
+
+  moteur(vitesse, 0, vitesse, 0)
+
+  current_dir  = "D"
 
 
 # Fonction pour freiner / bloquer les roues
 def frein():
   global current_dir 
   
-  IN1.on()     # On met la pin 9 (IN1) sur 0
-  IN2.on()     # On met la pin 10 (IN2) sur la vitesse voulue
-  IN3.on()     # On met la pin 5 (IN3) sur 0
-  IN4.on()     # On met la pin 3 (IN4) sur la vitesse voulue
+  moteur(forceFrein, forceFrein, forceFrein, forceFrein)
 
   current_dir = "X"
+
+def tournerGaucheAvecFrein(vitesse=1023, forceFrein=1023):
+  moteur(0, vitesse, forceFrein, forceFrein)
+
+def tournerDroiteAvecFrein(vitesse=1023, forceFrein=1023):
+  moteur(forceFrein, forceFrein, 0, vitesse)
 
 #======= GRABBER ============
 
@@ -112,7 +122,7 @@ def trig10():
   pinTrig.off()       # mise a l'état sur 0 par sécurité
   time.sleep_us(2)    # deux microsecondes de sécurité
 
-  pinTrig.on()        # met la pin trig sur 1
+  pinTrig.duty(vitesse)        # met la pin trig sur 1
   time.sleep_us(10)   # delay de 10µs
   pinTrig.off()       # met la pin trig sur 0
 
@@ -137,8 +147,10 @@ def get_distance():
 #======= LED INFRAS ========
 def status_led_gauche():
   global LED_INFRA1
-  return LED_INFRA1.value()
+  print("val g : " + str(LED_INFRA1.read()))
+  return LED_INFRA1.read() > seuil_detection
 
 def status_led_droite():
   global LED_INFRA2
-  return LED_INFRA2.value()
+  print("val d: " + str(LED_INFRA2.read()))
+  return LED_INFRA2.read() > seuil_detection

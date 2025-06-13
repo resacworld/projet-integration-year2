@@ -1,4 +1,5 @@
 from machine import ADC, PWM, Pin, time_pulse_us
+import neopixel
 import network
 import time
 import robot
@@ -7,6 +8,14 @@ import ujson
 
 ssid = 'IMERIR Fablab'
 password = 'imerir66'
+
+lum = (120, 120, 120)
+
+np = neopixel.NeoPixel(Pin(26), 3)
+np[0] = lum
+np[1] = lum
+np[2] = lum
+np.write()
 
 instructions = []
 current_inst_index = 0
@@ -21,7 +30,8 @@ wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
 
 # robot_id = wlan.config('mac')
-robot_id = "2249b6ec-bec6-4912-bf1d-99dca2f2308f"
+robot_id = "36bbec64-481b-4ac6-b27e-3ecfc8c44790"
+print(robot_id)
 
 if not wlan.isconnected():
   print(f"Try connect to SSID : {ssid}")
@@ -119,63 +129,84 @@ def recupere_cube(gauche=False):
 
   print("end grab cube")
 
+print("he")
 robot.close_grabber()
 
 # Loop
-while True:
-  while len(instructions) == 0:
-    res = urequests.get(f"http://10.7.5.182:8000/api/instructions?robot_id={robot_id}")
+def loop():
+  global instructions
+  
+  while True:
+    while len(instructions) == 0:
+      instructions = [2, 2]
+      # print("hello")
+      # res = urequests.get(f"http://10.7.5.182:8000/api/instructions?robot_id={robot_id}")
+      # print("pk faire ?")
+      # res_json = ujson.loads(res.text)
+      
+      # if not res_json["status"]:
+      #   time.sleep_ms(500)
+      #   continue
+      
+      # instructions = res_json["liste_blocks"]
+      # res.close()
+  
+    # print(robot.get_distance())
+  
+    # start of current_instruction
+  
+    # instruction = instructions[current_inst_index]
+    # print("current zone index : " + str(current_zone_index))
+  
+    # while (not robot.status_led_droite()) or (not robot.status_led_gauche()):
+    # print(robot.status_led_droite())
+    # while (not robot.status_led_droite()) or (not robot.status_led_gauche()):
+      
+    if (robot.status_led_droite() and robot.status_led_gauche()):
+      if robot.current_dir != "A":
+        print("avant")
+        robot.avant(600)
     
-    res_json = ujson.loads(res.text)
-    
-    if not res_json["status"]:
-      time.sleep_ms(500)
-      continue
-    
-    instructions = res_json["liste_blocks"]
-    res.close()
-
-  # print(robot.get_distance())
-
-  # start of current_instruction
-
-  # instruction = instructions[current_inst_index]
-  print("current zone index : " + str(current_zone_index))
-
-  while (not robot.status_led_droite()) or (not robot.status_led_gauche()):
-    if robot.status_led_droite():
+    elif robot.status_led_droite():
       if robot.current_dir != "D":
         print("droite")
-        robot.droite()
+        robot.tournerDroiteAvecFrein()
       
     elif robot.status_led_gauche():
       if robot.current_dir != "G":
         print("gauche")
-        robot.gauche()
+        robot.tournerGaucheAvecFrein()
         
     else:
       if robot.current_dir != "A":
         print("avant")
-        robot.avant()
+        robot.avant(600)
+        # robot.frein()
 
-  robot.frein()
+    print("Droite :" + str(robot.status_led_droite()))
+    print("Gauche :" + str(robot.status_led_gauche()))
 
-  # if current_zone_index == 1:
-  #   robot.frein()
+    time.sleep_ms(100)
+    # robot.frein()
+  
+    # if current_zone_index == 1:
+    #   robot.frein()
+      
+    # if (not have_block) and ((current_zone_index == 2) or (current_zone_index == 3) or (current_zone_index == 6) or (current_zone_index == 7) or (current_zone_index == 10)):
+    #   recupere_cube(current_zone_index == 6)
+  
+    # elif current_zone_index == 4:
+    #   depose_zone(4)
+  
+    # elif current_zone_index == 8:
+    #   depose_zone(8)
     
-  # if (not have_block) and ((current_zone_index == 2) or (current_zone_index == 3) or (current_zone_index == 6) or (current_zone_index == 7) or (current_zone_index == 10)):
-  #   recupere_cube(current_zone_index == 6)
+    # current_zone_index += 1
+    # if current_zone_index == 11:
+    #   current_zone_index = 1
+    
+    # sendTelemetry()
+    # time.sleep_ms(10)
+    # end of current instruction
 
-  # elif current_zone_index == 4:
-  #   depose_zone(4)
-
-  # elif current_zone_index == 8:
-  #   depose_zone(8)
-  
-  current_zone_index += 1
-  if current_zone_index == 11:
-    current_zone_index = 1
-  
-  # sendTelemetry()
-  time.sleep_ms(10)
-  # end of current instruction
+loop()
