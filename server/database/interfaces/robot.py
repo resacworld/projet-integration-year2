@@ -1,6 +1,5 @@
 from typing import List
 from abc import ABC, abstractmethod
-from pydantic import BaseModel
 from .base import BaseIdentifier, BaseObject
 
 

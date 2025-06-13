@@ -1,0 +1,9 @@
+fastapi[standard]
+uvicorn[standard]
+pydantic
+sqllite
+sqlite3
+uuid
+tkinter
+requests
+typing

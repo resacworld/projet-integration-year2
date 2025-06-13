@@ -1,12 +1,9 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from database.models.robotTelemetry import RobotTelemetryRepository, RobotTelemetry, RobotTelemetryId
 from database.models.robot import RobotRepository
 from database.models.mission import Mission, MissionRepository
-from database.models.block import Block, BlockRepository
+from database.models.block import BlockRepository
 from database.models.robot import Robot
-from datetime import datetime
-import json
 
 # router = APIRouter(prefix="/web")
 router = APIRouter()
