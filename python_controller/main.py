@@ -19,7 +19,7 @@ if len(robots) == 0:
 root = tk.Tk()
 
 root.title("Basic Tkinter GUI")
-root.geometry("500x500")
+root.geometry("500x600")
 
 top_frame = ttk.Frame(root)
 

@@ -5,9 +5,10 @@ import axios from 'axios';
  * @param {str} name - The name of the robot to register
  * @returns {object} The status of the request
  */
-export const registerRobot = async (name) => {
+export const registerRobot = async (name, robot_id) => {
     return (await axios.post('http://10.7.5.182:8000/api/addrobot', {
-        name: name
+        name: name,
+        robot_id: ((robot_id != "") && (robot_id != undefined) && (robot_id != null))?robot_id:undefined
     }, {
         headers: {
             "Content-Type": "application/json"

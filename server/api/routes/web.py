@@ -3,9 +3,9 @@ from pydantic import BaseModel
 from database.models.robot import RobotRepository
 from database.models.mission import Mission, MissionRepository
 from database.models.block import Block, BlockRepository
-from database.models.robot import Robot
+from database.models.robot import Robot, RobotId
 from services.checker import checker
-from typing import List
+from typing import List, Optional
 
 router = APIRouter()
 
@@ -13,6 +13,7 @@ class reqAddRobot(BaseModel):
     '''
     Class to define the request structure for adding a robot
     '''
+    robot_id: Optional[str] = None
     name: str = None
 
 @router.post("/addrobot")
@@ -24,7 +25,7 @@ def route(req: reqAddRobot):
         db_robot = RobotRepository()
     
         db_robot.add(robot=Robot(
-            id=db_robot.next_identity(),
+            id=RobotId(id=req.robot_id) if req.robot_id != None else db_robot.next_identity(),
             name=req.name
         ))
     

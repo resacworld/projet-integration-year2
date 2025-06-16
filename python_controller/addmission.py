@@ -39,6 +39,9 @@ def add_block(frame):
     Add a block element to the current mission (in creation)
     """
 
+    if len(comboBoxes) == 5:
+        return
+
     block_frame = tk.Frame(frame, bd=2, relief=tk.GROOVE, padx=10, pady=5)
     block_frame.pack(fill=tk.X, pady=5, padx=10)
 
@@ -77,10 +80,9 @@ def addMissionPage(frame, robot_id):
     add_block_button = tk.Button(frame, text="Ajouter un bloc", command=lambda: add_block(frame))
     add_block_button.pack(pady=10)
 
-    title_label = tk.Label(frame, text="Réponse ---", font=("Arial", 8))
-    title_label.pack(pady=10, padx=30)
-
-
     # Add a start button
     button = tk.Button(frame, text="Envoyer mission", command=lambda: add_mission(robot_id(), mission_entry.get(), title_label))
     button.pack(pady=10, padx=30)
+
+    title_label = tk.Label(frame, text="Réponse ---", font=("Arial", 8))
+    title_label.pack(pady=10, padx=30)
