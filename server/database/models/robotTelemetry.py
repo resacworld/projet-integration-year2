@@ -16,6 +16,10 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
     """
 
     def __init__(self):
+        """
+        Intialisation of the repository
+        """
+        
         super().__init__()
         self.conn = Database.getConnection()
         self.cursor = self.conn.cursor()

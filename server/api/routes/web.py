@@ -18,7 +18,7 @@ class reqAddRobot(BaseModel):
 @router.post("/addrobot")
 def route(req: reqAddRobot):
     '''
-    Route to register the status of a robot's mission
+    Route to register a new robot
     '''
     try:
         db_robot = RobotRepository()
@@ -53,7 +53,7 @@ def getFullMission(mission: Mission, blocks: List[Block]):
 @router.post("/getmissions")
 def route(req: reqGetMission):
     '''
-    Route to implement
+    Route that returns all missions of a robot
     '''
     try:
         db_mission = MissionRepository()

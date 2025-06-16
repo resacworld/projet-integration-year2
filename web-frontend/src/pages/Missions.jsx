@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { getMissions, getRobots } from "../services/RESTService";
 
+/**
+ * Missions section, to get all missions of the current selected robot
+ */
 export default ({}) => {
     const [ missions, setMissions ] = useState([])
     const [ robots, setRobots ] = useState([])
@@ -8,6 +11,9 @@ export default ({}) => {
     const [ selectedRobotId, setSelectedRobotId ] = useState()
 
     useEffect(()=>{
+        /**
+         * Get and set in hooks all the robots get from the web server
+         */
         async function request(){
             var allrobots = await getRobots()
             setRobots(allrobots)
@@ -16,6 +22,9 @@ export default ({}) => {
     }, [])
 
     useEffect(()=>{
+        /**
+         * Set the first robot as selected (only when the list of robot is available)
+         */
         async function request(){
             if(robots[0] !== undefined){
                 await setSelectedRobotId(robots[0].id)
@@ -25,6 +34,9 @@ export default ({}) => {
     }, [robots])
 
     useEffect(()=>{
+        /**
+         * Get all the missions of the selected robot, called each time a robot is selected
+         */
         async function request() {
             console.log("hello")
             setMissions(await getMissions(selectedRobotId))

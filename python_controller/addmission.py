@@ -5,7 +5,11 @@ import requests
 
 comboBoxes:List[ttk.Combobox] = []
 
-def add_mission(robot_id, mission_name):
+def add_mission(robot_id, mission_name, return_label: tk.Label):
+    """
+    Register a mission in the database
+    """
+
     blocks_to_send = []
 
     for block in comboBoxes:
@@ -23,10 +27,18 @@ def add_mission(robot_id, mission_name):
 
     response = requests.post(url, json=payload)
 
-    print(response.status_code)
-    print(response.json())
+    json_res = response.json()
 
+    if json_res["status"]:
+        return_label.config(text="Sucessfully added", fg="green")
+    else:
+        return_label.config(text=f"Error - not added : {json_res["error"]}", fg="red")
+    
 def add_block(frame):
+    """
+    Add a block element to the current mission (in creation)
+    """
+
     block_frame = tk.Frame(frame, bd=2, relief=tk.GROOVE, padx=10, pady=5)
     block_frame.pack(fill=tk.X, pady=5, padx=10)
 
@@ -40,6 +52,10 @@ def add_block(frame):
     comboBoxes.append(block_number)
 
 def addMissionPage(frame, robot_id):
+    """
+    Create in the frame (given as parameter) the Mission page
+    """
+
     blocks_frame = tk.Frame(frame)
 
     title_label = tk.Label(frame, text="Ajouter une mission", font=("Arial", 16))
@@ -61,7 +77,10 @@ def addMissionPage(frame, robot_id):
     add_block_button = tk.Button(frame, text="Ajouter un bloc", command=lambda: add_block(frame))
     add_block_button.pack(pady=10)
 
+    title_label = tk.Label(frame, text="Réponse ---", font=("Arial", 8))
+    title_label.pack(pady=10, padx=30)
+
 
     # Add a start button
-    button = tk.Button(frame, text="Envoyer mission", command=lambda: add_mission(robot_id(), mission_entry.get()))
+    button = tk.Button(frame, text="Envoyer mission", command=lambda: add_mission(robot_id(), mission_entry.get(), title_label))
     button.pack(pady=10, padx=30)

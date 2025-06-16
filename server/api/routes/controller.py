@@ -20,7 +20,7 @@ class reqAddMission(BaseModel):
 @router.post("/addmission")
 def route(req: reqAddMission):
     '''
-    Route to implement
+    Route to add a mission, asigned to a robot
     '''
     try:
         db_robot = RobotRepository()
@@ -77,7 +77,7 @@ class reqLastTelemety(BaseModel):
 @router.post("/lasttelemetry")
 def route(req: reqLastTelemety):
     '''
-    Route to implement
+    Route to get the last telemetry of a robot
     '''
     try:
         db_robot_telemetry = RobotTelemetryRepository()
@@ -105,7 +105,7 @@ def route(req: reqLastTelemety):
 @router.get("/robots")
 def route():
     '''
-    Route to implement
+    Route to get all robots registered in the database
     '''
     try:
         db_robot = RobotRepository()

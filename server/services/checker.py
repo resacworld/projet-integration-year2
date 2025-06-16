@@ -13,8 +13,14 @@ class checker:
     
     @staticmethod
     def isObjectInvalid(object: BaseObject) -> bool:
+        """
+        Check if an object is invalid (is None)
+        """
         return object is None
     
     @staticmethod
     def isUniqueObjectsOnly(objects: List[object]):
+        """
+        Check if a list contains only unique instance of each objects
+        """
         return len(objects) != len(set(objects))

@@ -13,7 +13,6 @@ router = APIRouter()
 def route(robot_id: str = None):
     '''
     Route for the robot to get instructions
-    
     '''
 
     try:
@@ -33,7 +32,7 @@ def route(robot_id: str = None):
         mission = db_mission.find_next_mission_by_robot_id(robot_id)
 
         if checker.isObjectInvalid(mission):
-            raise Exception("No mission avalaible for this robot. Please add a mission first.")
+            raise Exception("No mission available for this robot. Please add a mission first.")
 
         blocks = db_block.find_many_by_mission_id(mission.id)
 
@@ -65,7 +64,7 @@ class reqTelemetry(BaseModel):
 @router.post("/telemetry")
 def route(req: reqTelemetry):
     '''
-    Route to register the status of a robot's mission
+    Route to register the status of a robot's mission (register a telemetry)
     '''
     try:
         db_mission = MissionRepository()

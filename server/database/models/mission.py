@@ -16,6 +16,10 @@ class MissionRepository(BaseRepository, IMissionRepository):
     """
 
     def __init__(self):
+        """
+        Intialisation of the repository
+        """
+
         super().__init__()
         self.conn = Database.getConnection()
         self.cursor = self.conn.cursor()
@@ -77,6 +81,10 @@ class MissionRepository(BaseRepository, IMissionRepository):
         ) if row else None
     
     def find_all_by_robot_id(self, robot_id: str | RobotId) -> Optional[List[Mission]]:
+        """
+        Find all mission of a robot
+        """
+
         self.cursor.execute(f"SELECT * FROM missions WHERE robot_id =  \"{robot_id}\"")
         rows = self.cursor.fetchall()
         return [Mission(
@@ -161,7 +169,7 @@ class MissionRepository(BaseRepository, IMissionRepository):
 
     def start_mission(self, mission_id: str | MissionId) -> None:
         """
-        Update an existing mission in the database.
+        Start a mission
         """
 
         self.cursor.execute(f"""
@@ -174,6 +182,10 @@ class MissionRepository(BaseRepository, IMissionRepository):
         self.conn.commit()
 
     def end_mission(self, mission_id: str | MissionId) -> None:
+        """
+        End a mission
+        """
+        
         self.cursor.execute(f"""
             UPDATE missions
             SET finished = {int(True)},

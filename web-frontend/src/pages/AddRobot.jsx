@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { registerRobot } from "../services/RESTService"
 
+/** 
+ * Page to add a robot in the web server
+*/
 export default ({}) => {
     const [ status, setStatus ] = useState(false)
     const [ message, setMessage ] = useState(false)
@@ -18,12 +21,15 @@ export default ({}) => {
                     </div>
                 </div>
                 <button onClick={() => {
+                    // Ask the web server to register a new robot
                     var response = registerRobot(name)
                     if(response){
+                        // Set success message
                         setStatus(true)
                         setMessage("Robot ajouté avec succès")
                     }
                     else {
+                        // Set error message
                         setStatus(false)
                         setMessage("Erreur lors de l'ajout")
                     }
