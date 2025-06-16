@@ -1,5 +1,4 @@
 from machine import ADC, PWM, Pin, time_pulse_us
-import neopixel
 import network
 import time
 import robot
@@ -11,14 +10,8 @@ import ujson
 ssid = 'IMERIR Fablab'
 password = 'imerir66'
 
-# lum = (120, 120, 120)
 
-# np = neopixel.NeoPixel(Pin(26), 3)
-# np[0] = lum
-# np[1] = lum
-# np[2] = lum
-# np.write()
-
+timeTurn=0
 
 instructions = []
 current_inst_index = 0
@@ -49,8 +42,16 @@ print("\nWi-Fi Config: ", wlan.ifconfig())
 print("he")
 robot.close_grabber()
 robot.frein()
-robot.gaucheSurPlace(600)
-time.sleep(3)
+while not robot.status_led_gauche():
+  robot.droiteSurPlace(600)
+while not robot.status_led_droite():
+  robot.gaucheSurPlace(600)
+  timeTurn +=1
+  time.sleep_ms(1)
+timeTurn = int(timeTurn/2)
+robot.droiteSurPlace(600)
+time.sleep_ms(timeTurn)
+robot.frein()
 ##############################################################################################################
 
 def sendTelemetry():
@@ -156,23 +157,67 @@ def getInstructions():
   return
 
 def suiviLigne():
+  global nbLignes
+  global lum
+  global timeTurn
   vitesse = 600
   reverseFactor = 0.5
+  robot.led(0,0,0)
+
+  suiviGauche()
+  # suiviSimple()
+  # suiviCalib()
   
+  print("Droite :" + str(robot.status_led_droite()))
+  print("Gauche :" + str(robot.status_led_gauche()))
+
+def suiviGauche(vitesse = 600):
+  global timeTurn
+  robot.tournerGaucheAvecFrein(vitesse,1023)
+  if robot.status_led_droite():
+    robot.frein()
+    time.sleep_ms(10)
+    robot.droiteSurPlace(vitesse)
+    time.sleep_ms(timeTurn)
+  if robot.status_led_gauche():
+    robot.led()
+  
+def suiviCalib():
+  global timeTurn
+  if (robot.status_led_droite() and not robot.status_led_gauche()):
+    robot.frein()
+    time.sleep_ms(10)
+    robot.droiteSurPlace(600)
+    time.sleep_ms(timeTurn)
+    
+  elif (not robot.status_led_droite() and robot.status_led_gauche()):
+    robot.frein()
+    time.sleep_ms(10)
+    robot.gaucheSurPlace(600)
+    time.sleep_ms(timeTurn)
+  else: 
+    robot.avant(600)
+    if robot.status_led_droite() and robot.status_led_gauche():
+      # nbLignes = nbLignes+1
+      # print("Nombre de lignes : "+nbLignes)
+      robot.led()
+
+def suiviSimple(vitesse = 600,reverseFactor = 0.5):
   if (robot.status_led_droite() and not robot.status_led_gauche()):
     robot.droiteSurPlace(600)
     robot.moteur(0, vitesse, 0, int(vitesse*reverseFactor))
     time.sleep_ms(150)
-    
+      
   elif (not robot.status_led_droite() and robot.status_led_gauche()):
     robot.gaucheSurPlace(600)
     robot.moteur(int(vitesse*reverseFactor), 0,vitesse, 0)
     time.sleep_ms(150)
   else: 
     robot.avant(600)
-  
-    print("Droite :" + str(robot.status_led_droite()))
-    print("Gauche :" + str(robot.status_led_gauche()))
+    if robot.status_led_droite() and robot.status_led_gauche():
+      # nbLignes = nbLignes+1
+      # print("Nombre de lignes : "+nbLignes)
+      robot.led()
 
 # Loop
 def loop():

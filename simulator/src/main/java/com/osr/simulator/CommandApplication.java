@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class CommandApplication extends Application {
     private static CommandController commandController;
@@ -43,7 +44,7 @@ public class CommandApplication extends Application {
         Thread t1 = new Thread(() -> {
             try {
                 Robot.getInstance().execute();
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException | InterruptedException | URISyntaxException e) {
                 throw new RuntimeException(e);
             }
         });

@@ -29,18 +29,38 @@ public class dictPosition {
         put(9.5F, new Position("p_9_10","Stockage2_Green",null,false));
         put(10.5F, new Position("p_10_1","Green_Start",null,false));
     }} ;
+
+    /**
+     * getPosition
+     * @param id
+     * @return Position instance of the float id
+     */
     public static Position getPosition(Float id) {
         return positions.get(id);
     }
+
+    /**
+     * get number of positions
+     * @return Integer total number of positions
+     */
     public static Integer getNumberOfPositions() {
         return positions.size();
     }
 
     //Generate
+
+    /**
+     * get all positions
+     * @return Map<Float, Position> map of the positions dictionnary
+     */
     public static Map<Float, Position> getAllPositions() {
         return Collections.unmodifiableMap(positions);
     }
 
+    /**
+     * get free storage positions
+     * @return Map<Float, Position> map of all the positions with available storage
+     */
     public static Map<Float, Position> getFreeStoragePositions() {
         Map<Float, Position> storagePositions = new HashMap<>();
         for (var entry : positions.entrySet()) {

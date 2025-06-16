@@ -1,5 +1,6 @@
 from machine import PWM, Pin, ADC, time_pulse_us
 import time
+import neopixel
 
 seuil_detection = 1700
 forceFrein = 1023	  # Gère la force de frein
@@ -33,6 +34,16 @@ current_dir = "X"
 vitesse_ralentis_rotation = 0
 
 def moteur(m1, m2, m3, m4):
+  # if m1!=0 :
+  #   IN1.duty(800)
+  # if m2!=0 :
+  #   IN2.duty(800)
+  # if m3!=0 :
+  #   IN3.duty(800)
+  # if m4!=0 :
+  #   IN4.duty(800)
+    
+  time.sleep_ms(1)
   IN1.duty(m1)           # On met la pin 9 (IN1) sur 0
   IN2.duty(m2)     # On met la pin 10 (IN2) sur la vitesse voulue
   IN3.duty(m3)     # On met la pin 5 (IN3) sur la vitesse voulue
@@ -41,7 +52,7 @@ def moteur(m1, m2, m3, m4):
 # Fonction pour faire avancer le robot
 def avant(vitesse=1023):
   global current_dir 
-
+  
   moteur(0, vitesse, vitesse, 0)
 
   current_dir = "A"
@@ -142,7 +153,17 @@ def get_distance():
     ds_ultrasons = 99999
   
   return ds_ultrasons
+
+def led(R=255,G=0,B=0):
+  lum = (R, G, B)
   
+  np = neopixel.NeoPixel(Pin(26), 3)
+  np[0] = lum
+  np[1] = lum
+  np[2] = lum
+  np.write()
+
+
 
 #======= LED INFRAS ========
 def status_led_gauche():
