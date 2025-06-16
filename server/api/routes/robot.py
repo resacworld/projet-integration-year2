@@ -70,6 +70,8 @@ def route(req: reqTelemetry):
         db_mission = MissionRepository()
         db_robot_telemetry = RobotTelemetryRepository()
 
+        # TODO: check if robot exists
+
         mission = db_mission.find_by_robot_id_and_executing(robot_id=req.robot_id, executing=True)
 
         if checker.isObjectInvalid(mission):
@@ -114,14 +116,14 @@ def route(req: reqSummary):
     try:
         db_mission = MissionRepository()
 
+        # TODO: check if robot exists
+
         mission = db_mission.find_by_robot_id_and_executing(req.robot_id, executing=True)
 
         if checker.isObjectInvalid(mission):
             raise Exception("No mission currently running for this robot. Please start a mission first.")
 
         db_mission.end_mission(mission.id)
-
-        print("finished !")
 
         return {
             "status": True,
