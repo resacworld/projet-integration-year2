@@ -4,16 +4,10 @@ from database.models.robot import RobotRepository, RobotId
 from database.models.mission import MissionRepository, Mission
 from database.models.block import BlockRepository, Block
 from database.models.robotTelemetry import RobotTelemetryRepository, RobotTelemetry
+from services.checker import checker
 from typing import List
 
-# router = APIRouter(prefix="/controller")
 router = APIRouter()
-
-# class reqBlock(BaseModel):
-#     '''
-#     Class to define the structure of a block in a mission
-#     '''
-#     block_nb: int = None
 
 class reqAddMission(BaseModel):
     '''
@@ -26,7 +20,7 @@ class reqAddMission(BaseModel):
 @router.post("/addmission")
 def route(req: reqAddMission):
     '''
-    Route to implement
+    Route to add a mission, asigned to a robot
     '''
     try:
         db_robot = RobotRepository()
@@ -36,11 +30,11 @@ def route(req: reqAddMission):
         if len(req.blocks) == 0:
             raise Exception("No blocks provided for the mission. Please add at least one block.")
         
-        if db_robot.find_by_id(req.robot_id) is None:
-            raise Exception("Robot not found in the database. Please register the robot first.")
-        
-        if len(req.blocks) != len(set(req.blocks)):
+        elif checker.isUniqueObjectsOnly(req.blocks):
             raise Exception("Double block found in the sequence !!")
+        
+        elif not checker.checkObjectExists(db_robot, req.robot_id):
+            raise Exception("Robot not found in the database. Please register the robot first.")
 
         mission_id = db_mission.next_identity()
     
@@ -49,7 +43,9 @@ def route(req: reqAddMission):
             robot_id=RobotId(id=req.robot_id),
             name=req.name,
             finished=False,
-            executing=False
+            executing=False,
+            start_date="",
+            end_date=""
         ))
 
         i = 0
@@ -81,7 +77,7 @@ class reqLastTelemety(BaseModel):
 @router.post("/lasttelemetry")
 def route(req: reqLastTelemety):
     '''
-    Route to implement
+    Route to get the last telemetry of a robot
     '''
     try:
         db_robot_telemetry = RobotTelemetryRepository()
@@ -91,12 +87,10 @@ def route(req: reqLastTelemety):
 
         mission = db_mission.find_by_robot_id_and_executing(req.robot_id, executing=True)
 
-        if mission == None:
-            raise Exception("No active mission find")
+        if checker.isObjectInvalid(mission):
+            raise Exception("No active mission find !")
 
         telemetry: RobotTelemetry = db_robot_telemetry.find_last_by_mission_id(mission_id=mission.id)
-
-        # Put instructions here
 
         return {
             "status": True,
@@ -111,14 +105,12 @@ def route(req: reqLastTelemety):
 @router.get("/robots")
 def route():
     '''
-    Route to implement
+    Route to get all robots registered in the database
     '''
     try:
         db_robot = RobotRepository()
 
         robots = db_robot.find_all()
-
-        # Put instructions here
 
         return {
             "status": True,

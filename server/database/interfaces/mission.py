@@ -16,6 +16,8 @@ class Mission(BaseObject):
     name: str
     finished: bool
     executing: bool
+    start_date: str
+    end_date: str
 
 
 class IMissionRepository(ABC):

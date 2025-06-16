@@ -5,15 +5,14 @@ from database.models.robot import RobotRepository
 from database.models.mission import MissionRepository
 from database.models.block import BlockRepository
 from datetime import datetime
+from services.checker import checker
 
-# router = APIRouter(prefix="/robot")
 router = APIRouter()
 
 @router.get("/instructions")
 def route(robot_id: str = None):
     '''
     Route for the robot to get instructions
-    
     '''
 
     try:
@@ -21,23 +20,23 @@ def route(robot_id: str = None):
         db_mission = MissionRepository()
         db_block = BlockRepository()
 
-        # Check if the robot exists, if not create it
-        if(db_robot.find_by_id(robot_id) is None):
+        # Check if the robot exists
+        if not checker.checkObjectExists(db_robot, robot_id):
             raise Exception("Robot not found in the database. Please register the robot first.")
         
-        current_mission = db_mission.find_by_robot_id_and_executing(robot_id, True)
+        current_mission = db_mission.find_by_robot_id_and_executing(robot_id, executing=True)
 
         if current_mission != None:
             raise Exception("Robot already executing a mission !")
         
         mission = db_mission.find_next_mission_by_robot_id(robot_id)
 
-        if(mission is None):
-            raise Exception("No mission avalaible for this robot. Please add a mission first.")
+        if checker.isObjectInvalid(mission):
+            raise Exception("No mission available for this robot. Please add a mission first.")
 
-        blocks = db_block.find_by_mission_id(mission.id)
+        blocks = db_block.find_many_by_mission_id(mission.id)
 
-        db_mission.update_execution_status(mission.id, executing=True)
+        db_mission.start_mission(mission.id)
 
         return {
             "status": True,
@@ -56,8 +55,8 @@ class reqTelemetry(BaseModel):
     '''
     robot_id: str = None
     vitesse: float = None
-    ds_ultrasons: float = None
-    status_deplacement: str = None
+    distance_ultrasons: float = None
+    statut_deplacement: str = None
     ligne: int = None
     status_pince: bool = None
     # timestamp: str = None # => gérée par l'API (Cahier des Charges)
@@ -65,15 +64,20 @@ class reqTelemetry(BaseModel):
 @router.post("/telemetry")
 def route(req: reqTelemetry):
     '''
-    Route to register the status of a robot's mission
+    Route to register the status of a robot's mission (register a telemetry)
     '''
     try:
         db_mission = MissionRepository()
         db_robot_telemetry = RobotTelemetryRepository()
+        db_robot = RobotRepository()
+
+        # Check if the robot exists
+        if not checker.checkObjectExists(db_robot, req.robot_id):
+            raise Exception("Robot not found in the database. Please register the robot first.")
 
         mission = db_mission.find_by_robot_id_and_executing(robot_id=req.robot_id, executing=True)
 
-        if mission is None:
+        if checker.isObjectInvalid(mission):
             raise Exception("No mission currently running for this robot. Please start a mission first.")
 
         db_robot_telemetry.add(
@@ -81,8 +85,8 @@ def route(req: reqTelemetry):
                 id=db_robot_telemetry.next_identity(),
                 mission_id=mission.id,
                 vitesse_instant=req.vitesse,
-                ds_ultrasons=req.ds_ultrasons,
-                status_deplacement=req.status_deplacement,
+                ds_ultrasons=req.distance_ultrasons,
+                status_deplacement=req.statut_deplacement,
                 ligne=req.ligne,
                 status_pince=req.status_pince,
                 timestamp=datetime.now().isoformat()  # Automatically set the timestamp
@@ -115,12 +119,14 @@ def route(req: reqSummary):
     try:
         db_mission = MissionRepository()
 
+        # TODO: check if robot exists
+
         mission = db_mission.find_by_robot_id_and_executing(req.robot_id, executing=True)
 
-        if mission is None:
+        if checker.isObjectInvalid(mission):
             raise Exception("No mission currently running for this robot. Please start a mission first.")
 
-        db_mission.update_execution_status(mission.id, executing=False, finished=True)
+        db_mission.end_mission(mission.id)
 
         return {
             "status": True,

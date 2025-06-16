@@ -8,23 +8,18 @@ from ..interfaces.base import BaseRepository
 from ..interfaces.mission import Mission, MissionId, IMissionRepository
 from ..interfaces.robot import RobotId
 from ..database import Database
+from datetime import datetime
 
 class MissionRepository(BaseRepository, IMissionRepository):
     """
     Mission Repository implementing CRUD operations.
     """
 
-    # _instance = None
-
-    # def __new__(cls, *args, **kwargs):
-    #     """
-    #     Singleton pattern to ensure only one instance of BlockRepository exists.
-    #     """
-    #     if not cls._instance:
-    #         cls._instance = super().__new__(cls, *args, **kwargs)
-    #     return cls._instance
-
     def __init__(self):
+        """
+        Intialisation of the repository
+        """
+
         super().__init__()
         self.conn = Database.getConnection()
         self.cursor = self.conn.cursor()
@@ -37,6 +32,8 @@ class MissionRepository(BaseRepository, IMissionRepository):
                 name TEXT,
                 finished INTEGER DEFAULT 0,
                 executing INTEGER DEFAULT 0,
+                start_date TEXT,
+                end_date TEXT,
                 FOREIGN KEY (robot_id) REFERENCES robots (id)
             )
         """)
@@ -61,7 +58,9 @@ class MissionRepository(BaseRepository, IMissionRepository):
             robot_id=RobotId(id=row[1]),
             name=row[2],
             finished=bool(row[3]),
-            executing=bool(row[4])
+            executing=bool(row[4]),
+            start_date=str(row[5]),
+            end_date=str(row[6])
         ) for row in rows]
 
     def find_by_id(self, id: str | MissionId) -> Optional[Mission]:
@@ -76,10 +75,16 @@ class MissionRepository(BaseRepository, IMissionRepository):
             robot_id=RobotId(id=row[1]),
             name=row[2],
             finished=bool(row[3]),
-            executing=bool(row[4])
+            executing=bool(row[4]),
+            start_date=str(row[5]),
+            end_date=str(row[6])
         ) if row else None
     
     def find_all_by_robot_id(self, robot_id: str | RobotId) -> Optional[List[Mission]]:
+        """
+        Find all mission of a robot
+        """
+
         self.cursor.execute(f"SELECT * FROM missions WHERE robot_id =  \"{robot_id}\"")
         rows = self.cursor.fetchall()
         return [Mission(
@@ -87,7 +92,9 @@ class MissionRepository(BaseRepository, IMissionRepository):
             robot_id=RobotId(id=row[1]),
             name=row[2],
             finished=bool(row[3]),
-            executing=bool(row[4])
+            executing=bool(row[4]),
+            start_date=str(row[5]),
+            end_date=str(row[6])
         ) for row in rows]
     
     def find_next_mission_by_robot_id(self, robot_id: str | RobotId) -> Optional[Mission]:
@@ -102,7 +109,9 @@ class MissionRepository(BaseRepository, IMissionRepository):
             robot_id=RobotId(id=row[1]),
             name=row[2],
             finished=bool(row[3]),
-            executing=bool(row[4])
+            executing=bool(row[4]),
+            start_date=str(row[5]),
+            end_date=str(row[6])
         ) if row else None
     
 
@@ -121,7 +130,9 @@ class MissionRepository(BaseRepository, IMissionRepository):
             robot_id=RobotId(id=row[1]),
             name=row[2],
             finished=bool(row[3]),
-            executing=bool(row[4])
+            executing=bool(row[4]),
+            start_date=str(row[5]),
+            end_date=str(row[6])
         )
 
     def add(self, mission: Mission) -> None:
@@ -156,15 +167,30 @@ class MissionRepository(BaseRepository, IMissionRepository):
         """)
         self.conn.commit()
 
-    def update_execution_status(self, mission_id: str | MissionId, executing: bool, finished:bool=False) -> None:
+    def start_mission(self, mission_id: str | MissionId) -> None:
         """
-        Update an existing mission in the database.
+        Start a mission
         """
 
         self.cursor.execute(f"""
             UPDATE missions
-            SET finished = {int(finished)},
-                executing = {int(executing)}
+            SET finished = {int(False)},
+                executing = {int(True)},
+                start_date = \"{datetime.now().isoformat()}\"
+            WHERE id = \"{str(mission_id)}\"
+        """)
+        self.conn.commit()
+
+    def end_mission(self, mission_id: str | MissionId) -> None:
+        """
+        End a mission
+        """
+        
+        self.cursor.execute(f"""
+            UPDATE missions
+            SET finished = {int(True)},
+                executing = {int(False)},
+                end_date = \"{datetime.now().isoformat()}\"
             WHERE id = \"{str(mission_id)}\"
         """)
         self.conn.commit()
@@ -174,6 +200,6 @@ class MissionRepository(BaseRepository, IMissionRepository):
         Delete a mission by its ID.
         """
 
-        raise NotImplementedError("Method should not be implemented (due of the laws, for tracability).")
+        raise NotImplementedError("Method should not be implemented (due to standards, for tracability).")
         # self.cursor.execute("DELETE FROM missions WHERE id = \"{id}\"")
         # self.conn.commit()

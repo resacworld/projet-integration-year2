@@ -8,7 +8,6 @@ class BlockId(BaseIdentifier):
     """Value object holding Block identity."""
     pass
 
-# TODO: Add order to blocks in a mission
 class Block(BaseObject):
     """Aggregate root, entity holding Block."""
     id: BlockId

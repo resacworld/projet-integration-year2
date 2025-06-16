@@ -14,17 +14,11 @@ class BlockRepository(BaseRepository, IBlockRepository):
     Block Repository implementing CRUD operations.
     """
 
-    # _instance = None
-
-    # def __new__(cls, *args, **kwargs):
-    #     """
-    #     Singleton pattern to ensure only one instance of BlockRepository exists.
-    #     """
-    #     if not cls._instance:
-    #         cls._instance = super().__new__(cls, *args, **kwargs)
-    #     return cls._instance
-
     def __init__(self):
+        """
+        Intialisation of the repository
+        """
+        
         super().__init__()
         self.conn = Database.getConnection()
         self.cursor = self.conn.cursor()
@@ -76,7 +70,7 @@ class BlockRepository(BaseRepository, IBlockRepository):
             block_order=row[3]
         ) if row else None
     
-    def find_by_mission_id(self, mission_id: str | MissionId) -> List[Block]:
+    def find_many_by_mission_id(self, mission_id: str | MissionId) -> List[Block]:
         """
         Find all Blocks associated with a specific Mission ID.
         """
@@ -119,6 +113,6 @@ class BlockRepository(BaseRepository, IBlockRepository):
         Delete a Block by its ID.
         """
 
-        raise NotImplementedError("Method should not be implemented (due of the laws, for tracability).")
+        raise NotImplementedError("Method should not be implemented (due to standards, for tracability).")
         # self.cursor.execute("DELETE FROM blocks WHERE id = \"{id}\"")
         # self.conn.commit()

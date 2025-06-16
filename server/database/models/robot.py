@@ -13,17 +13,11 @@ class RobotRepository(BaseRepository, IRobotRepository):
     Robot repository implementing CRUD operations.
     """
 
-    # _instance = None
-
-    # def __new__(cls, *args, **kwargs):
-    #     """
-    #     Singleton pattern to ensure only one instance of BlockRepository exists.
-    #     """
-    #     if not cls._instance:
-    #         cls._instance = super().__new__(cls, *args, **kwargs)
-    #     return cls._instance
-
     def __init__(self):
+        """
+        Intialisation of the repository
+        """
+        
         super().__init__()
         self.conn = Database.getConnection()
         self.cursor = self.conn.cursor()
@@ -32,7 +26,6 @@ class RobotRepository(BaseRepository, IRobotRepository):
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS robots (
                 id TEXT PRIMARY KEY,
-                mac TEXT,
                 name TEXT
             )
         """)
@@ -54,8 +47,7 @@ class RobotRepository(BaseRepository, IRobotRepository):
         rows = self.cursor.fetchall()
         return [Robot(
             id=RobotId(id=row[0]),
-            mac=row[1],
-            name=row[2]
+            name=row[1]
         ) for row in rows]
 
     def find_by_id(self, id: str | RobotId) -> Optional[Robot]:
@@ -67,8 +59,7 @@ class RobotRepository(BaseRepository, IRobotRepository):
         row = self.cursor.fetchone()
         return None if row == None else Robot(
             id=RobotId(id=row[0]),
-            mac=row[1],
-            name=row[2]
+            name=row[1]
         ) if row else None
 
     def add(self, robot: Robot) -> None:
@@ -77,10 +68,9 @@ class RobotRepository(BaseRepository, IRobotRepository):
         """
 
         self.cursor.execute(f"""
-            INSERT INTO robots (id, mac, name)
+            INSERT INTO robots (id, name)
             VALUES (
-                \"{robot.id if robot.id != None else self.next_identity()}\", 
-                \"{robot.mac}\", 
+                \"{robot.id if robot.id != None else self.next_identity()}\",
                 \"{robot.name}\"
             )
         """)
@@ -98,6 +88,6 @@ class RobotRepository(BaseRepository, IRobotRepository):
         Delete a robot by its ID.
         """
 
-        raise NotImplementedError("Method should not be implemented (due of the laws, for tracability).")
+        raise NotImplementedError("Method should not be implemented (due to standards, for tracability).")
         # self.cursor.execute("DELETE FROM robots WHERE id = \"{id}\"")
         # self.conn.commit()

@@ -5,6 +5,10 @@ import requests
 last_telemetry = {}
 
 def update_last_telemetry(robot_id, telemetry_field: tk.Text):
+    """
+    Method to get from the web server and update in the tkinter interface the last telemetry
+    """
+    
     last_telemetry = requests.post("http://10.7.5.182:8000/api/lasttelemetry", json={
         "robot_id": robot_id
     }).json()
@@ -27,6 +31,9 @@ def update_last_telemetry(robot_id, telemetry_field: tk.Text):
     telemetry_field.config(state = tk.DISABLED)
 
 def telemetryPage(frame, robot_id):
+    """
+    Create in the frame (given as parameter) the telemetry page
+    """
 
     title_label = tk.Button(frame, text="Update Telemetry", font=("Arial", 16), command=lambda: update_last_telemetry(robot_id(), telemetry_field))
     title_label.pack(pady=10, padx=30)
