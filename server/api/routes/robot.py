@@ -5,8 +5,8 @@ from database.models.robot import RobotRepository
 from database.models.mission import MissionRepository
 from database.models.block import BlockRepository
 from datetime import datetime
+from services.checker import checker
 
-# router = APIRouter(prefix="/robot")
 router = APIRouter()
 
 @router.get("/instructions")
@@ -22,22 +22,22 @@ def route(robot_id: str = None):
         db_block = BlockRepository()
 
         # Check if the robot exists, if not create it
-        if(db_robot.find_by_id(robot_id) is None):
+        if not checker.checkObjectExists(db_robot, robot_id):
             raise Exception("Robot not found in the database. Please register the robot first.")
         
-        current_mission = db_mission.find_by_robot_id_and_executing(robot_id, True)
+        current_mission = db_mission.find_by_robot_id_and_executing(robot_id, executing=True)
 
         if current_mission != None:
             raise Exception("Robot already executing a mission !")
         
         mission = db_mission.find_next_mission_by_robot_id(robot_id)
 
-        if(mission is None):
+        if checker.isObjectInvalid(mission):
             raise Exception("No mission avalaible for this robot. Please add a mission first.")
 
-        blocks = db_block.find_by_mission_id(mission.id)
+        blocks = db_block.find_many_by_mission_id(mission.id)
 
-        db_mission.update_execution_status(mission.id, executing=True)
+        db_mission.start_mission(mission.id)
 
         return {
             "status": True,
@@ -73,7 +73,7 @@ def route(req: reqTelemetry):
 
         mission = db_mission.find_by_robot_id_and_executing(robot_id=req.robot_id, executing=True)
 
-        if mission is None:
+        if checker.isObjectInvalid(mission):
             raise Exception("No mission currently running for this robot. Please start a mission first.")
 
         db_robot_telemetry.add(
@@ -117,10 +117,12 @@ def route(req: reqSummary):
 
         mission = db_mission.find_by_robot_id_and_executing(req.robot_id, executing=True)
 
-        if mission is None:
+        if checker.isObjectInvalid(mission):
             raise Exception("No mission currently running for this robot. Please start a mission first.")
 
-        db_mission.update_execution_status(mission.id, executing=False, finished=True)
+        db_mission.end_mission(mission.id)
+
+        print("finished !")
 
         return {
             "status": True,

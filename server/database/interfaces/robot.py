@@ -11,7 +11,6 @@ class RobotId(BaseIdentifier):
 class Robot(BaseObject):
     """Aggregate root, entity holding robot."""
     id: RobotId
-    mac: str
     name: str
 
 

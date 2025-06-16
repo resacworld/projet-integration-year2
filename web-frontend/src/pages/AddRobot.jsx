@@ -6,7 +6,6 @@ export default ({}) => {
     const [ message, setMessage ] = useState(false)
 
     const [ name, setName ] = useState("");
-    const [ mac, setMac ] = useState("");
 
     return (
         <div className="p-3 w-1/3 bg-slate-400">
@@ -17,13 +16,9 @@ export default ({}) => {
                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Robot name</label>
                         <input type="text" id="name" value={name} onChange={(e)=>setName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="robot 1" required />
                     </div>
-                    <div>
-                        <label htmlFor="mac" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Robot mac address</label>
-                        <input type="text" id="mac" value={mac} onChange={(e)=>setMac(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="XX-XX-XX-XX-XX-XX" required />
-                    </div>
                 </div>
                 <button onClick={() => {
-                    var response = registerRobot(name, mac)
+                    var response = registerRobot(name)
                     if(response){
                         setStatus(true)
                         setMessage("Robot ajouté avec succès")

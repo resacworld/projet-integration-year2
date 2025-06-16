@@ -15,16 +15,6 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
     RobotTelemetry repository implementing CRUD operations.
     """
 
-    # _instance = None
-
-    # def __new__(cls, *args, **kwargs):
-    #     """
-    #     Singleton pattern to ensure only one instance of BlockRepository exists.
-    #     """
-    #     if not cls._instance:
-    #         cls._instance = super().__new__(cls, *args, **kwargs)
-    #     return cls._instance
-
     def __init__(self):
         super().__init__()
         self.conn = Database.getConnection()
@@ -118,7 +108,7 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
         self.cursor.execute(f"""
             INSERT INTO robot_telemetries (
                 id, mission_id, vitesse_instant, ds_ultrasons, status_deplacement,
-                orientation, status_pince, timestamp
+                ligne, status_pince, timestamp
             ) VALUES (
                 \"{telemetry.id if telemetry.id != None else self.next_identity()}\", 
                 \"{telemetry.mission_id}\", 
@@ -144,6 +134,6 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
         Delete a robot telemetry record by its ID.
         """
 
-        raise NotImplementedError("Method should not be implemented (due of the laws, for tracability).")
+        raise NotImplementedError("Method should not be implemented (due to standards, for tracability).")
         # self.cursor.execute(f"DELETE FROM robot_telemetries WHERE id = \"{id}\"")
         # self.conn.commit()

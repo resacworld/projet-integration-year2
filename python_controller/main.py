@@ -1,19 +1,16 @@
 import tkinter as tk
 from tkinter import ttk
 import requests
-from typing import List
 from pydantic import BaseModel
-import json
 from telemetry import telemetryPage
 from addmission import addMissionPage
 
 class Robot (BaseModel):
     id: str
-    mac: str
     name: str
 
 robots_json = requests.get("http://10.7.5.182:8000/api/robots").json()["robots"]
-robots = [Robot(id=robot["id"], mac=robot["mac"], name=robot["name"]) for robot in robots_json]
+robots = [Robot(id=robot["id"], name=robot["name"]) for robot in robots_json]
 
 
 if len(robots) == 0:

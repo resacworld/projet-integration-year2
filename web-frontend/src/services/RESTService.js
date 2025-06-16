@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-export const registerRobot = async (name, mac) =>{
+export const registerRobot = async (name) =>{
     return (await axios.post('http://10.7.5.182:8000/api/addrobot', {
-        name: name,
-        mac: mac
+        name: name
     }, {
         headers: {
             "Content-Type": "application/json"
