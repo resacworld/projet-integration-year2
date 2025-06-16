@@ -1,26 +1,21 @@
 package com.osr.simulator;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.UnknownHostException;
+import java.net.*;
 
 public class RESTService {
-    static String json = "{\n" + "\"userId\": 101,\r\n" +
-            "    \"id\": 101,\r\n" +
-            "    \"title\": \"Test Title\",\r\n" +
-            "    \"body\": \"Test Body\"" + "\n}";
     static String server = "http://10.7.5.182:8000/api/";
 //    public static void main(String[] args) throws IOException {
 //        //MyGETRequest();
 //        //MyPOSTRequest(json);
 //    }
-    public static void MyPOSTRequest(String Post) throws IOException {
+    public static void MyPOSTRequest(String Post,String route) throws IOException, URISyntaxException {
         System.out.println(Post);
         StringBuilder url = new StringBuilder(server);
-        url.append("instructions");
-        url.append("?robot_id=");
-        URL obj = new URL(url.toString());
+        url.append(route);
+        //url.append("?robot_id=");
+        //url.append(uuid);
+        URL obj = new URI(url.toString()).toURL();
         if (!testConnection(url.toString())) {return;}
         HttpURLConnection postConnection = (HttpURLConnection) obj.openConnection();
         postConnection.setRequestMethod("POST");
@@ -41,7 +36,7 @@ public class RESTService {
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     postConnection.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             while ((inputLine = in .readLine()) != null) {
                 response.append(inputLine);
@@ -54,12 +49,12 @@ public class RESTService {
         }
     }
 
-    public static String MyGETRequest(String parameter) throws IOException {
+    public static String MyGETRequest(String uuid) throws IOException, URISyntaxException {
         StringBuilder url = new StringBuilder(server);
         url.append("instructions");
         url.append("?robot_id=");
-        url.append(parameter);
-        URL urlForGetRequest = new URL(url.toString());
+        url.append(uuid);
+        URL urlForGetRequest = new URI(url.toString()).toURL();
         System.out.println(url);
         String readLine = null;
         if (!testConnection(url.toString())) {return ("Connection failed");}
@@ -72,7 +67,7 @@ public class RESTService {
         if (responseCode == HttpURLConnection.HTTP_OK) {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(conection.getInputStream()));
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
             while ((readLine = in.readLine()) != null) {
                 response.append(readLine);
             }
@@ -93,7 +88,7 @@ public class RESTService {
         try {
             // Define the URL to test the connection against.
             // Using the same URL as MyGETRequest for consistency.
-            URL urlToTest = new URL(url);
+            URL urlToTest = new URI(url).toURL();
 
             // Open a connection. This operation itself can throw exceptions
             // if the host is unreachable or the URL is malformed.
@@ -125,6 +120,8 @@ public class RESTService {
             // This catches other I/O errors like connection refused, timeouts, etc.
             System.err.println("Connection test failed: I/O error. " + e.getMessage());
             return false;
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         } finally {
             // Ensure the connection is disconnected to release resources.
             if (connection != null) {
