@@ -21,18 +21,18 @@ public class dictPosition {
         put(1.5F, new Position("p_1_2","Start_Yellow",null,false));
         put(2.5F, new Position("p_2_3","Yellow_Red",null,false));
         put(3.5F, new Position("p_3_4","Red_Stockage1",null,false));
-        put(4.5F, new Position("p_4_5","Stockage1_Stockage1",null,false));
+        put(4.5F, new Position("p_4_5","Stockage1_Stockage1",null,true));
         put(5.5F, new Position("p_5_6","Stockage1_Pink",null,false));
         put(6.5F, new Position("p_6_7","Pink_Blue",null,false));
         put(7.5F, new Position("p_7_8","Blue_Stockage2",null,false));
-        put(8.5F, new Position("p_8_9","Stockage2_Stockage2",null,false));
+        put(8.5F, new Position("p_8_9","Stockage2_Stockage2",null,true));
         put(9.5F, new Position("p_9_10","Stockage2_Green",null,false));
         put(10.5F, new Position("p_10_1","Green_Start",null,false));
     }} ;
 
     /**
      * getPosition
-     * @param id
+     * @param id    float id of the position
      * @return Position instance of the float id
      */
     public static Position getPosition(Float id) {

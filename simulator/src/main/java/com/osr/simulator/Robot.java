@@ -23,7 +23,7 @@ public class Robot {
 
     /**
      * Constructor of Robot Singleton
-     * @param commandController
+     * @param commandController JavaFX controller
      */
     private Robot(CommandController commandController) {
         this.commandController = commandController;
@@ -31,7 +31,7 @@ public class Robot {
 
     /**
      * Create singleton instance to set a commandController
-     * @param commandController
+     * @param commandController JavaFX controller
      * @return Robot instance
      */
     public static Robot setInstance(CommandController commandController) {
@@ -60,10 +60,6 @@ public class Robot {
         return cube;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
-
     /**
      * Position getter
      * @return float position of the robot
@@ -86,24 +82,28 @@ public class Robot {
         System.out.println(executeJson);
         //System.out.println(commandController);
         List<Integer> listeInstructions = getListeBlocksFromJson(executeJson);
-        //List<Integer> listeInstructions = getListeBlocksFromJson("{\"status\":true,\"liste_blocks\":[2,6,10]}");
+        //List<Integer> listeInstructions = getListeBlocksFromJson("{\"statut\":true,\"liste_blocks\":[2,6,10]}");
         TimeUnit.SECONDS.sleep(3);
         System.out.println(listeInstructions);
         for (Integer i : listeInstructions) {
             System.out.println("Going to cube position : "+ i);
-            moveRobot((int) positionRobot,i,findOrientation((int) positionRobot,i));
+            moveRobot(positionRobot,i,findOrientation(positionRobot,i));
 
             this.cube = dictPosition.getPosition(positionRobot).getCube();
+            if (this.cube == null) {
+                postTelemetry(0,"No cube go to next instruction",(int) positionRobot);
+                continue;
+            }
             postTelemetry(0,"Ramasse cube"+cube.getColor(),(int) positionRobot);
             System.out.println("Picked up "+cube.getColor()+"cube");
             dictPosition.getPosition(positionRobot).setCube(null);
 
             Map<Float, Position> storagePositions = dictPosition.getFreeStoragePositions();
             if (storagePositions.isEmpty()){System.out.println("No storage space");break;}
-            int closest = findClosest((int) positionRobot,storagePositions);
+            float closest = findClosest(positionRobot,storagePositions);
             System.out.println("Going to storage position : "+ closest);
             //System.out.println(findOrientation((int) positionRobot,closest));
-            moveRobot((int) positionRobot,closest,findOrientation((int) positionRobot,closest));
+            moveRobot(positionRobot,closest,findOrientation(positionRobot,closest));
 
             dictPosition.getPosition(positionRobot).setCube(cube);
             postTelemetry(0,"Dépose cube"+cube.getColor(),(int) positionRobot);
@@ -117,18 +117,18 @@ public class Robot {
 
     /**
      * Find the closest position in a list of positions
-     * @param start
-     * @param positions
-     * @return int
+     * @param start     float starting position
+     * @param positions Map<Float, Position> Map of the closest positions
+     * @return int  closest position
      */
-    private int findClosest(int start,Map<Float, Position> positions) {
-        List<Integer> listDistances = new ArrayList<>();
-        List<Integer> listDestinations = new ArrayList<>();
+    private float findClosest(float start,Map<Float, Position> positions) {
+        List<Float> listDistances = new ArrayList<>();
+        List<Float> listDestinations = new ArrayList<>();
         int x=0;
         for (var position : positions.entrySet()) {
-            int pos = position.getKey().intValue();
+            float pos = position.getKey();
             listDestinations.add(x, pos);
-            int distance;
+            float distance;
             int nbPositions = (int) (dictPosition.getNumberOfPositions()*0.5);
             if(pos>nbPositions+start){distance = nbPositions-pos+start;}
             else {distance = abs(pos-start);}
@@ -141,11 +141,11 @@ public class Robot {
 
     /**
      * Find the best orientation to go to a destination
-     * @param start
-     * @param end
-     * @return boolean
+     * @param start float starting position
+     * @param end   float ending position
+     * @return  boolean way to go (true = clockwise)
      */
-    private boolean findOrientation(int start, int end) {
+    private boolean findOrientation(float start, float end) {
         boolean startOrientation;
         int nbPositions = dictPosition.getNumberOfPositions();
         if (end<start) {
@@ -160,12 +160,12 @@ public class Robot {
 
     /**
      * Move the position of the robot to simulate motion
-     * @param start int start position
-     * @param end   int end position
-     * @param startOrientation  boolean way to go
+     * @param start float start position
+     * @param end   float end position
+     * @param startOrientation  boolean way to go (true = clockwise)
      * @throws InterruptedException
      */
-    private void moveRobot(int start, int end, boolean startOrientation) throws InterruptedException, IOException, URISyntaxException {
+    private void moveRobot(float start, float end, boolean startOrientation) throws InterruptedException, IOException, URISyntaxException {
         int nbPositions = dictPosition.getNumberOfPositions();
         float e = start;
         System.out.println("Going to : "+end);
@@ -182,6 +182,12 @@ public class Robot {
         }
     }
 
+    /**
+     * Random Float with 2 decimals between 2 values
+     * @param min   int lowest value
+     * @param max   int biggest value
+     * @return  float pseudorandom generated float
+     */
     private float randomFloat(int min, int max) {
         Random random = new Random();
         min *= 100;
@@ -203,7 +209,7 @@ public class Robot {
 
         try {
             JsonNode rootNode = objectMapper.readTree(jsonString);
-            if (rootNode.has("error")){RESTService.MyPOSTRequest("{\"robot_id\":\""+uuid+"\"}","summary");}
+            //if (rootNode.has("error")){RESTService.MyPOSTRequest("{\"robot_id\":\""+uuid+"\"}","summary");}
 
             // Check if "liste_blocks" node exists and is an array
             if (rootNode.has("liste_blocks") && rootNode.get("liste_blocks").isArray()) {
@@ -219,7 +225,7 @@ public class Robot {
             }
         } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
             System.err.println("Error parsing JSON string: " + e.getMessage());
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException /*| URISyntaxException*/ e) {
             throw new RuntimeException(e);
         }
         return listeBlocks;
@@ -247,7 +253,7 @@ public class Robot {
             put("distance_ultrasons",distance_ultrasons);
             put("statut_deplacement",statut_deplacement);
             put("ligne",ligne);
-            put("status_pince", cube==null);
+            put("statut_pince", cube==null);
             put("robot_id",uuid);
         }};
 

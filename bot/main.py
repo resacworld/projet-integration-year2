@@ -164,8 +164,8 @@ def suiviLigne():
   reverseFactor = 0.5
   robot.led(0,0,0)
 
-  suiviGauche()
-  # suiviSimple()
+  # suiviGauche()
+  suiviSimple()
   # suiviCalib()
   
   print("Droite :" + str(robot.status_led_droite()))
