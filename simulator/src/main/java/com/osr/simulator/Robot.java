@@ -178,7 +178,7 @@ public class Robot {
             this.positionRobot = e;
             System.out.println("Futur Position : "+e);
             CommandController.updatePositionColor();
-            postTelemetry(randomFloat(20,60),"Se déplace vers "+end,(int) e);
+            postTelemetry(randomFloat(20,60),"Se déplace vers "+dictPosition.getPosition(end).getName(),(int) e);
             TimeUnit.SECONDS.sleep(3);
         }
     }
