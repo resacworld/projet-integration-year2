@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "Web server", "index.html", [
+    [ "Server", "index.html", "index" ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ],
       [ "Package Members", "namespacemembers.html", [
@@ -52,7 +53,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"namespacemembers_vars.html"
+"namespacemembers_func.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

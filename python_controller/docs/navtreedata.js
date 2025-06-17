@@ -25,6 +25,10 @@
 var NAVTREE =
 [
   [ "Python controller", "index.html", [
+    [ "📁 Project Structure", "index.html#autotoc_md1", null ],
+    [ "🚀 Run project", "index.html#autotoc_md2", [
+      [ "<b>Important note :</b>", "index.html#autotoc_md3", null ]
+    ] ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ],
       [ "Package Members", "namespacemembers.html", [

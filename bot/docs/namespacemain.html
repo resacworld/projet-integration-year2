@@ -99,7 +99,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a11debc633c690ca19cb27df5f971d73d" id="r_a11debc633c690ca19cb27df5f971d73d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11debc633c690ca19cb27df5f971d73d">loop</a> ()</td></tr>
 <tr class="memitem:af464388d1fc4caccf2eb6b1cdbba0122" id="r_af464388d1fc4caccf2eb6b1cdbba0122"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af464388d1fc4caccf2eb6b1cdbba0122">recupere_cube</a> (gauche=False)</td></tr>
 <tr class="memitem:aa4128b0619f4be9f0963b3ab8633e9b6" id="r_aa4128b0619f4be9f0963b3ab8633e9b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4128b0619f4be9f0963b3ab8633e9b6">sendTelemetry</a> ()</td></tr>
+<tr class="memitem:a6ec27850efd632959a7171e2fe67454a" id="r_a6ec27850efd632959a7171e2fe67454a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ec27850efd632959a7171e2fe67454a">suiviCalib</a> ()</td></tr>
+<tr class="memitem:a04c6579d1ad7e8e2babd53bb900601e5" id="r_a04c6579d1ad7e8e2babd53bb900601e5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04c6579d1ad7e8e2babd53bb900601e5">suiviGauche</a> (vitesse=600)</td></tr>
 <tr class="memitem:a2297543613b7cb05a1cd41b8597c54ae" id="r_a2297543613b7cb05a1cd41b8597c54ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2297543613b7cb05a1cd41b8597c54ae">suiviLigne</a> ()</td></tr>
+<tr class="memitem:acf4a20e60a97165407323e32b2466c47" id="r_acf4a20e60a97165407323e32b2466c47"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf4a20e60a97165407323e32b2466c47">suiviSimple</a> (vitesse=600, reverseFactor=0.5)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -111,30 +114,12 @@ Variables</h2></td></tr>
 <tr class="memitem:a06f8bb62664a421719f4cc40de6188cc" id="r_a06f8bb62664a421719f4cc40de6188cc"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06f8bb62664a421719f4cc40de6188cc">password</a> = 'imerir66'</td></tr>
 <tr class="memitem:acaa87bbaf27fe1c9211351ebf194b715" id="r_acaa87bbaf27fe1c9211351ebf194b715"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acaa87bbaf27fe1c9211351ebf194b715">robot_id</a> = &quot;36bbec64-481b-4ac6-b27e-3ecfc8c44790&quot;</td></tr>
 <tr class="memitem:a615550db9f984df95a079d7bd4f588d4" id="r_a615550db9f984df95a079d7bd4f588d4"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a615550db9f984df95a079d7bd4f588d4">ssid</a> = 'IMERIR Fablab'</td></tr>
+<tr class="memitem:af3c1fd2aea35700ed0f222f0d9a78386" id="r_af3c1fd2aea35700ed0f222f0d9a78386"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3c1fd2aea35700ed0f222f0d9a78386">timeTurn</a> = 0</td></tr>
 <tr class="memitem:a6f0fc0b1d964be20eaf1fdb5b79cd426" id="r_a6f0fc0b1d964be20eaf1fdb5b79cd426"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6f0fc0b1d964be20eaf1fdb5b79cd426">wlan</a> = network.WLAN(network.STA_IF)</td></tr>
 <tr class="memitem:aeabcb33bb084c79072acaf8dc2c9b6fb" id="r_aeabcb33bb084c79072acaf8dc2c9b6fb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeabcb33bb084c79072acaf8dc2c9b6fb">zone_1_block_stored</a> = 0</td></tr>
 <tr class="memitem:a78f8ee02342f4f7ccc0f19e9d0115111" id="r_a78f8ee02342f4f7ccc0f19e9d0115111"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78f8ee02342f4f7ccc0f19e9d0115111">zone_2_block_stored</a> = 0</td></tr>
 </table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">@mainpage My Project Documentation
-
-@section intro_sec Introduction
-Welcome to the documentation for **My Project**. This project is designed to [briefly describe the purpose or functionality].
-
-@section features_sec Features
-- Feature 1: [Description of feature 1]
-- Feature 2: [Description of feature 2]
-- Feature 3: [Description of feature 3]
-
-@section usage_sec Usage
-To use this project, follow these steps:
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
-
-@section contact_sec Contact
-For more information, please contact [Your Name] at [Your Email].
-</pre> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a3bc80f19ae22ec81fa5cf1cc9584dcd7" name="a3bc80f19ae22ec81fa5cf1cc9584dcd7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3bc80f19ae22ec81fa5cf1cc9584dcd7">&#9670;&#160;</a></span>depose_zone()</h2>
 
@@ -220,6 +205,40 @@ For more information, please contact [Your Name] at [Your Email].
 
 </div>
 </div>
+<a id="a6ec27850efd632959a7171e2fe67454a" name="a6ec27850efd632959a7171e2fe67454a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ec27850efd632959a7171e2fe67454a">&#9670;&#160;</a></span>suiviCalib()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">suiviCalib </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a04c6579d1ad7e8e2babd53bb900601e5" name="a04c6579d1ad7e8e2babd53bb900601e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04c6579d1ad7e8e2babd53bb900601e5">&#9670;&#160;</a></span>suiviGauche()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">suiviGauche </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>vitesse</em></span><span class="paramdefsep"> = </span><span class="paramdefval">600</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2297543613b7cb05a1cd41b8597c54ae" name="a2297543613b7cb05a1cd41b8597c54ae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2297543613b7cb05a1cd41b8597c54ae">&#9670;&#160;</a></span>suiviLigne()</h2>
 
@@ -231,6 +250,27 @@ For more information, please contact [Your Name] at [Your Email].
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf4a20e60a97165407323e32b2466c47" name="acf4a20e60a97165407323e32b2466c47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf4a20e60a97165407323e32b2466c47">&#9670;&#160;</a></span>suiviSimple()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">suiviSimple </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>vitesse</em></span><span class="paramdefsep"> = </span><span class="paramdefval">600</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>reverseFactor</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.5</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -344,6 +384,20 @@ For more information, please contact [Your Name] at [Your Email].
       <table class="memname">
         <tr>
           <td class="memname">str ssid = 'IMERIR Fablab'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af3c1fd2aea35700ed0f222f0d9a78386" name="af3c1fd2aea35700ed0f222f0d9a78386"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3c1fd2aea35700ed0f222f0d9a78386">&#9670;&#160;</a></span>timeTurn</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">timeTurn = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">

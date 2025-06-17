@@ -92,76 +92,34 @@ $(function(){initNavTree('namespaceweb.html','',''); });
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:reqAddRobot" id="r_reqAddRobot"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1req_add_robot.html">reqAddRobot</a></td></tr>
-<tr class="memitem:reqGetMission" id="r_reqGetMission"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1req_get_mission.html">reqGetMission</a></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a616e11d54416a7920cee081099928280" id="r_a616e11d54416a7920cee081099928280"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a616e11d54416a7920cee081099928280">getFullMission</a> (Mission mission, List[Block] blocks)</td></tr>
-<tr class="memitem:a84cdfd19ac111cc755bdb3f7689b18de" id="r_a84cdfd19ac111cc755bdb3f7689b18de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84cdfd19ac111cc755bdb3f7689b18de">route</a> (<a class="el" href="classweb_1_1req_add_robot.html">reqAddRobot</a> req)</td></tr>
-<tr class="memitem:ab26252f028ccf2bf3bd4cf8409af6db7" id="r_ab26252f028ccf2bf3bd4cf8409af6db7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab26252f028ccf2bf3bd4cf8409af6db7">route</a> (<a class="el" href="classweb_1_1req_get_mission.html">reqGetMission</a> req)</td></tr>
+<tr class="memitem:a98930b7bc4c76862d45c7eb593167a71" id="r_a98930b7bc4c76862d45c7eb593167a71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98930b7bc4c76862d45c7eb593167a71">route</a> (str name, Optional[str] robot_id=None)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a697d5d45669a18c3fb2e7ac3ae470b49" id="r_a697d5d45669a18c3fb2e7ac3ae470b49"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a697d5d45669a18c3fb2e7ac3ae470b49">router</a> = APIRouter()</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a616e11d54416a7920cee081099928280" name="a616e11d54416a7920cee081099928280"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a616e11d54416a7920cee081099928280">&#9670;&#160;</a></span>getFullMission()</h2>
+<a id="a98930b7bc4c76862d45c7eb593167a71" name="a98930b7bc4c76862d45c7eb593167a71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98930b7bc4c76862d45c7eb593167a71">&#9670;&#160;</a></span>route()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">getFullMission </td>
+          <td class="memname">route </td>
           <td>(</td>
-          <td class="paramtype">Mission</td>          <td class="paramname"><span class="paramname"><em>mission</em></span>, </td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">List[Block]</td>          <td class="paramname"><span class="paramname"><em>blocks</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a84cdfd19ac111cc755bdb3f7689b18de" name="a84cdfd19ac111cc755bdb3f7689b18de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84cdfd19ac111cc755bdb3f7689b18de">&#9670;&#160;</a></span>route() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">route </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classweb_1_1req_add_robot.html">reqAddRobot</a></td>          <td class="paramname"><span class="paramname"><em>req</em></span></td><td>)</td>
-          <td></td>
+          <td class="paramtype">Optional[str] </td>          <td class="paramname"><span class="paramname"><em>robot_id</em></span><span class="paramdefsep"> = </span><span class="paramdefval">None</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Route to register a new robot
-</pre> 
-</div>
-</div>
-<a id="ab26252f028ccf2bf3bd4cf8409af6db7" name="ab26252f028ccf2bf3bd4cf8409af6db7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab26252f028ccf2bf3bd4cf8409af6db7">&#9670;&#160;</a></span>route() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">route </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classweb_1_1req_get_mission.html">reqGetMission</a></td>          <td class="paramname"><span class="paramname"><em>req</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<pre class="fragment">Route that returns all missions of a robot
 </pre> 
 </div>
 </div>

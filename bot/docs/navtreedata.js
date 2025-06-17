@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "Micropython bot (with esp32)", "index.html", [
-    [ "Hello", "index.html", null ],
+    [ "MicroPython - bot that execute missions", "index.html", "index" ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ],
       [ "Package Members", "namespacemembers.html", [

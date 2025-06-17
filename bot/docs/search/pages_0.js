@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hello_0',['Hello',['../index.html',1,'']]]
+  ['_3a_0',['&lt;b&gt;Important note :&lt;/b&gt;',['../index.html#autotoc_md5',1,'']]]
 ];

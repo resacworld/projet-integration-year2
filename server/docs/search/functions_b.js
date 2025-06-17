@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['to_5fjson_0',['to_json',['../classbase_1_1_base_object.html#a59fd94507ebbf9a98986f3d8d7140cac',1,'base::BaseObject']]]
+  ['start_5fmission_0',['start_mission',['../classmission_1_1_mission_repository.html#a756e6a2d058a4c1891823d4860deaf71',1,'mission::MissionRepository']]]
 ];

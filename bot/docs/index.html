@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Micropython bot (with esp32): Hello</title>
+<title>Micropython bot (with esp32): MicroPython - bot that execute missions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,10 +88,44 @@ $(function(){initNavTree('index.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Hello </div></div>
+  <div class="headertitle"><div class="title">MicroPython - bot that execute missions </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a></p>
+<p>This folder contains the part of the project to control a bot, controlled by a <b>MicroPython</b> script that controls many sensors or actuators (like line sensors, motors, etc..), to execute a precise mission, descibed by the used through a web-server.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+🧰 Required Hardware</h1>
+<ul>
+<li>ESP32 DevKit (ESP32 WROOM revision 3.1 used in this project)</li>
+<li>2 motors</li>
+<li>1 motor driver (LN298)</li>
+<li>1 servomotor (SG90)</li>
+<li>1 Breadboard</li>
+<li>2 line sensors (MH-sensors-series)</li>
+<li>1 ultrasonic sensor (HC-SR04)</li>
+<li>Many wires</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+📁 Project Structure</h1>
+<div class="fragment"><div class="line">bot/</div>
+<div class="line">├── docs            ── docs of the sever</div>
+<div class="line">├── main.py         ── Main script: requests instructions from server&#39;s API and executes them</div>
+<div class="line">├── robot.py        ── Local methods (no external libraries) to control robot actuators and sensors</div>
+<div class="line">├── Doxyfile        ── Configuration file for Doxygen (to generate code documentation)</div>
+<div class="line">├── firmware-esp32  ── ESP32 firmware used in this project (binary file)</div>
+<div class="line">└── README.md       ── Code documentation for the bot </div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+🚀 Installation</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+Flash MicroPython on the ESP32</h2>
+<p>Use the firmware in the folder (./firmware-esp32.bin), or download the micropython firmware for ESP32 from: <br  />
+ 👉 <a href="https://micropython.org/download/esp32/">https://micropython.org/download/esp32/</a></p>
+<p>Then flash it using <a href="https://github.com/espressif/esptool">esptool</a>:</p>
+<div class="fragment"><div class="line">python -m esptool --chip esp32 erase_flash</div>
+<div class="line">python -m esptool --chip esp32 --baud 460800 write_flash -z 0x1000 firmware-esp32.bin</div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+<b>Important note :</b></h2>
+<p><sub>AI has contributed to the creation of this file</sub> </p>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->

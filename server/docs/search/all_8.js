@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['iblockrepository_0',['IBlockRepository',['../classblock_1_1_i_block_repository.html',1,'block']]],
-  ['imissionrepository_1',['IMissionRepository',['../classmission_1_1_i_mission_repository.html',1,'mission']]],
-  ['index_2epy_2',['index.py',['../index_8py.html',1,'']]],
-  ['irobotrepository_3',['IRobotRepository',['../classrobot_1_1_i_robot_repository.html',1,'robot']]],
-  ['irobottelemetryrepository_4',['IRobotTelemetryRepository',['../classrobot_telemetry_1_1_i_robot_telemetry_repository.html',1,'robotTelemetry']]],
-  ['isobjectinvalid_5',['isObjectInvalid',['../classchecker_1_1checker.html#a72bfbc0788748f5f31f2f931268f6c69',1,'checker::checker']]],
-  ['isuniqueobjectsonly_6',['isUniqueObjectsOnly',['../classchecker_1_1checker.html#ae22ca6f19ff5ef39e2d6991d2fe5c4eb',1,'checker::checker']]]
+  ['getallmissions_0',['getAllMissions',['../namespacepages_1_1home.html#ae847997d25bc0810fa719688a6e56ee8',1,'pages::home']]],
+  ['getconnection_1',['getConnection',['../classdatabase_1_1database_1_1_database.html#a7371770e7a92ab17ac73e5a1b8145b38',1,'database::database::Database']]],
+  ['getfullhomepage_2',['getFullHomePage',['../namespacepages_1_1home.html#a6aff3f0e24259a3286a0dae5e59ed504',1,'pages::home']]],
+  ['getfullmission_3',['getFullMission',['../namespacepages_1_1home.html#a616e11d54416a7920cee081099928280',1,'pages::home']]],
+  ['getgraphicalmissions_4',['getGraphicalMissions',['../namespacepages_1_1home.html#ad5114243777df593fae1fd3351d78dd5',1,'pages::home']]],
+  ['getgraphicalrobotselectoptions_5',['getGraphicalRobotSelectOptions',['../namespacepages_1_1home.html#a6606151904beddc43d2b350caa296598',1,'pages::home']]]
 ];

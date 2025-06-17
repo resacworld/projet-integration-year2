@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['expand_0',['expand',['../namespacemain.html#a6d75829fbffb45805b5472b9db7a54b9',1,'main']]]
+  ['column_0',['column',['../namespacemain.html#ae78e6e11a40e6dba1bae097358f97d15',1,'main']]],
+  ['comboboxes_1',['comboBoxes',['../namespaceaddmission.html#a606b1e58d153397749af53fd4ea4a181',1,'addmission']]],
+  ['controller_2',['Python controller',['../index.html',1,'']]]
 ];
