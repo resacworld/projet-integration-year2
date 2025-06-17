@@ -4,8 +4,8 @@ import java.io.*;
 import java.net.*;
 
 public class RESTService {
-//    static String server = "http://10.7.5.182:8000/";
-    static String server = "http://10.7.5.42:8000/";
+    static String server = "http://10.7.5.182:8000/";
+    //static String server = "http://10.7.5.42:8000/";
 
     /**
      * POST request method
