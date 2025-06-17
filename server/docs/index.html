@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Web server: Main Page</title>
+<title>Web server: Server</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,10 +87,55 @@ $(function(){initNavTree('index.html','',''); });
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Web server Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Server </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a></p>
+<p>This folder contains one part of the project, the server, the main hub of all this project.</p>
+<p>He can manage few robots at the same time, manage many missions with status (new, running, finished), and store telemetries from robots executing missions.</p>
+<div class="fragment"><div class="line">server/</div>
+<div class="line">├── api/</div>
+<div class="line">│   ├── routes/</div>
+<div class="line">│   │   ├── controller.py       ── All routes for Python controller</div>
+<div class="line">│   │   ├── robot.py            ── All routes for robot (in MicroPython)</div>
+<div class="line">│   │   └── web.py              ── All routes for web IHM</div>
+<div class="line">│   ├── index.py                ── Includes all routes defined in /routes</div>
+<div class="line">│   └── __init__.py             ── Defines the api package</div>
+<div class="line">│</div>
+<div class="line">├── database/</div>
+<div class="line">│   ├── interfaces/             ── All database interfaces</div>
+<div class="line">│   │   ├── base.py             ── Default objects</div>
+<div class="line">│   │   ├── block.py            ── Block interfaces</div>
+<div class="line">│   │   ├── mission.py          ── Mission interfaces</div>
+<div class="line">│   │   ├── robot.py            ── Robot interfaces</div>
+<div class="line">│   │   └── robotTelemetry.py   ── Robot telemetry interfaces</div>
+<div class="line">│   ├── models/                 ── All database models</div>
+<div class="line">│   │   ├── block.py            ── Block models</div>
+<div class="line">│   │   ├── mission.py          ── Mission models</div>
+<div class="line">│   │   ├── robot.py            ── Robot models</div>
+<div class="line">│   │   └── robotTelemetry.py   ── Robot telemetry models</div>
+<div class="line">│   ├── database.py             ── Initializes and provides DB connection</div>
+<div class="line">│   └── __init__.py             ── Defines the database package</div>
+<div class="line">│</div>
+<div class="line">├── docs/                       ── Documentation for the server</div>
+<div class="line">│</div>
+<div class="line">├── services/</div>
+<div class="line">│   └── checker.py              ── Class to check objects</div>
+<div class="line">│</div>
+<div class="line">├── main.py                     ── Main script: launches and configures the server</div>
+<div class="line">├── .env                        ── Environment variables (contains secrets)</div>
+<div class="line">├── .env-example                ── Example of .env file</div>
+<div class="line">├── database.db                 ── Generated SQLite DB file (contains all data)</div>
+<div class="line">├── Doxyfile                    ── Doxygen config file for code documentation</div>
+<div class="line">└── README.md                   ── Documentation for the Python server (controller)</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+🚀 Run server</h1>
+<div class="fragment"><div class="line">uvicorn main:app --reload --env-file .env --host 0.0.0.0</div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+<b>Important note :</b></h2>
+<p><sub>AI has contributed to the creation of this file</sub> </p>
+</div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -9,6 +9,7 @@ var robot_8py =
     [ "robot.gauche", "namespacerobot.html#afa86cf2cf8ab358d81f62d086754958b", null ],
     [ "robot.gaucheSurPlace", "namespacerobot.html#a75a88e3255a7e5e25738eda73468985f", null ],
     [ "robot.get_distance", "namespacerobot.html#ab41ba96a73a50a21bf5a538389bb7a80", null ],
+    [ "robot.led", "namespacerobot.html#a57cd52dd6a5fda0283d5ed0841ff70d5", null ],
     [ "robot.mesure", "namespacerobot.html#a24c547aa60ead9f7cbfaa6f0bc2b3dcd", null ],
     [ "robot.moteur", "namespacerobot.html#a0b3c91f7f3391446f53d20522d59c870", null ],
     [ "robot.open_grabber", "namespacerobot.html#a042f939e6ef424097841e88bca17c13f", null ],

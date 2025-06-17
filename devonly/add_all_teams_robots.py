@@ -1,3 +1,7 @@
+"""
+This script adds each robot of each team to the database.
+"""
+
 import requests
 
 all_robots = [

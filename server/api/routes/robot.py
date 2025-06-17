@@ -58,7 +58,7 @@ class reqTelemetry(BaseModel):
     distance_ultrasons: float = None
     statut_deplacement: str = None
     ligne: int = None
-    status_pince: bool = None
+    statut_pince: bool = None
     # timestamp: str = None # => gérée par l'API (Cahier des Charges)
 
 @router.post("/telemetry")
@@ -88,7 +88,7 @@ def route(req: reqTelemetry):
                 ds_ultrasons=req.distance_ultrasons,
                 status_deplacement=req.statut_deplacement,
                 ligne=req.ligne,
-                status_pince=req.status_pince,
+                status_pince=req.statut_pince,
                 timestamp=datetime.now().isoformat()  # Automatically set the timestamp
             )
         )

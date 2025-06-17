@@ -1,6 +1,6 @@
 var main_8py =
 [
-    [ "main.root", "namespacemain.html#a453c8a0e297db31a4ab6ae4c23318eef", null ],
+    [ "main.homepage", "namespacemain.html#a0a2d0608911cc3b02982afbd5ec2ef70", null ],
     [ "main.allow_credentials", "namespacemain.html#aa39ef28611671e6b5cdf25799c68716b", null ],
     [ "main.allow_headers", "namespacemain.html#a6108dcdcf98a7e3bb2892972d166af3d", null ],
     [ "main.allow_methods", "namespacemain.html#a84e33a5b7601d33a41fb6584f613d198", null ],

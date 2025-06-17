@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['web_0',['web',['../namespaceweb.html',1,'']]]
+  ['robot_0',['robot',['../namespacerobot.html',1,'']]],
+  ['robottelemetry_1',['robotTelemetry',['../namespacerobot_telemetry.html',1,'']]]
 ];

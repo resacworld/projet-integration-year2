@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['isobjectinvalid_0',['isObjectInvalid',['../classchecker_1_1checker.html#a72bfbc0788748f5f31f2f931268f6c69',1,'checker::checker']]],
-  ['isuniqueobjectsonly_1',['isUniqueObjectsOnly',['../classchecker_1_1checker.html#ae22ca6f19ff5ef39e2d6991d2fe5c4eb',1,'checker::checker']]]
+  ['homepage_0',['homepage',['../namespacemain.html#a0a2d0608911cc3b02982afbd5ec2ef70',1,'main']]]
 ];

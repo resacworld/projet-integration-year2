@@ -30,9 +30,7 @@ var hierarchy =
       [ "reqAddMission", "classcontroller_1_1req_add_mission.html", null ],
       [ "reqLastTelemety", "classcontroller_1_1req_last_telemety.html", null ],
       [ "reqSummary", "classrobot_1_1req_summary.html", null ],
-      [ "reqTelemetry", "classrobot_1_1req_telemetry.html", null ],
-      [ "reqAddRobot", "classweb_1_1req_add_robot.html", null ],
-      [ "reqGetMission", "classweb_1_1req_get_mission.html", null ]
+      [ "reqTelemetry", "classrobot_1_1req_telemetry.html", null ]
     ] ],
     [ "BaseRepository", "classbase_1_1_base_repository.html", null ],
     [ "BaseRepository", null, [

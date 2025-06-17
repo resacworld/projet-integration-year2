@@ -4,9 +4,10 @@ from .routes.controller import router as controllerRouter
 from .routes.web import router as webRouter
 
 # Create the master router
-MasterRouter = APIRouter(prefix="/api")
+MasterRouter = APIRouter()
+MasterRouterAPI = APIRouter(prefix="/api")
 
 # Include the child routers
 MasterRouter.include_router(robotRouter)
-MasterRouter.include_router(controllerRouter)
-MasterRouter.include_router(webRouter)
+MasterRouterAPI.include_router(controllerRouter)
+MasterRouterAPI.include_router(webRouter)

@@ -42,9 +42,5 @@ var annotated_dup =
       [ "RobotTelemetry", "classrobot_telemetry_1_1_robot_telemetry.html", null ],
       [ "RobotTelemetryId", "classrobot_telemetry_1_1_robot_telemetry_id.html", null ],
       [ "RobotTelemetryRepository", "classrobot_telemetry_1_1_robot_telemetry_repository.html", "classrobot_telemetry_1_1_robot_telemetry_repository" ]
-    ] ],
-    [ "web", "namespaceweb.html", [
-      [ "reqAddRobot", "classweb_1_1req_add_robot.html", null ],
-      [ "reqGetMission", "classweb_1_1req_get_mission.html", null ]
     ] ]
 ];

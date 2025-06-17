@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-from api.index import MasterRouter
+from api.index import MasterRouter, MasterRouterAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from pages.home import getFullHomePage
 
 # Initialize the FastAPI application
 app = FastAPI()
@@ -10,7 +11,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,  # seulement si tu envoies des cookies ou auth headers
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -19,9 +20,12 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # link the router to the fastapi instance
 app.include_router(MasterRouter)
+app.include_router(MasterRouterAPI)
 
-# Define the default route
 @app.get("/", response_class=HTMLResponse)
-async def root():
-    with open('static/index.html', 'r') as file:
-        return file.read()
+async def homepage(status: bool = None, selected_id: str = None):
+    """
+    Route to return the html home page
+    """
+
+    return getFullHomePage(status=status, selected_id=selected_id)

@@ -23,7 +23,7 @@ root.geometry("500x600")
 
 top_frame = ttk.Frame(root)
 
-title = tk.Label(top_frame, text="Selectionnez un robot :", padx=10)
+title = tk.Label(top_frame, text="Select a robot :", padx=10)
 robot_number = ttk.Combobox(top_frame, values=[robot.name for robot in robots], width=20)
 robot_number.current(0)
 
