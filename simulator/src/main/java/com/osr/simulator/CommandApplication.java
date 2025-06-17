@@ -23,11 +23,12 @@ public class CommandApplication extends Application {
 
         // Get the controller instance created by the FXMLLoader
         commandController = loader.getController();
+        System.out.println(commandController);
         Scene scene = new Scene(root, 896, 504);
         stage.setTitle("Command Control");
         stage.setScene(scene);
         stage.show();
-        Robot.setInstance(commandController);
+        Robot.getInstance();
         stage.setOnCloseRequest(t -> {
             Platform.exit();
             System.exit(0);
@@ -49,6 +50,7 @@ public class CommandApplication extends Application {
     public static void main(String[] args){
         Thread t1 = new Thread(() -> {
             try {
+                TimeUnit.SECONDS.sleep(1);
                 while(true){
                     Robot.getInstance().execute();
                     TimeUnit.SECONDS.sleep(3);

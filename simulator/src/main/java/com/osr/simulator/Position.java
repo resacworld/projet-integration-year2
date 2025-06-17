@@ -58,7 +58,7 @@ public class Position {
 
     /**
      * Cube setter
-     * @param cube
+     * @param cube  Cube cube of the Position
      */
     @FXML
     public void setCube(Cube cube) {
