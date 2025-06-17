@@ -23,4 +23,8 @@ app.include_router(MasterRouter)
 
 @app.get("/", response_class=HTMLResponse)
 async def homepage(status: bool = None, selected_id: str = None):
+    """
+    Route to return the html home page
+    """
+
     return getFullHomePage(status=status, selected_id=selected_id)

@@ -144,6 +144,7 @@
     font-weight: 500; /* font-medium */
     display: inline-block; /* inline-block */
     border-radius: 0.375rem; /* rounded-md */
+    margin-top: 0.25rem; /* mt-1 */
 }
 
 .yellow {

@@ -45,7 +45,7 @@ def getGraphicalMissions(missions: List):
     for mission in missions:  
         allGMissions += f"""           
         <div class="card">
-            <h3 htmlFor="name">Mission : <span class="span">{mission["name"]}</span></h3>
+            <h3 htmlFor="name"><span class="span">{mission["name"]}</span></h3>
             
             {(
                 "<h3 class=\"tag yellow\">Running</h3>" if mission["executing"] else (
