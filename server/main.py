@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-from api.index import MasterRouter
+from api.index import MasterRouter, MasterRouterAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pages.home import getFullHomePage
@@ -20,6 +20,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # link the router to the fastapi instance
 app.include_router(MasterRouter)
+app.include_router(MasterRouterAPI)
 
 @app.get("/", response_class=HTMLResponse)
 async def homepage(status: bool = None, selected_id: str = None):
