@@ -11,6 +11,7 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.concurrent.TimeUnit;
 
 public class CommandApplication extends Application {
     private static CommandController commandController;
@@ -27,23 +28,31 @@ public class CommandApplication extends Application {
         stage.setScene(scene);
         stage.show();
         Robot.setInstance(commandController);
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override public void handle(WindowEvent t) {
-                Platform.exit();
-                System.exit(0);
-            }
+        stage.setOnCloseRequest(t -> {
+            Platform.exit();
+            System.exit(0);
         });
     }
 
+    /**
+     * Command Controller getter
+     * @return  CommandController
+     */
     public static CommandController getCommandController() {
         return commandController;
     }
 
-
-    public static void main(String[] args) throws IOException {
+    /**
+     * Main method
+     * @param args
+     */
+    public static void main(String[] args){
         Thread t1 = new Thread(() -> {
             try {
-                Robot.getInstance().execute();
+                while(true){
+                    Robot.getInstance().execute();
+                    TimeUnit.SECONDS.sleep(3);
+                }
             } catch (IOException | InterruptedException | URISyntaxException e) {
                 throw new RuntimeException(e);
             }

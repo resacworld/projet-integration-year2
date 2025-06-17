@@ -17,10 +17,13 @@ public class CommandController{
     @FXML
     private Pane map_pane;
     private static Map<String, Circle> uiCircles = new HashMap<>();
-    @FXML
-    private Label consoleTest;
-    private String consoleTestText ;
+//    @FXML
+//    private Label consoleTest;
+//    private String consoleTestText ;
 
+    /**
+     * Initialize the circles depending on dictPositionFxId
+     */
     @FXML
     public void initialize() {
         // After map_pane is injected, we can now safely lookup circles.
@@ -59,6 +62,10 @@ public class CommandController{
 //            System.err.println("Error: Position with ID '" + positionId + "' not found in dictPosition.");
 //        }
 //    }
+
+    /**
+     * Update the circles colors
+     */
     public static void updatePositionColor() {
         dictPosition.getAllPositions().values().forEach(pos -> {
             Circle uiCircle = uiCircles.get(pos.getFxId());
@@ -86,16 +93,16 @@ public class CommandController{
 
     }
 
-    public void setConsoleTestText(String consoleTestText) {
-        this.consoleTestText = consoleTestText;
-    }
-
-    @FXML
-    //protected void onHelloButtonClick() {welcomeText.setText("Welcome to JavaFX Application!");}
-    protected void pressedTestButton() throws IOException {
-        //consoleTestText = RESTService.MyGETRequest();
-        //consoleTest.setText(consoleTestText);
-        //updatePositionColor("1",RED);
-    }
+//    public void setConsoleTestText(String consoleTestText) {
+//        this.consoleTestText = consoleTestText;
+//    }
+//
+//    @FXML
+//    //protected void onHelloButtonClick() {welcomeText.setText("Welcome to JavaFX Application!");}
+//    protected void pressedTestButton() throws IOException {
+//        //consoleTestText = RESTService.MyGETRequest();
+//        //consoleTest.setText(consoleTestText);
+//        //updatePositionColor("1",RED);
+//    }
 
 }
