@@ -64,7 +64,7 @@ public class Robot {
         });
         //System.out.println(commandController);
         List<Integer> listeInstructions = getListeBlocksFromJson(executeJson);
-        //List<Integer> listeInstructions = getListeBlocksFromJson("{\"statut\":true,\"liste_blocks\":[2,6,10]}");
+        //List<Integer> listeInstructions = getListeBlocksFromJson("{\"statut\":true,\"blocks\":[2,6,10]}");
         TimeUnit.SECONDS.sleep(3);
         System.out.println(listeInstructions);
         for (Integer i : listeInstructions) {
@@ -206,17 +206,17 @@ public class Robot {
             JsonNode rootNode = objectMapper.readTree(jsonString);
             //if (rootNode.has("error")){RESTService.MyPOSTRequest("{\"robot_id\":\""+uuid+"\"}","summary");}
 
-            // Check if "liste_blocks" node exists and is an array
-            if (rootNode.has("liste_blocks") && rootNode.get("liste_blocks").isArray()) {
-                for (JsonNode blockNode : rootNode.get("liste_blocks")) {
+            // Check if "blocks" node exists and is an array
+            if (rootNode.has("blocks") && rootNode.get("blocks").isArray()) {
+                for (JsonNode blockNode : rootNode.get("blocks")) {
                     if (blockNode.isInt()) {
                         listeBlocks.add(blockNode.asInt());
                     } else {
-                        System.err.println("Warning: Non-integer value found in liste_blocks: " + blockNode.asText());
+                        System.err.println("Warning: Non-integer value found in blocks: " + blockNode.asText());
                     }
                 }
             } else {
-                System.out.println("No 'liste_blocks' array found or it's not an array in the JSON.");
+                System.out.println("No 'blocks' array found or it's not an array in the JSON.");
             }
         } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
             System.err.println("Error parsing JSON string: " + e.getMessage());
