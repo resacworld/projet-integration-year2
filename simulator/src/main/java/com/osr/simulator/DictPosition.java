@@ -6,7 +6,7 @@ import java.util.Map;
 
 import static javafx.scene.paint.Color.*;
 
-public class dictPosition {
+public class DictPosition {
     private static final Map<Float,Position> positions = new HashMap<Float,Position>(){{
         put(1F, new Position("p_1","Start",null,false));
         put(2F, new Position("p_2","Yellow",new Cube(YELLOW),false));
@@ -32,8 +32,8 @@ public class dictPosition {
 
     /**
      * getPosition
-     * @param id    float id of the position
-     * @return Position instance of the float id
+     * @param id    float : id of the position
+     * @return Position : position instance of the float id
      */
     public static Position getPosition(Float id) {
         return positions.get(id);
@@ -41,7 +41,7 @@ public class dictPosition {
 
     /**
      * get number of positions
-     * @return Integer total number of positions
+     * @return Integer : total number of positions
      */
     public static Integer getNumberOfPositions() {
         return positions.size();
@@ -51,7 +51,7 @@ public class dictPosition {
 
     /**
      * get all positions
-     * @return Map<Float, Position> map of the positions dictionnary
+     * @return Map<Float, Position> : map of the positions dictionnary
      */
     public static Map<Float, Position> getAllPositions() {
         return Collections.unmodifiableMap(positions);
@@ -59,7 +59,7 @@ public class dictPosition {
 
     /**
      * get free storage positions
-     * @return Map<Float, Position> map of all the positions with available storage
+     * @return Map<Float, Position> : map of all the positions with available storage
      */
     public static Map<Float, Position> getFreeStoragePositions() {
         Map<Float, Position> storagePositions = new HashMap<>();

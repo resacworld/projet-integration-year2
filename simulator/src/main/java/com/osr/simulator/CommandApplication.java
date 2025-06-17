@@ -16,6 +16,11 @@ import java.util.concurrent.TimeUnit;
 public class CommandApplication extends Application {
     private static CommandController commandController;
 
+    /**
+     * Override of the start method of javaFX
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("command-control.fxml")); // Assuming your FXML is SimulatorView.fxml

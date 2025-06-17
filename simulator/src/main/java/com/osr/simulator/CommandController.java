@@ -24,7 +24,7 @@ public class CommandController{
     public void initialize() {
         // After map_pane is injected, we can now safely lookup circles.
         // Iterate through all the Position data objects from dictPosition
-        for (Position pos : dictPosition.getAllPositions().values())
+        for (Position pos : DictPosition.getAllPositions().values())
         {
             // Find the corresponding Circle UI element in the FXML
             Node foundNode = map_pane.lookup("#" + pos.getFxId()); // Use pos.getFxId() here!
@@ -64,7 +64,7 @@ public class CommandController{
      * Update the circles colors
      */
     public static void updatePositionColor() {
-        dictPosition.getAllPositions().values().forEach(pos -> {
+        DictPosition.getAllPositions().values().forEach(pos -> {
             Circle uiCircle = uiCircles.get(pos.getFxId());
             uiCircle.setStroke(BLACK);
             if (pos.getCube()==null&&uiCircle!=null) {
@@ -81,17 +81,17 @@ public class CommandController{
 //        }else{robotPoseString = robotPose+"";}
         System.out.println("robot pose : "+robotPose);
         //System.out.println(uiCircles.values());
-        uiCircles.get(dictPosition.getPosition(robotPose).getFxId())
+        uiCircles.get(DictPosition.getPosition(robotPose).getFxId())
                 .setStroke(GRAY);
         if(Robot.getInstance().getCube()!=null){
-            uiCircles.get(dictPosition.getPosition(robotPose).getFxId())
+            uiCircles.get(DictPosition.getPosition(robotPose).getFxId())
                     .setFill(Robot.getInstance().getCube().getColor());
         }
     }
 
     /**
      * set text of the console of the FXML
-     * @param consoleTestText String text to show
+     * @param consoleTestText String : text to show
      */
     public void setConsoleTestText(String consoleTestText) {
         consoleTest.setText(consoleTestText);

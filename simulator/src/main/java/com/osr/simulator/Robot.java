@@ -25,7 +25,7 @@ public class Robot {
 
     /**
      * Singleton instance getter
-     * @return Robot instance
+     * @return Robot : Singleton instance
      */
     public static Robot getInstance() {
         if ( instance == null ) {
@@ -36,7 +36,7 @@ public class Robot {
 
     /**
      * Cube getter
-     * @return Cube
+     * @return Cube : Cube hold by robot
      */
     public Cube getCube() {
         return cube;
@@ -44,7 +44,7 @@ public class Robot {
 
     /**
      * Position getter
-     * @return float position of the robot
+     * @return float : position of the robot
      */
     public float getPositionRobot() {
         return positionRobot;
@@ -69,26 +69,26 @@ public class Robot {
         System.out.println(listeInstructions);
         for (Integer i : listeInstructions) {
             System.out.println("Going to cube position : "+ i);
-            if (dictPosition.getPosition((float)i).getCube() == null) {
+            if (DictPosition.getPosition((float)i).getCube() == null) {
                 postTelemetry(0,"No cube at this location go to next instruction",(int) positionRobot);
                 continue;
             }
             moveRobot(positionRobot,i,findOrientation(positionRobot,i));
 
-            this.cube = dictPosition.getPosition(positionRobot).getCube();
+            this.cube = DictPosition.getPosition(positionRobot).getCube();
 
             postTelemetry(0,"Ramasse cube"+cube.getColor(),(int) positionRobot);
             System.out.println("Picked up "+cube.getColor()+"cube");
-            dictPosition.getPosition(positionRobot).setCube(null);
+            DictPosition.getPosition(positionRobot).setCube(null);
 
-            Map<Float, Position> storagePositions = dictPosition.getFreeStoragePositions();
+            Map<Float, Position> storagePositions = DictPosition.getFreeStoragePositions();
             if (storagePositions.isEmpty()){System.out.println("No storage space");break;}
             float closest = findClosest(positionRobot,storagePositions);
             System.out.println("Going to storage position : "+ closest);
             //System.out.println(findOrientation((int) positionRobot,closest));
             moveRobot(positionRobot,closest,findOrientation(positionRobot,closest));
 
-            dictPosition.getPosition(positionRobot).setCube(cube);
+            DictPosition.getPosition(positionRobot).setCube(cube);
             postTelemetry(0,"Dépose cube"+cube.getColor(),(int) positionRobot);
             System.out.println("Dropped "+cube.getColor()+"cube");
             cube = null;
@@ -98,8 +98,8 @@ public class Robot {
 
     /**
      * Transform json to readable text
-     * @param jsonString    String in json format
-     * @return  String readable
+     * @param jsonString    String : in json format
+     * @return  String : readable text
      */
     private String jsonShow(String jsonString) {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -108,19 +108,13 @@ public class Robot {
             if(rootNode.has("error")){return rootNode.get("error").asText();}
             else{return "Les instructions seront : "+getListeBlocksFromJson(jsonString).toString();}
         }catch (JsonProcessingException e){return jsonString;}
-
-
-
-
-
     }
-
 
     /**
      * Find the closest position in a list of positions
-     * @param start     float starting position
-     * @param positions Map<Float, Position> Map of the closest positions
-     * @return int  closest position
+     * @param start     float : starting position
+     * @param positions Map<Float, Position> : Map of the closest positions
+     * @return int : closest position
      */
     private float findClosest(float start,Map<Float, Position> positions) {
         List<Float> listDistances = new ArrayList<>();
@@ -130,7 +124,7 @@ public class Robot {
             float pos = position.getKey();
             listDestinations.add(x, pos);
             float distance;
-            int nbPositions = (int) (dictPosition.getNumberOfPositions()*0.5);
+            int nbPositions = (int) (DictPosition.getNumberOfPositions()*0.5);
             if(pos>nbPositions+start){distance = nbPositions-pos+start;}
             else {distance = abs(pos-start);}
             listDistances.add(x,distance);
@@ -142,13 +136,13 @@ public class Robot {
 
     /**
      * Find the best orientation to go to a destination
-     * @param start float starting position
-     * @param end   float ending position
-     * @return  boolean way to go (true = clockwise)
+     * @param start float : starting position
+     * @param end   float : ending position
+     * @return  boolean : way to go (true = clockwise)
      */
     private boolean findOrientation(float start, float end) {
         boolean startOrientation;
-        int nbPositions = dictPosition.getNumberOfPositions();
+        int nbPositions = DictPosition.getNumberOfPositions();
         if (end<start) {
             if(end<0.25*nbPositions+(start)){startOrientation=false;}else{startOrientation=true;}
         }else {
@@ -161,13 +155,13 @@ public class Robot {
 
     /**
      * Move the position of the robot to simulate motion
-     * @param start float start position
-     * @param end   float end position
-     * @param startOrientation  boolean way to go (true = clockwise)
+     * @param start float : start position
+     * @param end   float : end position
+     * @param startOrientation  boolean : way to go (true = clockwise)
      * @throws InterruptedException
      */
     private void moveRobot(float start, float end, boolean startOrientation) throws InterruptedException, IOException, URISyntaxException {
-        int nbPositions = dictPosition.getNumberOfPositions();
+        int nbPositions = DictPosition.getNumberOfPositions();
         float e = start;
         System.out.println("Going to : "+end);
         while (e != end) {
@@ -178,7 +172,7 @@ public class Robot {
             this.positionRobot = e;
             System.out.println("Futur Position : "+e);
             CommandController.updatePositionColor();
-            postTelemetry(randomFloat(20,60),"Se déplace vers "+dictPosition.getPosition(end).getName(),(int) e);
+            postTelemetry(randomFloat(20,60),"Se déplace vers "+ DictPosition.getPosition(end).getName(),(int) e);
             TimeUnit.SECONDS.sleep(3);
         }
     }
