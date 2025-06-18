@@ -4,12 +4,13 @@ import java.io.*;
 import java.net.*;
 
 public class RESTService {
-    static String server = "http://10.7.5.182:8000/api/";
+    static String server = "http://10.7.5.182:8000/";
+    //static String server = "http://10.7.5.42:8000/";
 
     /**
      * POST request method
-     * @param Post  String message to post (usually json)
-     * @param route String route to reach
+     * @param Post  String : message to post (usually json)
+     * @param route String : route to reach
      * @throws IOException
      * @throws URISyntaxException
      */
@@ -55,8 +56,8 @@ public class RESTService {
 
     /**
      * GET request method
-     * @param uuid  String uuid of the robot
-     * @return  String json of the instructions
+     * @param uuid  String : uuid of the robot
+     * @return  String : json of the instructions
      * @throws IOException
      * @throws URISyntaxException
      */
@@ -96,8 +97,8 @@ public class RESTService {
     //Gemini
     /**
      * Test the server connection
-     * @param url   String URL of the server
-     * @return  boolean true if connection exist
+     * @param url   String : URL of the server
+     * @return  boolean : true if connection exist
      */
     public static boolean testConnection(String url) {
         HttpURLConnection connection = null;

@@ -10,10 +10,10 @@ public class Position {
 
     /**
      * Positions constructor
-     * @param fxId  for example, "p_1"
-     * @param name  distinct name
-     * @param cube  Cube if needed else null
-     * @param storage   true if it's a storage position
+     * @param fxId  String : id for example, "p_1"
+     * @param name  String : distinct name
+     * @param cube  Cube : cub of Position else null
+     * @param storage   boolean : Is a storage position
      * @throws NullPointerException
      */
     public Position(String fxId, String name, Cube cube,Boolean storage) throws NullPointerException{
@@ -26,7 +26,7 @@ public class Position {
 
     /**
      * FxId getter
-     * @return String fxId
+     * @return String : fxId
      */
     public String getFxId() { // Getter for the FXML ID
         return fxId;
@@ -34,7 +34,7 @@ public class Position {
 
     /**
      * Name getter
-     * @return String
+     * @return String : name of the position
      */
     public String getName() {
         return name;
@@ -42,7 +42,7 @@ public class Position {
 
     /**
      * Cube getter
-     * @return Cube
+     * @return Cube : cube of the position
      */
     public Cube getCube() {
         return cube;
@@ -50,7 +50,7 @@ public class Position {
 
     /**
      * is Storage
-     * @return boolean
+     * @return boolean : Is a storage position
      */
     public boolean isStorage() {
         return storage;
@@ -58,7 +58,7 @@ public class Position {
 
     /**
      * Cube setter
-     * @param cube
+     * @param cube  Cube : cube of the Position
      */
     @FXML
     public void setCube(Cube cube) {
