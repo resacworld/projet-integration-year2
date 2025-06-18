@@ -1,3 +1,7 @@
+"""
+AI helped in writing the comments
+"""
+
 from fastapi import APIRouter
 from pydantic import BaseModel
 from database.models.robot import RobotRepository, RobotId
@@ -10,18 +14,21 @@ from typing import List
 router = APIRouter()
 
 class reqAddMission(BaseModel):
-    '''
+    """
     Class to define the request structure
-    '''
+    """
     robot_id: str = None
     name: str = None
     blocks: List[int] = None
 
 @router.post("/addmission")
 def route(req: reqAddMission):
-    '''
+    """!
     Route to add a mission, asigned to a robot
-    '''
+    @param req: Request object containing parameters
+    @return JSON response with status or error message if any
+    """
+
     try:
         db_robot = RobotRepository()
         db_mission = MissionRepository()
@@ -69,16 +76,19 @@ def route(req: reqAddMission):
         }
 
 class reqLastTelemety(BaseModel):
-    '''
+    """
     Class to define the request structure
-    '''
+    """
     robot_id: str = None
 
 @router.post("/lasttelemetry")
 def route(req: reqLastTelemety):
-    '''
+    """!
     Route to get the last telemetry of a robot
-    '''
+    @param req: Request object containing parameters
+    @return JSON response with status or error message if any
+    """
+
     try:
         db_robot_telemetry = RobotTelemetryRepository()
         db_mission = MissionRepository()
@@ -104,9 +114,11 @@ def route(req: reqLastTelemety):
 
 @router.get("/robots")
 def route():
-    '''
+    """!
     Route to get all robots registered in the database
-    '''
+    @return JSON response with status or error message if any
+    """
+
     try:
         db_robot = RobotRepository()
 

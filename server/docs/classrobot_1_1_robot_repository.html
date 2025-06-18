@@ -104,12 +104,19 @@ Inheritance diagram for RobotRepository:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abdd362d5f799ad16b5d6700efe590290" id="r_abdd362d5f799ad16b5d6700efe590290"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdd362d5f799ad16b5d6700efe590290">__init__</a> (self)</td></tr>
+<tr class="memdesc:abdd362d5f799ad16b5d6700efe590290"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intialisation of the repository.  <br /></td></tr>
 <tr class="memitem:a09b906475da81bc7d6daa1970a0ea73c" id="r_a09b906475da81bc7d6daa1970a0ea73c"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09b906475da81bc7d6daa1970a0ea73c">add</a> (self, <a class="el" href="classrobot_1_1_robot.html">Robot</a> robot)</td></tr>
+<tr class="memdesc:a09b906475da81bc7d6daa1970a0ea73c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new robot to the database.  <br /></td></tr>
 <tr class="memitem:a8735b787ded2d9a16e08aa2d9adfdb17" id="r_a8735b787ded2d9a16e08aa2d9adfdb17"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8735b787ded2d9a16e08aa2d9adfdb17">delete</a> (self, str|<a class="el" href="classrobot_1_1_robot_id.html">RobotId</a> id)</td></tr>
+<tr class="memdesc:a8735b787ded2d9a16e08aa2d9adfdb17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a robot by its ID.  <br /></td></tr>
 <tr class="memitem:a1d9ca2874efd975ba0be2e1e784b50fa" id="r_a1d9ca2874efd975ba0be2e1e784b50fa"><td class="memItemLeft" align="right" valign="top">List[<a class="el" href="classrobot_1_1_robot.html">Robot</a>]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d9ca2874efd975ba0be2e1e784b50fa">find_all</a> (self)</td></tr>
+<tr class="memdesc:a1d9ca2874efd975ba0be2e1e784b50fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve all robots from the database.  <br /></td></tr>
 <tr class="memitem:ae426b1f77c7ec1657398e86d2d0cc2a1" id="r_ae426b1f77c7ec1657398e86d2d0cc2a1"><td class="memItemLeft" align="right" valign="top">Optional[<a class="el" href="classrobot_1_1_robot.html">Robot</a>]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae426b1f77c7ec1657398e86d2d0cc2a1">find_by_id</a> (self, str|<a class="el" href="classrobot_1_1_robot_id.html">RobotId</a> id)</td></tr>
+<tr class="memdesc:ae426b1f77c7ec1657398e86d2d0cc2a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find a robot by its ID.  <br /></td></tr>
 <tr class="memitem:abbf9b61d442c6b7fa757717d7049e8ef" id="r_abbf9b61d442c6b7fa757717d7049e8ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrobot_1_1_robot_id.html">RobotId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbf9b61d442c6b7fa757717d7049e8ef">next_identity</a> (self)</td></tr>
+<tr class="memdesc:abbf9b61d442c6b7fa757717d7049e8ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a new unique identifier for a <a class="el" href="classrobot_1_1_robot.html">Robot</a> record.  <br /></td></tr>
 <tr class="memitem:a3bb9ae3dda2616c7829e7c5dd5ddbfe6" id="r_a3bb9ae3dda2616c7829e7c5dd5ddbfe6"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3bb9ae3dda2616c7829e7c5dd5ddbfe6">update</a> (self, <a class="el" href="classrobot_1_1_robot.html">Robot</a> robot)</td></tr>
+<tr class="memdesc:a3bb9ae3dda2616c7829e7c5dd5ddbfe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update an existing robot in the database.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -133,8 +140,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Intialisation of the repository
-</pre> 
+
+<p>Intialisation of the repository. </p>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -156,8 +164,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Add a new robot to the database.
-</pre> 
+
+<p>Add a new robot to the database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">robot</td><td>The <a class="el" href="classrobot_1_1_robot.html">Robot</a> object to add. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="classrobot_1_1_i_robot_repository.html#a697e38bb95a07483ee7877d9f589a6ab">IRobotRepository</a>.</p>
 
 </div>
@@ -180,8 +195,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Delete a robot by its ID.
-</pre> 
+
+<p>Delete a robot by its ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID of the robot to delete, can be a string or <a class="el" href="classrobot_1_1_robot_id.html">RobotId</a>. @raises NotImplementedError: This method is not implemented due to standards for traceability. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="classrobot_1_1_i_robot_repository.html#acd5f7d43b089fa592b79b42b9d62dd29">IRobotRepository</a>.</p>
 
 </div>
@@ -200,8 +222,10 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Retrieve all robots from the database.
-</pre> 
+
+<p>Retrieve all robots from the database. </p>
+<dl class="section return"><dt>Returns</dt><dd>List of <a class="el" href="classrobot_1_1_robot.html">Robot</a> objects. </dd></dl>
+
 <p>Reimplemented from <a class="el" href="classrobot_1_1_i_robot_repository.html#a1d9ca2874efd975ba0be2e1e784b50fa">IRobotRepository</a>.</p>
 
 </div>
@@ -224,8 +248,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Find a robot by its ID.
-</pre> 
+
+<p>Find a robot by its ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID of the robot to find, can be a string or <a class="el" href="classrobot_1_1_robot_id.html">RobotId</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrobot_1_1_robot.html">Robot</a> object if found, otherwise None. </dd></dl>
+
 <p>Reimplemented from <a class="el" href="classrobot_1_1_i_robot_repository.html#a56201bcecab614ab7a467521e215c83c">IRobotRepository</a>.</p>
 
 </div>
@@ -244,8 +276,10 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generate a new unique identifier for a Robot record.
-</pre> 
+
+<p>Generate a new unique identifier for a <a class="el" href="classrobot_1_1_robot.html">Robot</a> record. </p>
+<dl class="section return"><dt>Returns</dt><dd>A new <a class="el" href="classrobot_1_1_robot_id.html">RobotId</a> object with a unique ID. </dd></dl>
+
 <p>Reimplemented from <a class="el" href="classrobot_1_1_i_robot_repository.html#abbf9b61d442c6b7fa757717d7049e8ef">IRobotRepository</a>.</p>
 
 </div>
@@ -268,8 +302,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Update an existing robot in the database.
-</pre> 
+
+<p>Update an existing robot in the database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">robot</td><td>The <a class="el" href="classrobot_1_1_robot.html">Robot</a> object with updated information. @raises NotImplementedError: This method is not implemented yet. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="classrobot_1_1_i_robot_repository.html#a1f51cfe943d90bf627e7abe46a33b534">IRobotRepository</a>.</p>
 
 </div>

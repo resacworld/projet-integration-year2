@@ -104,15 +104,19 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a09e04215b00f2c3c2729fef5e4f20ab9" id="r_a09e04215b00f2c3c2729fef5e4f20ab9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09e04215b00f2c3c2729fef5e4f20ab9">route</a> (<a class="el" href="classrobot_1_1req_summary.html">reqSummary</a> req)</td></tr>
+<tr class="memdesc:a09e04215b00f2c3c2729fef5e4f20ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Route to register the end of a robot's mission.  <br /></td></tr>
 <tr class="memitem:aaa7c9438c10bb8ae40737b27dd7d19af" id="r_aaa7c9438c10bb8ae40737b27dd7d19af"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa7c9438c10bb8ae40737b27dd7d19af">route</a> (<a class="el" href="classrobot_1_1req_telemetry.html">reqTelemetry</a> req)</td></tr>
+<tr class="memdesc:aaa7c9438c10bb8ae40737b27dd7d19af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Route to register the status of a robot's mission (register a telemetry)  <br /></td></tr>
 <tr class="memitem:a70df35ba65069a51a3e5dca2a4621587" id="r_a70df35ba65069a51a3e5dca2a4621587"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70df35ba65069a51a3e5dca2a4621587">route</a> (str robot_id=None)</td></tr>
+<tr class="memdesc:a70df35ba65069a51a3e5dca2a4621587"><td class="mdescLeft">&#160;</td><td class="mdescRight">Route for the robot to get instructions.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a697d5d45669a18c3fb2e7ac3ae470b49" id="r_a697d5d45669a18c3fb2e7ac3ae470b49"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a697d5d45669a18c3fb2e7ac3ae470b49">router</a> = APIRouter()</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">Ce fichier a été complété par un assistant IA, (il a fait toutes les tâches répétitives des fichiers dans le dossier parent "models").
+<div class="textblock"><pre class="fragment">AI helped in writing the comments
+</pre><pre class="fragment">This file was partially completed by an AI assistant, which handled all the repetitive tasks for files in the parent "models" directory.
 </pre> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a09e04215b00f2c3c2729fef5e4f20ab9" name="a09e04215b00f2c3c2729fef5e4f20ab9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09e04215b00f2c3c2729fef5e4f20ab9">&#9670;&#160;</a></span>route() <span class="overload">[1/3]</span></h2>
@@ -128,8 +132,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Route to register the end of a robot's mission
-</pre> 
+
+<p>Route to register the end of a robot's mission. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">req</td><td>Request object containing parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>JSON response with status or error message if any </dd></dl>
+
 </div>
 </div>
 <a id="aaa7c9438c10bb8ae40737b27dd7d19af" name="aaa7c9438c10bb8ae40737b27dd7d19af"></a>
@@ -146,8 +158,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Route to register the status of a robot's mission (register a telemetry)
-</pre> 
+
+<p>Route to register the status of a robot's mission (register a telemetry) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">req</td><td>Request object containing parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>JSON response with status or error message if any </dd></dl>
+
 </div>
 </div>
 <a id="a70df35ba65069a51a3e5dca2a4621587" name="a70df35ba65069a51a3e5dca2a4621587"></a>
@@ -164,8 +184,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Route for the robot to get instructions
-</pre> 
+
+<p>Route for the robot to get instructions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">robot_id</td><td>ID of the robot requesting instructions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>JSON response with status or error message if any </dd></dl>
+
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>

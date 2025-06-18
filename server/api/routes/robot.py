@@ -1,3 +1,7 @@
+"""
+AI helped in writing the comments
+"""
+
 from fastapi import APIRouter
 from pydantic import BaseModel
 from database.models.robotTelemetry import RobotTelemetryRepository, RobotTelemetry
@@ -11,9 +15,11 @@ router = APIRouter()
 
 @router.get("/instructions")
 def route(robot_id: str = None):
-    '''
+    """!
     Route for the robot to get instructions
-    '''
+    @param robot_id: ID of the robot requesting instructions
+    @return JSON response with status or error message if any
+    """
 
     try:
         db_robot = RobotRepository()
@@ -40,7 +46,7 @@ def route(robot_id: str = None):
 
         return {
             "status": True,
-            "liste_blocks": [ block.block_nb for block in blocks ],
+            "blocks": [ block.block_nb for block in blocks ],
         }
     except Exception as e:
         return {
@@ -50,9 +56,9 @@ def route(robot_id: str = None):
     
 
 class reqTelemetry(BaseModel):
-    '''
+    """
     Class to define the request structure
-    '''
+    """
     robot_id: str = None
     vitesse: float = None
     distance_ultrasons: float = None
@@ -63,9 +69,12 @@ class reqTelemetry(BaseModel):
 
 @router.post("/telemetry")
 def route(req: reqTelemetry):
-    '''
+    """!
     Route to register the status of a robot's mission (register a telemetry)
-    '''
+    @param req: Request object containing parameters
+    @return JSON response with status or error message if any
+    """
+
     try:
         db_mission = MissionRepository()
         db_robot_telemetry = RobotTelemetryRepository()
@@ -104,18 +113,21 @@ def route(req: reqTelemetry):
 
 
 class reqSummary(BaseModel):
-    '''
+    """
     Class to define the request structure
-    '''
+    """
     robot_id: str = None
     vitesse_moy: float = None
     tps_total: float = None
 
 @router.post("/summary")
 def route(req: reqSummary):
-    '''
+    """!
     Route to register the end of a robot's mission
-    '''
+    @param req: Request object containing parameters
+    @return JSON response with status or error message if any
+    """
+
     try:
         db_mission = MissionRepository()
 

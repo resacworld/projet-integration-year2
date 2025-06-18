@@ -1,10 +1,10 @@
 var indexSectionsWithContent =
 {
-  0: ":acefilmnprstu📁🚀",
+  0: ":acdefilmnprstu📁🚀",
   1: "r",
   2: "amt",
   3: "amrt",
-  4: "atu",
+  4: "adtu",
   5: "ceflnprst",
   6: ":cinprs📁🚀"
 };

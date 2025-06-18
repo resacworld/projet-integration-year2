@@ -1,3 +1,7 @@
+"""
+AI helped in writing the comments
+"""
+
 from fastapi import APIRouter
 from database.models.robot import RobotRepository
 from database.models.robot import Robot, RobotId
@@ -8,9 +12,13 @@ router = APIRouter()
 
 @router.get("/addrobot")
 def route(name: str, robot_id: Optional[str] = None):
-    '''
+    """!
     Route to register a new robot
-    '''
+    @param name: Name of the robot to register
+    @param robot_id: Optional ID of the robot, if not provided a new ID will be generated
+    @return JSON response with status or error message if any
+    """
+
     try:
         db_robot = RobotRepository()
     

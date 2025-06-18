@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['pady_0',['pady',['../namespacemain.html#aacfca40f5357b3bdb417b60bb98b8150',1,'main']]],
-  ['project_1',['🚀 Run project',['../index.html#autotoc_md2',1,'']]],
-  ['project_20structure_2',['📁 Project Structure',['../index.html#autotoc_md1',1,'']]],
-  ['python_20controller_3',['Python controller',['../index.html',1,'']]]
+  ['note_20_3a_0',['&lt;b&gt;Important note :&lt;/b&gt;',['../index.html#autotoc_md3',1,'']]],
+  ['notebook_1',['notebook',['../namespacemain.html#a9d9c279569f959f553951502d6a93194',1,'main']]]
 ];

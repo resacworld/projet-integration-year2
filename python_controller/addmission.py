@@ -1,3 +1,7 @@
+"""
+AI helped in writing the comments
+"""
+
 import tkinter as tk
 from tkinter import ttk
 from typing import List
@@ -6,8 +10,12 @@ import requests
 comboBoxes:List[ttk.Combobox] = []
 
 def add_mission(robot_id, mission_name, return_label: tk.Label):
-    """
+    """!
     Register a mission in the database
+    @param robot_id: ID of the robot to which the mission is associated
+    @param mission_name: Name of the mission to register
+    @param return_label: Label to display the result of the operation
+
     """
 
     blocks_to_send = []
@@ -35,8 +43,10 @@ def add_mission(robot_id, mission_name, return_label: tk.Label):
         return_label.config(text=f"Error - not added : {json_res["error"]}", fg="red")
     
 def del_block(block_frame: tk.Frame, block_number: ttk.Combobox):
-    """
+    """!
     Delete a block element from the current mission (in creation)
+    @param block_frame: Frame to delete
+    @param block_number: Combobox to delete on the list of blocks
     """
 
     if len(comboBoxes) == 0:
@@ -46,8 +56,9 @@ def del_block(block_frame: tk.Frame, block_number: ttk.Combobox):
     block_frame.destroy()
 
 def add_block(frame):
-    """
+    """!
     Add a block element to the current mission (in creation)
+    @param frame: Frame in which the block will be added
     """
 
     if len(comboBoxes) == 5:
@@ -70,8 +81,10 @@ def add_block(frame):
     comboBoxes.append(block_number)
 
 def addMissionPage(frame, robot_id):
-    """
+    """!
     Create in the frame (given as parameter) the Mission page
+    @param frame: Frame in which the mission page will be created
+    @param robot_id: Function to get the ID of the robot to which the mission is associated
     """
 
     blocks_frame = tk.Frame(frame)

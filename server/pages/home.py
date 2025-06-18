@@ -6,11 +6,11 @@ from database.models.block import BlockRepository, Block
 from typing import List
 
 def getFullMission(mission: Mission, blocks: List[Block]):
-    """
+    """!
     Function to get the full mission with its blocks
     @param mission: Mission object
     @param blocks: List of Block objects associated with the mission
-    @return: Dictionary representation of the mission with its blocks
+    @return Dictionary representation of the mission with its blocks
     """
 
     json_mission = mission.to_json()
@@ -19,10 +19,10 @@ def getFullMission(mission: Mission, blocks: List[Block]):
     return json_mission
 
 def getAllMissions(robot_id: str):
-    """
+    """!
     Function to get all missions of a robot
     @param robot_id: ID of the robot
-    @return: List of mission dictionaries with their blocks
+    @return List of mission dictionaries with their blocks
     """
 
     db_mission = MissionRepository()
@@ -34,10 +34,10 @@ def getAllMissions(robot_id: str):
     return [getFullMission(mission, db_block.find_many_by_mission_id(mission.id)) for mission in missions]
 
 def getGraphicalMissions(missions: List):
-    """
+    """!
     Function to get the HTML representation of all missions
     @param missions: List of mission dictionaries
-    @return: HTML string of all missions
+    @return HTML string of all missions
     """
 
     allGMissions = ""
@@ -65,11 +65,11 @@ def getGraphicalMissions(missions: List):
 
 
 def getGraphicalRobotSelectOptions(robots: List[Robot], selectedRobotId: str = None):
-    """
+    """!
     Function to get the HTML options for the robot select dropdown
     @param robots: List of Robot objects
     @param selectedRobotId: ID of the selected robot
-    @return: HTML string of options for the select dropdown
+    @return HTML string of options for the select dropdown
     """
 
     options = ""
@@ -79,11 +79,11 @@ def getGraphicalRobotSelectOptions(robots: List[Robot], selectedRobotId: str = N
 
 
 def getFullHomePage(status: bool = None, selected_id: str = None):
-    """
+    """!
     Function to get the full home page (in HTML) with robots and missions
     @param status: Status of the last operation (True for success, False for error)
     @param selected_id: ID of the selected robot
-    @return: HTML string of the home page
+    @return HTML string of the home page
     """
 
     db_robot = RobotRepository()

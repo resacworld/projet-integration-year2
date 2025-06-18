@@ -1,5 +1,5 @@
 """
-Ce fichier a été complété par un assistant IA, (il a fait toutes les tâches répétitives des fichiers dans le dossier parent "models").
+This file was partially completed by an AI assistant, which handled all the repetitive tasks for files in the parent "models" directory.
 """
 
 import uuid
@@ -16,7 +16,7 @@ class MissionRepository(BaseRepository, IMissionRepository):
     """
 
     def __init__(self):
-        """
+        """!
         Intialisation of the repository
         """
 
@@ -40,15 +40,17 @@ class MissionRepository(BaseRepository, IMissionRepository):
         self.conn.commit()
 
     def next_identity(self) -> MissionId:
-        """
+        """!
         Generate a new unique identifier for a Mission record.
+        @return A new MissionId object with a unique ID.
         """
 
         return MissionId(id=str(uuid.uuid4()))
 
     def find_all(self) -> List[Mission]:
-        """
+        """!
         Retrieve all missions from the database.
+        @return List of Mission objects.
         """
 
         self.cursor.execute("SELECT * FROM missions")
@@ -64,8 +66,10 @@ class MissionRepository(BaseRepository, IMissionRepository):
         ) for row in rows]
 
     def find_by_id(self, id: str | MissionId) -> Optional[Mission]:
-        """
+        """!
         Find a mission by its ID.
+        @param id: The ID of the mission to find, can be a string or MissionId.
+        @return Mission object if found, otherwise None.
         """
 
         self.cursor.execute(f"SELECT * FROM missions WHERE id = \"{id}\"")
@@ -81,8 +85,10 @@ class MissionRepository(BaseRepository, IMissionRepository):
         ) if row else None
     
     def find_all_by_robot_id(self, robot_id: str | RobotId) -> Optional[List[Mission]]:
-        """
+        """!
         Find all mission of a robot
+        @param robot_id: The ID of the robot to find missions for, can be a string or RobotId.
+        @return List of Mission objects if found, otherwise None.
         """
 
         self.cursor.execute(f"SELECT * FROM missions WHERE robot_id =  \"{robot_id}\"")
@@ -98,8 +104,10 @@ class MissionRepository(BaseRepository, IMissionRepository):
         ) for row in rows]
     
     def find_next_mission_by_robot_id(self, robot_id: str | RobotId) -> Optional[Mission]:
-        """
+        """!
         Find the next mission for a given robot by its ID.
+        @param robot_id: The ID of the robot to find the next mission for, can be a string or RobotId.
+        @return Mission object if found, otherwise None.
         """
 
         self.cursor.execute(f"SELECT * FROM missions WHERE robot_id = \"{robot_id}\" AND finished = 0 AND executing = 0 LIMIT 1")
@@ -116,8 +124,11 @@ class MissionRepository(BaseRepository, IMissionRepository):
     
 
     def find_by_robot_id_and_executing(self, robot_id: str | RobotId, executing: bool) -> Mission:
-        """
+        """!
         Find all missions for a given robot ID that are currently executing.
+        @param robot_id: The ID of the robot to find missions for, can be a string or RobotId.
+        @param executing: Boolean indicating whether to find missions that are currently executing.
+        @return Mission object if found, otherwise None.
         """
 
         self.cursor.execute(f"""
@@ -136,8 +147,9 @@ class MissionRepository(BaseRepository, IMissionRepository):
         )
 
     def add(self, mission: Mission) -> None:
-        """
+        """!
         Add a new mission to the database.
+        @param mission: The Mission object to add.
         """
 
         self.cursor.execute(f"""
@@ -153,8 +165,9 @@ class MissionRepository(BaseRepository, IMissionRepository):
         self.conn.commit()
 
     def update(self, mission: Mission) -> None:
-        """
+        """!
         Update an existing mission in the database.
+        @param mission: The Mission object with updated information.
         """
 
         self.cursor.execute(f"""
@@ -168,8 +181,9 @@ class MissionRepository(BaseRepository, IMissionRepository):
         self.conn.commit()
 
     def start_mission(self, mission_id: str | MissionId) -> None:
-        """
+        """!
         Start a mission
+        @param mission_id: The ID of the mission to start, can be a string or MissionId.
         """
 
         self.cursor.execute(f"""
@@ -182,8 +196,9 @@ class MissionRepository(BaseRepository, IMissionRepository):
         self.conn.commit()
 
     def end_mission(self, mission_id: str | MissionId) -> None:
-        """
-        End a mission
+        """!
+        End current running mission
+        @param mission_id: The ID of the mission to end, can be a string or MissionId.
         """
         
         self.cursor.execute(f"""
@@ -196,10 +211,11 @@ class MissionRepository(BaseRepository, IMissionRepository):
         self.conn.commit()
 
     def delete(self, id: str | MissionId) -> None:
-        """
+        """!
         Delete a mission by its ID.
+        @param id: The ID of the mission to delete, can be a string or MissionId.
         """
 
-        raise NotImplementedError("Method should not be implemented (due to standards, for tracability).")
+        raise NotImplementedError("Method should not be implemented (due to standards, for traceability).")
         # self.cursor.execute("DELETE FROM missions WHERE id = \"{id}\"")
         # self.conn.commit()
