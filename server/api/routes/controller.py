@@ -98,7 +98,7 @@ def route(req: reqLastTelemety):
         mission = db_mission.find_by_robot_id_and_executing(req.robot_id, executing=True)
 
         if Checker.isObjectInvalid(mission):
-            raise Exception("No active mission find !")
+            raise Exception("No active missions found !")
 
         telemetry: RobotTelemetry = db_robot_telemetry.find_last_by_mission_id(mission_id=mission.id)
 
