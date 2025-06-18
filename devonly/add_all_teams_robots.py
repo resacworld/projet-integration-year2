@@ -18,7 +18,7 @@ all_robots = [
         "name": "GHOST EYES"
     },
     {
-        "robot_id": "7f377006-cba5-5d50f-a058d-45c5ce970f10",
+        "robot_id": "255f30bc-46f7-41d4-ba1d-db76a0afd7f7",
         "name": "PATH FINDER"
     },
     {
@@ -26,7 +26,7 @@ all_robots = [
         "name": "ROBOT OSR (NOUS)"
     },
     {
-        "robot_id": "255f30bc-46f7-41d4-ba1d-db76a0afd7f7",
+        "robot_id": "7f377006-cba5-5d50f-a058d-45c5ce970f10",
         "name": "PASTA BOT"
     },
 ]
@@ -39,4 +39,4 @@ for robot in all_robots:
         "name": robot["name"]
     }
 
-    response = requests.post(url, json=payload)
+    response = requests.get(url, params=payload)

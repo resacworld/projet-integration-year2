@@ -7,6 +7,10 @@ from database.models.robot import RobotRepository
 from typing import List
 
 class Checker:
+    """
+    Static class to check the validity of objects.
+    """
+    
     @staticmethod
     def checkObjectExists(db: RobotRepository, id: str | BaseIdentifier) -> bool:
         """!
