@@ -8,7 +8,7 @@ from database.models.robot import RobotRepository, RobotId
 from database.models.mission import MissionRepository, Mission
 from database.models.block import BlockRepository, Block
 from database.models.robotTelemetry import RobotTelemetryRepository, RobotTelemetry
-from services.checker import checker
+from services.checker import Checker
 from typing import List
 
 router = APIRouter()
@@ -37,10 +37,10 @@ def route(req: reqAddMission):
         if len(req.blocks) == 0:
             raise Exception("No blocks provided for the mission. Please add at least one block.")
         
-        elif checker.isUniqueObjectsOnly(req.blocks):
+        elif Checker.isUniqueObjectsOnly(req.blocks):
             raise Exception("Double block found in the sequence !!")
         
-        elif not checker.checkObjectExists(db_robot, req.robot_id):
+        elif not Checker.checkObjectExists(db_robot, req.robot_id):
             raise Exception("Robot not found in the database. Please register the robot first.")
 
         mission_id = db_mission.next_identity()
@@ -97,7 +97,7 @@ def route(req: reqLastTelemety):
 
         mission = db_mission.find_by_robot_id_and_executing(req.robot_id, executing=True)
 
-        if checker.isObjectInvalid(mission):
+        if Checker.isObjectInvalid(mission):
             raise Exception("No active mission find !")
 
         telemetry: RobotTelemetry = db_robot_telemetry.find_last_by_mission_id(mission_id=mission.id)

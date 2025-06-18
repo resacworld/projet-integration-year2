@@ -9,7 +9,7 @@ from database.models.robot import RobotRepository
 from database.models.mission import MissionRepository
 from database.models.block import BlockRepository
 from datetime import datetime
-from services.checker import checker
+from services.checker import Checker
 
 router = APIRouter()
 
@@ -27,7 +27,7 @@ def route(robot_id: str = None):
         db_block = BlockRepository()
 
         # Check if the robot exists
-        if not checker.checkObjectExists(db_robot, robot_id):
+        if not Checker.checkObjectExists(db_robot, robot_id):
             raise Exception("Robot not found in the database. Please register the robot first.")
         
         current_mission = db_mission.find_by_robot_id_and_executing(robot_id, executing=True)
@@ -37,7 +37,7 @@ def route(robot_id: str = None):
         
         mission = db_mission.find_next_mission_by_robot_id(robot_id)
 
-        if checker.isObjectInvalid(mission):
+        if Checker.isObjectInvalid(mission):
             raise Exception("No mission available for this robot. Please add a mission first.")
 
         blocks = db_block.find_many_by_mission_id(mission.id)
@@ -81,12 +81,12 @@ def route(req: reqTelemetry):
         db_robot = RobotRepository()
 
         # Check if the robot exists
-        if not checker.checkObjectExists(db_robot, req.robot_id):
+        if not Checker.checkObjectExists(db_robot, req.robot_id):
             raise Exception("Robot not found in the database. Please register the robot first.")
 
         mission = db_mission.find_by_robot_id_and_executing(robot_id=req.robot_id, executing=True)
 
-        if checker.isObjectInvalid(mission):
+        if Checker.isObjectInvalid(mission):
             raise Exception("No mission currently running for this robot. Please start a mission first.")
 
         db_robot_telemetry.add(
@@ -135,7 +135,7 @@ def route(req: reqSummary):
 
         mission = db_mission.find_by_robot_id_and_executing(req.robot_id, executing=True)
 
-        if checker.isObjectInvalid(mission):
+        if Checker.isObjectInvalid(mission):
             raise Exception("No mission currently running for this robot. Please start a mission first.")
 
         db_mission.end_mission(mission.id)

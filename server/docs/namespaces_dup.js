@@ -3,7 +3,7 @@ var namespaces_dup =
     [ "api", "namespaceapi.html", "namespaceapi" ],
     [ "base", "namespacebase.html", "namespacebase" ],
     [ "block", "namespaceblock.html", "namespaceblock" ],
-    [ "checker", "namespacechecker.html", "namespacechecker" ],
+    [ "checker", "namespaceChecker.html", "namespacechecker" ],
     [ "controller", "namespacecontroller.html", "namespacecontroller" ],
     [ "database", "namespacedatabase.html", "namespacedatabase" ],
     [ "main", "namespacemain.html", [

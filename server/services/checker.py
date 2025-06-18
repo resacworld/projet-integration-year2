@@ -6,7 +6,7 @@ from database.interfaces.base import BaseObject, BaseIdentifier
 from database.models.robot import RobotRepository
 from typing import List
 
-class checker:
+class Checker:
     @staticmethod
     def checkObjectExists(db: RobotRepository, id: str | BaseIdentifier) -> bool:
         """!
