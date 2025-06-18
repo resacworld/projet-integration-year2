@@ -8,15 +8,15 @@ Project created by Victor and Loïc.
 ```
 Projet-integration-year2/
 ├── bot                         ── All references to the micropython robot 
-|   ├── ... (see "bot/README.md" for more informations)
+|   └── ... (see "bot/README.md" for more informations)
 ├── python_controller           ── All references to the controller (made with python)
-|   ├── ... (see "python_controller/README.md" for more informations)
+|   └── ... (see "python_controller/README.md" for more informations)
 ├── server                      ── All references to the web server (so the API)
-|   ├── ... (see "server/README.md" for more informations)
+|   └── ... (see "server/README.md" for more informations)
 ├── simulator                   ── All references to JAVA simualtor
-|   ├── ... (see "simulator/README.md" for more informations)
+|   └── ... (see "simulator/README.md" for more informations)
 ├── web-frontend (deprecated)   ── All references to the IHM (deprecated, made with javascript / react)
-|   ├── ... (see "web-frontend/README.md" for more informations)
+|   └── ... (see "web-frontend/README.md" for more informations)
 ├── .gitignore                  ── file to indicate github to ignore files
 ├── LICENSE                     ── License
 ├── README.md                   ── Code documentation for the controller (made with python)
