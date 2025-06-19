@@ -4,7 +4,8 @@ import java.io.*;
 import java.net.*;
 
 public class RESTService {
-    static String server = "http://10.7.5.182:8000/";
+    static String serverStart = "http://";
+    static String serverEnd = ":8000/";
     //static String server = "http://10.7.5.42:8000/";
 
     /**
@@ -16,7 +17,7 @@ public class RESTService {
      */
     public static void MyPOSTRequest(String Post,String route) throws IOException, URISyntaxException {
         System.out.println(Post);
-        StringBuilder url = new StringBuilder(server);
+        StringBuilder url = new StringBuilder(serverStart+CommandApplication.getCommandController().getIPTextField()+serverEnd);
         url.append(route);
         //url.append("?robot_id=");
         //url.append(uuid);
@@ -62,7 +63,7 @@ public class RESTService {
      * @throws URISyntaxException
      */
     public static String MyGETRequest(String uuid) throws IOException, URISyntaxException {
-        StringBuilder url = new StringBuilder(server);
+        StringBuilder url = new StringBuilder(serverStart+CommandApplication.getCommandController().getIPTextField()+serverEnd);
         url.append("instructions");
         url.append("?robot_id=");
         url.append(uuid);
@@ -102,6 +103,7 @@ public class RESTService {
      */
     public static boolean testConnection(String url) {
         HttpURLConnection connection = null;
+        System.out.println(url);
         try {
             // Define the URL to test the connection against.
             // Using the same URL as MyGETRequest for consistency.

@@ -3,6 +3,7 @@ package com.osr.simulator;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.Map;
 import static javafx.scene.paint.Color.*;
 
 public class CommandController{
+    public TextField IPTextField;
     @FXML
     private Pane map_pane;
     private static Map<String, Circle> uiCircles = new HashMap<>();
@@ -97,7 +99,11 @@ public class CommandController{
         consoleTest.setText(consoleTestText);
     }
 
-//    @FXML
+    public String getIPTextField() {
+        return IPTextField.getText();
+    }
+
+    //    @FXML
 //    //protected void onHelloButtonClick() {welcomeText.setText("Welcome to JavaFX Application!");}
 //    protected void pressedTestButton() throws IOException {
 //        //consoleTestText = RESTService.MyGETRequest();

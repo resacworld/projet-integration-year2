@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -9,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="896.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.osr.simulator.CommandController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="896.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.osr.simulator.CommandController">
    <children>
-      <Pane fx:id="map_pane" layoutX="7.0" layoutY="15.0" prefHeight="487.0" prefWidth="879.0">
+      <Pane fx:id="map_pane" layoutX="7.0" layoutY="15.0" prefHeight="465.0" prefWidth="861.0">
          <children>
             <ImageView fitHeight="480.0" fitWidth="754.0" layoutX="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -49,7 +50,9 @@
                </font></Label>
             <TextFlow layoutX="57.0" layoutY="443.0" prefHeight="26.0" prefWidth="755.0" style="-fx-background-color: #000000;">
                <children>
-                  <Label fx:id="consoleTest" alignment="CENTER" prefHeight="37.0" prefWidth="754.0" text="Test" textFill="WHITE" wrapText="true" />
+                  <Label fx:id="consoleTest" alignment="CENTER" prefHeight="38.0" prefWidth="384.0" text="Test" textFill="WHITE" wrapText="true" />
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="166.0" text="Server IP" textFill="WHITE" wrapText="true" />
+                  <TextField fx:id="IPTextField" prefHeight="42.0" prefWidth="71.0" promptText="Server IP" text="10.7.5.182" />
                </children>
             </TextFlow>
          </children>
