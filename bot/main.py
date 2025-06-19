@@ -42,18 +42,22 @@ print("\nWi-Fi Config: ", wlan.ifconfig())
 print("he")
 robot.close_grabber()
 robot.frein()
-while not robot.status_led_gauche():
-  robot.droiteSurPlace(600)
-while not robot.status_led_droite():
-  robot.gaucheSurPlace(600)
-  timeTurn +=1
-  time.sleep_ms(1)
-timeTurn = int(timeTurn/2)
-robot.droiteSurPlace(600)
-time.sleep_ms(timeTurn)
-robot.frein()
-##############################################################################################################
 
+##############################################################################################################
+def calibration():
+  while not robot.status_led_gauche():
+    robot.droiteSurPlace(600)
+  while not robot.status_led_droite():
+    robot.gaucheSurPlace(600)
+    timeTurn +=1
+    time.sleep_ms(1)
+  #timeTurn = int(timeTurn/2)
+  robot.frein()
+  time.sleep_ms(10)
+  robot.droiteSurPlace(600)
+  time.sleep_ms(timeTurn)
+  robot.frein()
+  
 def sendTelemetry():
   res = urequests.post("http://10.7.5.182:8000/api/telemetry", data=ujson.dumps({
     "robot_id": robot_id,
@@ -164,23 +168,69 @@ def suiviLigne():
   reverseFactor = 0.5
   robot.led(0,0,0)
 
-  # suiviGauche()
-  suiviSimple()
+  suiviGris()
+  # suiviDroite()
+  # suiviSimple()
   # suiviCalib()
   
   print("Droite :" + str(robot.status_led_droite()))
   print("Gauche :" + str(robot.status_led_gauche()))
 
-def suiviGauche(vitesse = 600):
-  global timeTurn
-  robot.tournerGaucheAvecFrein(vitesse,1023)
+def suiviDroite(vitesse = 600,reverseFactor = 0.5):
+  # global timeTurn
+  # robot.gauche(vitesse,0.5)
+  
+  # if robot.status_led_droite():
+  #   robot.frein()
+  #   time.sleep_ms(10)
+  #   while (robot.status_led_droite()):
+  #     robot.droite(1000,0.3)
+  #     # robot.tournerDroiteAvecFrein(1000,1023)
+  #   time.sleep_ms(150)
+  # else : 
+  #   robot.tournerGaucheAvecFrein(vitesse,1023)
+    # time.sleep_ms(400)
   if robot.status_led_droite():
-    robot.frein()
-    time.sleep_ms(10)
+    robot.droiteSurPlace(600)
+    robot.moteur(0, vitesse, 0, int(vitesse*reverseFactor))
+    time.sleep_ms(150)
+  else:
+    robot.gaucheSurPlace(600)
+    robot.moteur(int(vitesse*reverseFactor), 0,vitesse, 0)
+    time.sleep_ms(150)
+
+    # robot.droiteSurPlace(vitesse)
+    # time.sleep_ms(100)
+    # while not robot.status_led_droite():
+    #   robot.droiteSurPlace(vitesse)
+    #   # robot.gauche(vitesse,1.5)
+    #   if robot.status_led_gauche():
+    #     robot.led()
+    # # robot.tournerGaucheAvecFrein(vitesse,1023)
+    # robot.gauche(vitesse,0.5)
+    # time.sleep_ms(100)
+def suiviGris(vitesse=600,deadZone=40):
+  i=robot.led_droite()
+  robot.avant(vitesse)
+  j=robot.led_droite()
+
+  if(i+deadZone < j) :
+    # robot.arriere()
     robot.droiteSurPlace(vitesse)
-    time.sleep_ms(timeTurn)
-  if robot.status_led_gauche():
-    robot.led()
+    # //we are moving away from the cable
+    # reverse()
+    # turnLeft()
+    # forward()
+    # takeReading()
+
+  if(j+deadZone < i) :
+    robot.gaucheSurPlace(vitesse)
+      # //left turn was the wrong turn
+      # reverse()
+      # turnRight()
+      # turnRight()
+    
+  
   
 def suiviCalib():
   global timeTurn
@@ -241,7 +291,7 @@ def loop():
     # while (not robot.status_led_droite()) or (not robot.status_led_gauche()):
       
     suiviLigne()
-    time.sleep_ms(50)
+    time.sleep_ms(20)
     # robot.frein()
   
     # if current_zone_index == 1:
