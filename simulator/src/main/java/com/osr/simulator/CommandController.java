@@ -99,6 +99,10 @@ public class CommandController{
         consoleTest.setText(consoleTestText);
     }
 
+    /**
+     * IPTextField input
+     * @return  String : IP address input
+     */
     public String getIPTextField() {
         return IPTextField.getText();
     }
