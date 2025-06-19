@@ -1,27 +1,34 @@
+"""
+AI helped in writing the comments
+"""
+
 from fastapi import APIRouter
 from pydantic import BaseModel
 from database.models.robot import RobotRepository, RobotId
 from database.models.mission import MissionRepository, Mission
 from database.models.block import BlockRepository, Block
 from database.models.robotTelemetry import RobotTelemetryRepository, RobotTelemetry
-from services.checker import checker
+from services.checker import Checker
 from typing import List
 
 router = APIRouter()
 
 class reqAddMission(BaseModel):
-    '''
+    """
     Class to define the request structure
-    '''
+    """
     robot_id: str = None
     name: str = None
     blocks: List[int] = None
 
 @router.post("/addmission")
 def route(req: reqAddMission):
-    '''
+    """!
     Route to add a mission, asigned to a robot
-    '''
+    @param req: Request object containing parameters
+    @return JSON response with status or error message if any
+    """
+
     try:
         db_robot = RobotRepository()
         db_mission = MissionRepository()
@@ -30,10 +37,10 @@ def route(req: reqAddMission):
         if len(req.blocks) == 0:
             raise Exception("No blocks provided for the mission. Please add at least one block.")
         
-        elif checker.isUniqueObjectsOnly(req.blocks):
+        elif Checker.isUniqueObjectsOnly(req.blocks):
             raise Exception("Double block found in the sequence !!")
         
-        elif not checker.checkObjectExists(db_robot, req.robot_id):
+        elif not Checker.checkObjectExists(db_robot, req.robot_id):
             raise Exception("Robot not found in the database. Please register the robot first.")
 
         mission_id = db_mission.next_identity()
@@ -69,16 +76,19 @@ def route(req: reqAddMission):
         }
 
 class reqLastTelemety(BaseModel):
-    '''
+    """
     Class to define the request structure
-    '''
+    """
     robot_id: str = None
 
 @router.post("/lasttelemetry")
 def route(req: reqLastTelemety):
-    '''
+    """!
     Route to get the last telemetry of a robot
-    '''
+    @param req: Request object containing parameters
+    @return JSON response with status or error message if any
+    """
+
     try:
         db_robot_telemetry = RobotTelemetryRepository()
         db_mission = MissionRepository()
@@ -87,8 +97,8 @@ def route(req: reqLastTelemety):
 
         mission = db_mission.find_by_robot_id_and_executing(req.robot_id, executing=True)
 
-        if checker.isObjectInvalid(mission):
-            raise Exception("No active mission find !")
+        if Checker.isObjectInvalid(mission):
+            raise Exception("No active missions found !")
 
         telemetry: RobotTelemetry = db_robot_telemetry.find_last_by_mission_id(mission_id=mission.id)
 
@@ -104,9 +114,11 @@ def route(req: reqLastTelemety):
 
 @router.get("/robots")
 def route():
-    '''
+    """!
     Route to get all robots registered in the database
-    '''
+    @return JSON response with status or error message if any
+    """
+
     try:
         db_robot = RobotRepository()
 

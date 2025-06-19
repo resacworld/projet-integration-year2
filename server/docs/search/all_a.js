@@ -6,6 +6,6 @@ var searchData=
   ['index_2epy_3',['index.py',['../index_8py.html',1,'']]],
   ['irobotrepository_4',['IRobotRepository',['../classrobot_1_1_i_robot_repository.html',1,'robot']]],
   ['irobottelemetryrepository_5',['IRobotTelemetryRepository',['../classrobot_telemetry_1_1_i_robot_telemetry_repository.html',1,'robotTelemetry']]],
-  ['isobjectinvalid_6',['isObjectInvalid',['../classchecker_1_1checker.html#a72bfbc0788748f5f31f2f931268f6c69',1,'checker::checker']]],
-  ['isuniqueobjectsonly_7',['isUniqueObjectsOnly',['../classchecker_1_1checker.html#ae22ca6f19ff5ef39e2d6991d2fe5c4eb',1,'checker::checker']]]
+  ['isobjectinvalid_6',['isObjectInvalid',['../classchecker_1_1Checker.html#a72bfbc0788748f5f31f2f931268f6c69',1,'checker::checker']]],
+  ['isuniqueobjectsonly_7',['isUniqueObjectsOnly',['../classchecker_1_1Checker.html#ae22ca6f19ff5ef39e2d6991d2fe5c4eb',1,'checker::checker']]]
 ];

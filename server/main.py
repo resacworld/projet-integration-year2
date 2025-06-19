@@ -1,3 +1,7 @@
+"""
+AI helped in writing the comments
+"""
+
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from api.index import MasterRouter, MasterRouterAPI
@@ -24,8 +28,11 @@ app.include_router(MasterRouterAPI)
 
 @app.get("/", response_class=HTMLResponse)
 async def homepage(status: bool = None, selected_id: str = None):
-    """
+    """!
     Route to return the html home page
+    @param status: Status of the last operation (True for success, False for error)
+    @param selected_id: ID of the selected robot
+    @return home page as HTML response
     """
 
     return getFullHomePage(status=status, selected_id=selected_id)

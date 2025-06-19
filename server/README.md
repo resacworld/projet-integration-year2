@@ -32,7 +32,7 @@ server/
 ├── docs/                       ── Documentation for the server
 │
 ├── services/
-│   └── checker.py              ── Class to check objects
+│   └── Checker.py              ── Class to check objects
 │
 ├── main.py                     ── Main script: launches and configures the server
 ├── .env                        ── Environment variables (contains secrets)

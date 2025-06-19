@@ -1,5 +1,5 @@
 """
-Ce fichier a été complété par un assistant IA, (il a fait toutes les tâches répétitives des fichiers dans le dossier parent "models").
+This file was partially completed by an AI assistant, which handled all the repetitive tasks for files in the parent "models" directory.
 """
 
 import uuid
@@ -14,7 +14,7 @@ class RobotRepository(BaseRepository, IRobotRepository):
     """
 
     def __init__(self):
-        """
+        """!
         Intialisation of the repository
         """
         
@@ -32,15 +32,17 @@ class RobotRepository(BaseRepository, IRobotRepository):
         self.conn.commit()
 
     def next_identity(self) -> RobotId:
-        """
+        """!
         Generate a new unique identifier for a Robot record.
+        @return A new RobotId object with a unique ID.
         """
         
         return RobotId(id=str(uuid.uuid4()))
 
     def find_all(self) -> List[Robot]:
-        """
+        """!
         Retrieve all robots from the database.
+        @return List of Robot objects.
         """
 
         self.cursor.execute("SELECT * FROM robots")
@@ -51,8 +53,10 @@ class RobotRepository(BaseRepository, IRobotRepository):
         ) for row in rows]
 
     def find_by_id(self, id: str | RobotId) -> Optional[Robot]:
-        """
+        """!
         Find a robot by its ID.
+        @param id: The ID of the robot to find, can be a string or RobotId.
+        @return Robot object if found, otherwise None.
         """
 
         self.cursor.execute(f"SELECT * FROM robots WHERE id = \"{id}\"")
@@ -63,8 +67,9 @@ class RobotRepository(BaseRepository, IRobotRepository):
         ) if row else None
 
     def add(self, robot: Robot) -> None:
-        """
+        """!
         Add a new robot to the database.
+        @param robot: The Robot object to add.
         """
 
         self.cursor.execute(f"""
@@ -77,17 +82,21 @@ class RobotRepository(BaseRepository, IRobotRepository):
         self.conn.commit()
 
     def update(self, robot: Robot) -> None:
-        """
+        """!
         Update an existing robot in the database.
+        @param robot: The Robot object with updated information.
+        @raises NotImplementedError: This method is not implemented yet.
         """
 
         raise NotImplementedError("Method is not implemented yet.")
 
     def delete(self, id: str | RobotId) -> None:
-        """
+        """!
         Delete a robot by its ID.
+        @param id: The ID of the robot to delete, can be a string or RobotId.
+        @raises NotImplementedError: This method is not implemented due to standards for traceability.
         """
 
-        raise NotImplementedError("Method should not be implemented (due to standards, for tracability).")
+        raise NotImplementedError("Method should not be implemented (due to standards, for traceability).")
         # self.cursor.execute("DELETE FROM robots WHERE id = \"{id}\"")
         # self.conn.commit()

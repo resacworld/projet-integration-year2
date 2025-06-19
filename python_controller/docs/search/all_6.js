@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['last_5ftelemetry_0',['last_telemetry',['../namespacetelemetry.html#ac122d34f9112075fe3aaad24abcf1452',1,'telemetry']]]
+  ['important_20note_20_3a_0',['&lt;b&gt;Important note :&lt;/b&gt;',['../index.html#autotoc_md3',1,'']]]
 ];

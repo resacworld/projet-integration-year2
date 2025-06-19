@@ -62,7 +62,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('classchecker_1_1checker.html','','classchecker_1_1checker-members'); });
+$(function(){initNavTree('classchecker_1_1Checker.html','','classchecker_1_1checker-members'); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -95,8 +95,11 @@ $(function(){initNavTree('classchecker_1_1checker.html','','classchecker_1_1chec
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a9e837e8978be37100a2599b189baa6b2" id="r_a9e837e8978be37100a2599b189baa6b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e837e8978be37100a2599b189baa6b2">checkObjectExists</a> (RobotRepository db, str|BaseIdentifier id)</td></tr>
+<tr class="memdesc:a9e837e8978be37100a2599b189baa6b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an object exists in the given database.  <br /></td></tr>
 <tr class="memitem:a72bfbc0788748f5f31f2f931268f6c69" id="r_a72bfbc0788748f5f31f2f931268f6c69"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72bfbc0788748f5f31f2f931268f6c69">isObjectInvalid</a> (BaseObject object)</td></tr>
+<tr class="memdesc:a72bfbc0788748f5f31f2f931268f6c69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an object is invalid (is None)  <br /></td></tr>
 <tr class="memitem:ae22ca6f19ff5ef39e2d6991d2fe5c4eb" id="r_ae22ca6f19ff5ef39e2d6991d2fe5c4eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae22ca6f19ff5ef39e2d6991d2fe5c4eb">isUniqueObjectsOnly</a> (List[object] objects)</td></tr>
+<tr class="memdesc:ae22ca6f19ff5ef39e2d6991d2fe5c4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a list contains only unique instance of each objects.  <br /></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a9e837e8978be37100a2599b189baa6b2" name="a9e837e8978be37100a2599b189baa6b2"></a>
@@ -125,8 +128,17 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<pre class="fragment">Check if an object exists in the given database.
-</pre> 
+
+<p>Check if an object exists in the given database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>Database repository to check the object in </td></tr>
+    <tr><td class="paramname">id</td><td>ID of the object to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the object exists, False otherwise </dd></dl>
+
 </div>
 </div>
 <a id="a72bfbc0788748f5f31f2f931268f6c69" name="a72bfbc0788748f5f31f2f931268f6c69"></a>
@@ -151,8 +163,16 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<pre class="fragment">Check if an object is invalid (is None)
-</pre> 
+
+<p>Check if an object is invalid (is None) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>The object to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the object is invalid, False otherwise </dd></dl>
+
 </div>
 </div>
 <a id="ae22ca6f19ff5ef39e2d6991d2fe5c4eb" name="ae22ca6f19ff5ef39e2d6991d2fe5c4eb"></a>
@@ -177,12 +197,20 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<pre class="fragment">Check if a list contains only unique instance of each objects
-</pre> 
+
+<p>Check if a list contains only unique instance of each objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">objects</td><td>List of objects to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the list contains only unique objects, False otherwise </dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>services/<a class="el" href="checker_8py.html">checker.py</a></li>
+<li>services/<a class="el" href="checker_8py.html">Checker.py</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -197,7 +225,7 @@ Static Public Member Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacechecker.html">checker</a></li><li class="navelem"><a href="classchecker_1_1checker.html">checker</a></li>
+    <li class="navelem"><a href="namespaceChecker.html">checker</a></li><li class="navelem"><a href="classchecker_1_1Checker.html">checker</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
   </ul>
 </div>

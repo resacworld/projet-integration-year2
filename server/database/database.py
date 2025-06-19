@@ -1,3 +1,7 @@
+"""
+AI helped in writing the comments
+"""
+
 import sqlite3
 import os
 
@@ -7,15 +11,16 @@ class Database():
     """
 
     def __init__(self):
-        """
+        """!
         Intialsation method, not possible here because this is a static class
         """
         raise RuntimeError("Static class, cannot be instantiated.")
 
     @staticmethod
     def getConnection() -> sqlite3.Connection:
-        """
+        """!
         Returns the SQLite database connection.
+        @return sqlite3.Connection object
         """
 
         return sqlite3.connect(os.getenv("SQLITE_URL"))

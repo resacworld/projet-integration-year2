@@ -1,5 +1,5 @@
 """
-Ce fichier a été complété par un assistant IA, (il a fait toutes les tâches répétitives des fichiers dans le dossier parent "models").
+This file was partially completed by an AI assistant, which handled all the repetitive tasks for files in the parent "models" directory.
 """
 
 import uuid
@@ -16,7 +16,7 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
     """
 
     def __init__(self):
-        """
+        """!
         Intialisation of the repository
         """
         
@@ -41,15 +41,17 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
         self.conn.commit()
 
     def next_identity(self) -> RobotTelemetryId:
-        """
+        """!
         Generate a new unique identifier for a RobotTelemetry record.
+        @return A new RobotTelemetryId object with a unique ID.
         """
 
         return RobotTelemetryId(id=str(uuid.uuid4()))
 
     def find_all(self) -> List[RobotTelemetry]:
-        """
+        """!
         Retrieve all robot telemetry records from the database.
+        @return List of RobotTelemetry objects.
         """
         
         self.cursor.execute("SELECT * FROM robot_telemetries")
@@ -69,8 +71,10 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
         ) for row in rows]
 
     def find_by_id(self, id: str | RobotTelemetryId) -> RobotTelemetry:
-        """
+        """!
         Find a robot telemetry record by its ID.
+        @param id: The ID of the robot telemetry record to find.
+        @return The RobotTelemetry object if found, otherwise None.
         """
 
         self.cursor.execute(f"SELECT * FROM robot_telemetries WHERE id = \"{id}\"")
@@ -87,8 +91,10 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
         )
     
     def find_last_by_mission_id(self, mission_id: str | MissionId) -> RobotTelemetry:
-        """
+        """!
         Find the last robot telemetry recorded, by the mission id.
+        @param mission_id: The ID of the mission to find the last telemetry for.
+        @return The last RobotTelemetry object for the given mission ID, or None if not found.
         """
 
         self.cursor.execute(f"SELECT * FROM robot_telemetries WHERE mission_id = \"{mission_id}\" ORDER BY timestamp DESC")
@@ -105,8 +111,10 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
         )
 
     def add(self, telemetry: RobotTelemetry) -> None:
-        """
+        """!
         Add a new robot telemetry record to the database.
+        @param telemetry: The RobotTelemetry object to add.
+        @return None
         """
 
         self.cursor.execute(f"""
@@ -127,17 +135,21 @@ class RobotTelemetryRepository(BaseRepository, IRobotTelemetryRepository):
         self.conn.commit()
 
     def update(self, telemetry: RobotTelemetry) -> None:
-        """
+        """!
         Update an existing robot telemetry record in the database.
+        @param telemetry: The RobotTelemetry object containing updated data.
+        @raises NotImplementedError: This method is not implemented yet.
         """
 
         raise NotImplementedError("Method is not implemented yet.")
 
     def delete(self, id: str | RobotTelemetryId) -> None:
-        """
+        """!
         Delete a robot telemetry record by its ID.
+        @param id: The ID of the robot telemetry record to delete.
+        @raises NotImplementedError: This method is not implemented due to standards for tracability.
         """
 
-        raise NotImplementedError("Method should not be implemented (due to standards, for tracability).")
+        raise NotImplementedError("Method should not be implemented (due to standards, for traceability).")
         # self.cursor.execute(f"DELETE FROM robot_telemetries WHERE id = \"{id}\"")
         # self.conn.commit()

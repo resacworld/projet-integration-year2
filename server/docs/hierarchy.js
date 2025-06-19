@@ -39,6 +39,6 @@ var hierarchy =
       [ "RobotRepository", "classrobot_1_1_robot_repository.html", null ],
       [ "RobotTelemetryRepository", "classrobot_telemetry_1_1_robot_telemetry_repository.html", null ]
     ] ],
-    [ "checker", "classchecker_1_1checker.html", null ],
+    [ "checker", "classchecker_1_1Checker.html", null ],
     [ "Database", "classdatabase_1_1database_1_1_database.html", null ]
 ];

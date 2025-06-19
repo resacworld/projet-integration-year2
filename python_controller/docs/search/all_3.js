@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['expand_0',['expand',['../namespacemain.html#a6d75829fbffb45805b5472b9db7a54b9',1,'main']]]
+  ['del_5fblock_0',['del_block',['../namespaceaddmission.html#a11a7bda35e06c870f285ce20e7fe81ad',1,'addmission']]]
 ];

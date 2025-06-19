@@ -104,17 +104,29 @@ Inheritance diagram for MissionRepository:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abdd362d5f799ad16b5d6700efe590290" id="r_abdd362d5f799ad16b5d6700efe590290"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdd362d5f799ad16b5d6700efe590290">__init__</a> (self)</td></tr>
+<tr class="memdesc:abdd362d5f799ad16b5d6700efe590290"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intialisation of the repository.  <br /></td></tr>
 <tr class="memitem:aa8fafac68d7b99e6c74f6781b3de8522" id="r_aa8fafac68d7b99e6c74f6781b3de8522"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa8fafac68d7b99e6c74f6781b3de8522">add</a> (self, <a class="el" href="classmission_1_1_mission.html">Mission</a> mission)</td></tr>
+<tr class="memdesc:aa8fafac68d7b99e6c74f6781b3de8522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new mission to the database.  <br /></td></tr>
 <tr class="memitem:a1588e3e6acb46760f2f8c9903554d19b" id="r_a1588e3e6acb46760f2f8c9903554d19b"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1588e3e6acb46760f2f8c9903554d19b">delete</a> (self, str|<a class="el" href="classmission_1_1_mission_id.html">MissionId</a> id)</td></tr>
+<tr class="memdesc:a1588e3e6acb46760f2f8c9903554d19b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a mission by its ID.  <br /></td></tr>
 <tr class="memitem:a1301d8af5a009a7696fbb3bc3cbba961" id="r_a1301d8af5a009a7696fbb3bc3cbba961"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1301d8af5a009a7696fbb3bc3cbba961">end_mission</a> (self, str|<a class="el" href="classmission_1_1_mission_id.html">MissionId</a> mission_id)</td></tr>
+<tr class="memdesc:a1301d8af5a009a7696fbb3bc3cbba961"><td class="mdescLeft">&#160;</td><td class="mdescRight">End current running mission.  <br /></td></tr>
 <tr class="memitem:a01e65b4960285ea1fd6ca3ef477c8c4c" id="r_a01e65b4960285ea1fd6ca3ef477c8c4c"><td class="memItemLeft" align="right" valign="top">List[<a class="el" href="classmission_1_1_mission.html">Mission</a>]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01e65b4960285ea1fd6ca3ef477c8c4c">find_all</a> (self)</td></tr>
+<tr class="memdesc:a01e65b4960285ea1fd6ca3ef477c8c4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve all missions from the database.  <br /></td></tr>
 <tr class="memitem:a37a164faa24b8781d8663b2930553b0d" id="r_a37a164faa24b8781d8663b2930553b0d"><td class="memItemLeft" align="right" valign="top">Optional[List[<a class="el" href="classmission_1_1_mission.html">Mission</a>]]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37a164faa24b8781d8663b2930553b0d">find_all_by_robot_id</a> (self, str|<a class="el" href="classrobot_1_1_robot_id.html">RobotId</a> robot_id)</td></tr>
+<tr class="memdesc:a37a164faa24b8781d8663b2930553b0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find all mission of a robot.  <br /></td></tr>
 <tr class="memitem:af5cae8c62244a4b858180c46169e0a82" id="r_af5cae8c62244a4b858180c46169e0a82"><td class="memItemLeft" align="right" valign="top">Optional[<a class="el" href="classmission_1_1_mission.html">Mission</a>]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5cae8c62244a4b858180c46169e0a82">find_by_id</a> (self, str|<a class="el" href="classmission_1_1_mission_id.html">MissionId</a> id)</td></tr>
+<tr class="memdesc:af5cae8c62244a4b858180c46169e0a82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find a mission by its ID.  <br /></td></tr>
 <tr class="memitem:a790302ddd4a26b3f930e067ab0f10f20" id="r_a790302ddd4a26b3f930e067ab0f10f20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmission_1_1_mission.html">Mission</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a790302ddd4a26b3f930e067ab0f10f20">find_by_robot_id_and_executing</a> (self, str|<a class="el" href="classrobot_1_1_robot_id.html">RobotId</a> robot_id, bool executing)</td></tr>
+<tr class="memdesc:a790302ddd4a26b3f930e067ab0f10f20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find all missions for a given robot ID that are currently executing.  <br /></td></tr>
 <tr class="memitem:a46e45fe19b72c32d1f626662b5e1949e" id="r_a46e45fe19b72c32d1f626662b5e1949e"><td class="memItemLeft" align="right" valign="top">Optional[<a class="el" href="classmission_1_1_mission.html">Mission</a>]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46e45fe19b72c32d1f626662b5e1949e">find_next_mission_by_robot_id</a> (self, str|<a class="el" href="classrobot_1_1_robot_id.html">RobotId</a> robot_id)</td></tr>
+<tr class="memdesc:a46e45fe19b72c32d1f626662b5e1949e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the next mission for a given robot by its ID.  <br /></td></tr>
 <tr class="memitem:afec11d7bd90b8ef975032d3ad198869e" id="r_afec11d7bd90b8ef975032d3ad198869e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmission_1_1_mission_id.html">MissionId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afec11d7bd90b8ef975032d3ad198869e">next_identity</a> (self)</td></tr>
+<tr class="memdesc:afec11d7bd90b8ef975032d3ad198869e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a new unique identifier for a <a class="el" href="classmission_1_1_mission.html">Mission</a> record.  <br /></td></tr>
 <tr class="memitem:a756e6a2d058a4c1891823d4860deaf71" id="r_a756e6a2d058a4c1891823d4860deaf71"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a756e6a2d058a4c1891823d4860deaf71">start_mission</a> (self, str|<a class="el" href="classmission_1_1_mission_id.html">MissionId</a> mission_id)</td></tr>
+<tr class="memdesc:a756e6a2d058a4c1891823d4860deaf71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a mission.  <br /></td></tr>
 <tr class="memitem:ad1ab63aeb3633978be73d53c726a7737" id="r_ad1ab63aeb3633978be73d53c726a7737"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1ab63aeb3633978be73d53c726a7737">update</a> (self, <a class="el" href="classmission_1_1_mission.html">Mission</a> mission)</td></tr>
+<tr class="memdesc:ad1ab63aeb3633978be73d53c726a7737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update an existing mission in the database.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -138,8 +150,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Intialisation of the repository
-</pre> 
+
+<p>Intialisation of the repository. </p>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -161,8 +174,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Add a new mission to the database.
-</pre> 
+
+<p>Add a new mission to the database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mission</td><td>The <a class="el" href="classmission_1_1_mission.html">Mission</a> object to add. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="classmission_1_1_i_mission_repository.html#a7bfa001f3472f680e9d45a86369cd088">IMissionRepository</a>.</p>
 
 </div>
@@ -185,8 +205,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Delete a mission by its ID.
-</pre> 
+
+<p>Delete a mission by its ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID of the mission to delete, can be a string or <a class="el" href="classmission_1_1_mission_id.html">MissionId</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="classmission_1_1_i_mission_repository.html#a8dd95a2b3bb1c264893bab6f7688e35d">IMissionRepository</a>.</p>
 
 </div>
@@ -209,8 +236,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">End a mission
-</pre> 
+
+<p>End current running mission. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mission_id</td><td>The ID of the mission to end, can be a string or <a class="el" href="classmission_1_1_mission_id.html">MissionId</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a01e65b4960285ea1fd6ca3ef477c8c4c" name="a01e65b4960285ea1fd6ca3ef477c8c4c"></a>
@@ -227,8 +261,10 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Retrieve all missions from the database.
-</pre> 
+
+<p>Retrieve all missions from the database. </p>
+<dl class="section return"><dt>Returns</dt><dd>List of <a class="el" href="classmission_1_1_mission.html">Mission</a> objects. </dd></dl>
+
 <p>Reimplemented from <a class="el" href="classmission_1_1_i_mission_repository.html#a01e65b4960285ea1fd6ca3ef477c8c4c">IMissionRepository</a>.</p>
 
 </div>
@@ -251,8 +287,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Find all mission of a robot
-</pre> 
+
+<p>Find all mission of a robot. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">robot_id</td><td>The ID of the robot to find missions for, can be a string or <a class="el" href="classrobot_1_1_robot_id.html">RobotId</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of <a class="el" href="classmission_1_1_mission.html">Mission</a> objects if found, otherwise None. </dd></dl>
+
 </div>
 </div>
 <a id="af5cae8c62244a4b858180c46169e0a82" name="af5cae8c62244a4b858180c46169e0a82"></a>
@@ -273,8 +317,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Find a mission by its ID.
-</pre> 
+
+<p>Find a mission by its ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID of the mission to find, can be a string or <a class="el" href="classmission_1_1_mission_id.html">MissionId</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classmission_1_1_mission.html">Mission</a> object if found, otherwise None. </dd></dl>
+
 <p>Reimplemented from <a class="el" href="classmission_1_1_i_mission_repository.html#aa918952830caf69beeb14861bf9e0494">IMissionRepository</a>.</p>
 
 </div>
@@ -302,8 +354,17 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Find all missions for a given robot ID that are currently executing.
-</pre> 
+
+<p>Find all missions for a given robot ID that are currently executing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">robot_id</td><td>The ID of the robot to find missions for, can be a string or <a class="el" href="classrobot_1_1_robot_id.html">RobotId</a>. </td></tr>
+    <tr><td class="paramname">executing</td><td>Boolean indicating whether to find missions that are currently executing. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classmission_1_1_mission.html">Mission</a> object if found, otherwise None. </dd></dl>
+
 </div>
 </div>
 <a id="a46e45fe19b72c32d1f626662b5e1949e" name="a46e45fe19b72c32d1f626662b5e1949e"></a>
@@ -324,8 +385,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Find the next mission for a given robot by its ID.
-</pre> 
+
+<p>Find the next mission for a given robot by its ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">robot_id</td><td>The ID of the robot to find the next mission for, can be a string or <a class="el" href="classrobot_1_1_robot_id.html">RobotId</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classmission_1_1_mission.html">Mission</a> object if found, otherwise None. </dd></dl>
+
 </div>
 </div>
 <a id="afec11d7bd90b8ef975032d3ad198869e" name="afec11d7bd90b8ef975032d3ad198869e"></a>
@@ -342,8 +411,10 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generate a new unique identifier for a Mission record.
-</pre> 
+
+<p>Generate a new unique identifier for a <a class="el" href="classmission_1_1_mission.html">Mission</a> record. </p>
+<dl class="section return"><dt>Returns</dt><dd>A new <a class="el" href="classmission_1_1_mission_id.html">MissionId</a> object with a unique ID. </dd></dl>
+
 <p>Reimplemented from <a class="el" href="classmission_1_1_i_mission_repository.html#afec11d7bd90b8ef975032d3ad198869e">IMissionRepository</a>.</p>
 
 </div>
@@ -366,8 +437,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Start a mission
-</pre> 
+
+<p>Start a mission. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mission_id</td><td>The ID of the mission to start, can be a string or <a class="el" href="classmission_1_1_mission_id.html">MissionId</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ad1ab63aeb3633978be73d53c726a7737" name="ad1ab63aeb3633978be73d53c726a7737"></a>
@@ -388,8 +466,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Update an existing mission in the database.
-</pre> 
+
+<p>Update an existing mission in the database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mission</td><td>The <a class="el" href="classmission_1_1_mission.html">Mission</a> object with updated information. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="classmission_1_1_i_mission_repository.html#a89332a98e1965d2e09733a1ead2dc408">IMissionRepository</a>.</p>
 
 </div>

@@ -11,8 +11,8 @@ var annotated_dup =
       [ "BlockRepository", "classblock_1_1_block_repository.html", "classblock_1_1_block_repository" ],
       [ "IBlockRepository", "classblock_1_1_i_block_repository.html", "classblock_1_1_i_block_repository" ]
     ] ],
-    [ "checker", "namespacechecker.html", [
-      [ "checker", "classchecker_1_1checker.html", null ]
+    [ "checker", "namespaceChecker.html", [
+      [ "checker", "classchecker_1_1Checker.html", null ]
     ] ],
     [ "controller", "namespacecontroller.html", [
       [ "reqAddMission", "classcontroller_1_1req_add_mission.html", null ],

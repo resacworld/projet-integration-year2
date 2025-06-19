@@ -95,10 +95,15 @@ $(function(){initNavTree('namespacepages_1_1home.html','',''); });
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ae847997d25bc0810fa719688a6e56ee8" id="r_ae847997d25bc0810fa719688a6e56ee8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae847997d25bc0810fa719688a6e56ee8">getAllMissions</a> (str robot_id)</td></tr>
+<tr class="memdesc:ae847997d25bc0810fa719688a6e56ee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to get all missions of a robot.  <br /></td></tr>
 <tr class="memitem:a6aff3f0e24259a3286a0dae5e59ed504" id="r_a6aff3f0e24259a3286a0dae5e59ed504"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6aff3f0e24259a3286a0dae5e59ed504">getFullHomePage</a> (bool status=None, str selected_id=None)</td></tr>
+<tr class="memdesc:a6aff3f0e24259a3286a0dae5e59ed504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to get the full home page (in HTML) with robots and missions.  <br /></td></tr>
 <tr class="memitem:a616e11d54416a7920cee081099928280" id="r_a616e11d54416a7920cee081099928280"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a616e11d54416a7920cee081099928280">getFullMission</a> (Mission mission, List[Block] blocks)</td></tr>
+<tr class="memdesc:a616e11d54416a7920cee081099928280"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to get the full mission with its blocks.  <br /></td></tr>
 <tr class="memitem:ad5114243777df593fae1fd3351d78dd5" id="r_ad5114243777df593fae1fd3351d78dd5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5114243777df593fae1fd3351d78dd5">getGraphicalMissions</a> (List missions)</td></tr>
+<tr class="memdesc:ad5114243777df593fae1fd3351d78dd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to get the HTML representation of all missions.  <br /></td></tr>
 <tr class="memitem:a6606151904beddc43d2b350caa296598" id="r_a6606151904beddc43d2b350caa296598"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6606151904beddc43d2b350caa296598">getGraphicalRobotSelectOptions</a> (List[Robot] robots, str selectedRobotId=None)</td></tr>
+<tr class="memdesc:a6606151904beddc43d2b350caa296598"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to get the HTML options for the robot select dropdown.  <br /></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="ae847997d25bc0810fa719688a6e56ee8" name="ae847997d25bc0810fa719688a6e56ee8"></a>
@@ -115,10 +120,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Function to get all missions of a robot
-@param robot_id: ID of the robot
-@return List of mission dictionaries with their blocks
-</pre> 
+
+<p>Function to get all missions of a robot. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">robot_id</td><td>ID of the robot </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of mission dictionaries with their blocks </dd></dl>
+
 </div>
 </div>
 <a id="a6aff3f0e24259a3286a0dae5e59ed504" name="a6aff3f0e24259a3286a0dae5e59ed504"></a>
@@ -139,11 +150,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Function to get the full home page (in HTML) with robots and missions
-@param status: Status of the last operation (True for success, False for error)
-@param selected_id: ID of the selected robot
-@return HTML string of the home page
-</pre> 
+
+<p>Function to get the full home page (in HTML) with robots and missions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>Status of the last operation (True for success, False for error) </td></tr>
+    <tr><td class="paramname">selected_id</td><td>ID of the selected robot </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HTML string of the home page </dd></dl>
+
 </div>
 </div>
 <a id="a616e11d54416a7920cee081099928280" name="a616e11d54416a7920cee081099928280"></a>
@@ -164,11 +181,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Function to get the full mission with its blocks
-@param mission: Mission object
-@param blocks: List of Block objects associated with the mission
-@return Dictionary representation of the mission with its blocks
-</pre> 
+
+<p>Function to get the full mission with its blocks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mission</td><td>Mission object </td></tr>
+    <tr><td class="paramname">blocks</td><td>List of Block objects associated with the mission </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Dictionary representation of the mission with its blocks </dd></dl>
+
 </div>
 </div>
 <a id="ad5114243777df593fae1fd3351d78dd5" name="ad5114243777df593fae1fd3351d78dd5"></a>
@@ -185,10 +208,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Function to get the HTML representation of all missions
-@param missions: List of mission dictionaries
-@return HTML string of all missions
-</pre> 
+
+<p>Function to get the HTML representation of all missions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">missions</td><td>List of mission dictionaries </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HTML string of all missions </dd></dl>
+
 </div>
 </div>
 <a id="a6606151904beddc43d2b350caa296598" name="a6606151904beddc43d2b350caa296598"></a>
@@ -209,11 +238,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Function to get the HTML options for the robot select dropdown
-@param robots: List of Robot objects
-@param selectedRobotId: ID of the selected robot
-@return HTML string of options for the select dropdown
-</pre> 
+
+<p>Function to get the HTML options for the robot select dropdown. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">robots</td><td>List of Robot objects </td></tr>
+    <tr><td class="paramname">selectedRobotId</td><td>ID of the selected robot </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HTML string of options for the select dropdown </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->
