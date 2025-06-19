@@ -2,7 +2,7 @@ from machine import PWM, Pin, ADC, time_pulse_us
 import time
 import neopixel
 
-seuil_detection = 1700
+seuil_detection = 1000
 forceFrein = 1023	  # Gère la force de frein
 
 # Configure the LED pins
@@ -175,3 +175,13 @@ def status_led_droite():
   global LED_INFRA2
   print("val d: " + str(LED_INFRA2.read()))
   return LED_INFRA2.read() > seuil_detection
+
+def led_gauche():
+  global LED_INFRA1
+  print("val g : " + str(LED_INFRA1.read()))
+  return LED_INFRA1.read()
+
+def led_droite():
+  global LED_INFRA2
+  print("val d: " + str(LED_INFRA2.read()))
+  return LED_INFRA2.read()
