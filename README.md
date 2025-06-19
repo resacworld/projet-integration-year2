@@ -1,4 +1,4 @@
-# projet-integration-year2
+# Projet-integration-year2
 2nd year integration project consisting in creating a web server, in communication with various services, including a JAVA simulator, and a robot that fetches.
 
 Project created by Victor and Loïc. 
